@@ -1,12 +1,6 @@
-import express from "express";
+import { server } from "./config/server.config";
+import { API_PORT } from "./config/env.config";
 
-const app = express();
-const port = 3000;
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.listen(port, () => {
-  console.log(`TODO API listening at http://localhost:${port}`);
+server.listen(API_PORT, () => {
+  console.log(`TODO API listening at http://localhost:${API_PORT}`);
 });
