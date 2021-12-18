@@ -1,0 +1,13 @@
+[
+  {
+    "messageTypeCode": "AU",
+    "messageType": "AUTHENTICATION",
+    "response": [
+      {
+        "messageCode": 10,
+        "message": "user created successfully",
+        "statusCode": 201
+      }
+    ]
+  }
+]

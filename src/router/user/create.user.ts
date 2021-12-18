@@ -1,5 +1,11 @@
 import { Request, Response } from "express";
 
-export const createUser = (req: Request, res: Response) => {
-  res.send("Create user");
+import { ErrorResponse, SuccessResponse } from "../../response";
+
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    SuccessResponse(req, res, "AU", 10);
+  } catch (error: any) {
+    ErrorResponse(req, res, "IS", 10);
+  }
 };
