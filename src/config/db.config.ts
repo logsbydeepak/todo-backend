@@ -11,6 +11,6 @@ export const dbConnect = () => {
 
   connection.on("error", () => {
     console.log("Error establishing DB connection");
-    process.exit(1)
+    process.exit(1);
   });
 };
