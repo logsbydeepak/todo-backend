@@ -1,12 +1,13 @@
 import { connection, connect } from "mongoose";
 
 import { DB_URL } from "./env.config";
+import { logger } from "./logger.config";
 
 export const dbConnect = () => {
   connect(DB_URL as string);
 
   connection.on("open", () => {
-    console.log("DB connection established successfully");
+    logger.info("DB connection established successfully");
   });
 
   connection.on("error", () => {
