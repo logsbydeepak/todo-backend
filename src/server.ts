@@ -1,4 +1,4 @@
-import { connect, connection } from "mongoose";
+import { connection } from "mongoose";
 
 import { server } from "./config/server.config";
 import { API_PORT } from "./config/env.config";
