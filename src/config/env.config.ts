@@ -10,3 +10,4 @@ if (NODE_ENV !== "prod" + "../../") {
 }
 
 export const API_PORT: string | undefined = env.API_PORT;
+export const DB_URL: string | undefined = env.DB_URL;
