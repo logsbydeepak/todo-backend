@@ -12,3 +12,6 @@ if (NODE_ENV !== "prod" + "../../") {
 export const API_PORT: string | undefined = env.API_PORT;
 export const DB_URL: string | undefined = env.DB_URL;
 export const DB_LOG_URL: string | undefined = env.DB_LOG_URL;
+export const ACCESS_TOKEN_SECRET: string | undefined = env.ACCESS_TOKEN_SECRET;
+export const REFRESH_TOKEN_SECRET: string | undefined =
+  env.REFRESH_TOKEN_SECRET;

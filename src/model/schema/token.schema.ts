@@ -3,11 +3,12 @@ import { Schema } from "mongoose";
 const ObjectId = Schema.Types.ObjectId;
 
 export const TokenSchema = new Schema({
-  id: ObjectId,
+  _id: ObjectId,
   tokens: [
     {
+      _id: false,
       refreshToken: { type: String, required: true },
-      accessToken: [{ token: { type: String, required: true } }],
+      accessToken: [{ _id: false, token: { type: String, required: true } }],
     },
   ],
 });

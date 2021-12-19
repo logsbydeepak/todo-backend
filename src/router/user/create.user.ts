@@ -1,5 +1,13 @@
 import { Request, Response } from "express";
+import {
+  setAccessTokenCookie,
+  setRefreshTokenCookie,
+} from "../../helper/cookie.helper";
 import { isEmailExist } from "../../helper/db.helper";
+import {
+  accessTokenGenerator,
+  refreshTokenGenerator,
+} from "../../helper/token.helper";
 
 import {
   validateBody,
@@ -7,7 +15,7 @@ import {
   validateName,
   validatePassword,
 } from "../../helper/validator.helper";
-import { UserModel } from "../../model";
+import { TokenModel, UserModel } from "../../model";
 import { ErrorResponse, SuccessResponse } from "../../response";
 
 export const createUser = async (req: Request, res: Response) => {
@@ -28,7 +36,27 @@ export const createUser = async (req: Request, res: Response) => {
     if (!dbEmailCheck) return;
 
     const newUser = new UserModel({ name, email, password });
-    newUser.save();
+
+    const newUserId = newUser._id;
+
+    const accessToken = accessTokenGenerator(newUserId);
+    const refreshToken = refreshTokenGenerator(newUserId);
+
+    const newToken = new TokenModel({
+      _id: newUserId,
+      tokens: [
+        {
+          refreshToken,
+          accessToken: [{ token: accessToken }],
+        },
+      ],
+    });
+
+    await newUser.save();
+    await newToken.save();
+
+    setAccessTokenCookie(res, accessToken);
+    setRefreshTokenCookie(res, refreshToken);
 
     SuccessResponse(req, res, "AU", 10);
   } catch (error: any) {
