@@ -7,6 +7,11 @@
         "messageCode": 10,
         "message": "user created successfully",
         "statusCode": 201
+      },
+      {
+        "messageCode": 11,
+        "message": "user info got successfully",
+        "statusCode": 200
       }
     ]
   }

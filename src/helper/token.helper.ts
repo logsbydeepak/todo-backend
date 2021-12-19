@@ -1,4 +1,4 @@
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import {
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET,
@@ -9,3 +9,14 @@ export const accessTokenGenerator = (id: number) =>
 
 export const refreshTokenGenerator = (id: number) =>
   sign({ id }, REFRESH_TOKEN_SECRET as string, { expiresIn: "30d" });
+
+export const accessTokenValidator = (token: string) => {
+  try {
+    return verify(token, ACCESS_TOKEN_SECRET as string);
+  } catch (error: any) {
+    if (error.name === "TokenExpiredError") {
+      return "TokenExpiredError";
+    }
+    return null;
+  }
+};

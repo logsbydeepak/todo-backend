@@ -4,7 +4,7 @@ import {
   setRefreshTokenCookie,
 } from "../../helper/cookie.helper";
 import { isEmailExist } from "../../helper/db.helper";
-import { generateEncrypt } from "../../helper/security.helper";
+import { generateEncryption } from "../../helper/security.helper";
 import {
   accessTokenGenerator,
   refreshTokenGenerator,
@@ -42,8 +42,8 @@ export const createUser = async (req: Request, res: Response) => {
 
     const accessToken = accessTokenGenerator(newUserId);
     const refreshToken = refreshTokenGenerator(newUserId);
-    const accessTokenEncrypt = generateEncrypt(accessToken);
-    const refreshTokenEncrypt = generateEncrypt(refreshToken);
+    const accessTokenEncrypt = generateEncryption(accessToken);
+    const refreshTokenEncrypt = generateEncryption(refreshToken);
 
     const newToken = new TokenModel({
       _id: newUserId,

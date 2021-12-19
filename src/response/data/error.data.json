@@ -18,6 +18,33 @@
         "messageCode": 10,
         "message": "invalid body data",
         "statusCode": 400
+      },
+      {
+        "messageCode": 11,
+        "message": "invalid token",
+        "statusCode": 400
+      }
+    ]
+  },
+  {
+    "messageTypeCode": "TP",
+    "messageType": "TOKEN_PARSE",
+    "response": [
+      {
+        "messageCode": 10,
+        "message": "token expired",
+        "statusCode": 401
+      }
+    ]
+  },
+  {
+    "messageTypeCode": "AU",
+    "messageType": "AUTHENTICATION",
+    "response": [
+      {
+        "messageCode": 10,
+        "message": "user do not exist",
+        "statusCode": 404
       }
     ]
   }
