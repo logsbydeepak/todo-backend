@@ -29,7 +29,6 @@ export const checkAccessToken = async (
     }
 
     const accessTokenData: any = accessTokenValidator(accessTokenDecryption);
-    console.log(accessTokenData);
     if (!accessTokenData) {
       return ErrorResponse(req, res, "BP", 11);
     }
@@ -50,7 +49,7 @@ export const checkAccessToken = async (
       return ErrorResponse(req, res, "AU", 10);
     }
 
-    res.locals.userId = accessToken.id;
+    res.locals.userId = accessTokenData.id;
 
     next();
   } catch {
