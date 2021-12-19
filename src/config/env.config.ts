@@ -15,3 +15,4 @@ export const DB_LOG_URL: string | undefined = env.DB_LOG_URL;
 export const ACCESS_TOKEN_SECRET: string | undefined = env.ACCESS_TOKEN_SECRET;
 export const REFRESH_TOKEN_SECRET: string | undefined =
   env.REFRESH_TOKEN_SECRET;
+export const ENCRYPT_SECRET: string | undefined = env.ENCRYPT_SECRET;

@@ -4,6 +4,7 @@ import {
   setRefreshTokenCookie,
 } from "../../helper/cookie.helper";
 import { isEmailExist } from "../../helper/db.helper";
+import { generateEncrypt } from "../../helper/security.helper";
 import {
   accessTokenGenerator,
   refreshTokenGenerator,
@@ -41,13 +42,15 @@ export const createUser = async (req: Request, res: Response) => {
 
     const accessToken = accessTokenGenerator(newUserId);
     const refreshToken = refreshTokenGenerator(newUserId);
+    const accessTokenEncrypt = generateEncrypt(accessToken);
+    const refreshTokenEncrypt = generateEncrypt(refreshToken);
 
     const newToken = new TokenModel({
       _id: newUserId,
       tokens: [
         {
-          refreshToken,
-          accessToken: [{ token: accessToken }],
+          refreshToken: refreshTokenEncrypt,
+          accessToken: [{ token: accessTokenEncrypt }],
         },
       ],
     });
@@ -55,8 +58,8 @@ export const createUser = async (req: Request, res: Response) => {
     await newUser.save();
     await newToken.save();
 
-    setAccessTokenCookie(res, accessToken);
-    setRefreshTokenCookie(res, refreshToken);
+    setAccessTokenCookie(res, accessTokenEncrypt);
+    setRefreshTokenCookie(res, refreshTokenEncrypt);
 
     SuccessResponse(req, res, "AU", 10);
   } catch (error: any) {
