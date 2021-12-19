@@ -12,6 +12,16 @@
         "messageCode": 11,
         "message": "user info got successfully",
         "statusCode": 200
+      },
+      {
+        "messageCode": 12,
+        "message": "user info updated successfully",
+        "statusCode": 200
+      },
+      {
+        "messageCode": 13,
+        "message": "user deleted successfully",
+        "statusCode": 200
       }
     ]
   }
