@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { hash } from "bcryptjs";
+import { generateHashAndSalt } from "../../helper/security.helper";
 
 const defaultProperty = {
   required: true,
@@ -14,6 +14,6 @@ export const UserSchema = new Schema({
 
 UserSchema.pre("save", async function (next: any) {
   if (!this.isModified("password")) return next();
-  this.password = await hash(this.password, 8);
+  this.password = await generateHashAndSalt(this.password);
   return next();
 });
