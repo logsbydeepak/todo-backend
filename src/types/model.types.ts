@@ -5,3 +5,16 @@ export interface UserModelType extends Document {
   password: string | null;
   name: string | null;
 }
+
+export interface TokenModelType extends Document {
+  sessions: [
+    {
+      refreshSession: string;
+      accessSession: [
+        {
+          session: string;
+        }
+      ];
+    }
+  ];
+}
