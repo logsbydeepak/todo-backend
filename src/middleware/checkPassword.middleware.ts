@@ -12,8 +12,12 @@ export const checkPassword = async (
 ) => {
   try {
     const userId = res.locals.userId;
-    const password = validatePassword(req, res, req.body.password);
-    if (!password) return;
+    const currentPassword = validatePassword(
+      req,
+      res,
+      req.body.currentPassword
+    );
+    if (!currentPassword) return;
 
     const dbUser = await UserModel.findById(userId);
 
@@ -22,7 +26,7 @@ export const checkPassword = async (
     }
 
     const checkDbPassword = await validateHashAndSalt(
-      password,
+      currentPassword,
       dbUser.password as string
     );
 

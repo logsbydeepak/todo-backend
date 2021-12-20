@@ -13,7 +13,7 @@ import {
 import {
   validateBody,
   validateEmail,
-  validateName,
+  validateGeneral,
   validatePassword,
 } from "../../helper/validator.helper";
 import { TokenModel, UserModel } from "../../model";
@@ -24,7 +24,7 @@ export const createUser = async (req: Request, res: Response) => {
     const bodyData = validateBody(req, res, req.body, 3);
     if (!bodyData) return;
 
-    const name = validateName(req, res, bodyData.name);
+    const name = validateGeneral(req, res, bodyData.name);
     if (!name) return;
 
     const email = validateEmail(req, res, bodyData.email);

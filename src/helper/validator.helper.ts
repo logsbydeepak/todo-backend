@@ -23,14 +23,18 @@ export const validateBody = (
   return bodyData;
 };
 
-export const validateName = (req: Request, res: Response, name: string) => {
-  if (!name) {
+export const validateGeneral = (
+  req: Request,
+  res: Response,
+  rawData: string
+) => {
+  if (!rawData) {
     return ErrorResponse(req, res, "BP", 10);
   }
 
-  name = name.trim();
+  rawData = rawData.trim();
 
-  return name;
+  return rawData;
 };
 
 export const validateEmail = (req: Request, res: Response, email: string) => {
