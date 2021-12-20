@@ -8,6 +8,8 @@ import {
   ErrorStatusCode,
 } from "../../../helper/response.helper";
 
+import { token } from "../../../helper/data.helper";
+
 export const createUserWithDifferentData = async (data: object) => {
   const createUser: any = await request.post("/v1/user").send(data);
 
@@ -26,6 +28,8 @@ export const createUserSuccessfully = async (data: object) => {
   expect(cookie.accessToken.path).toBe("/v1");
   expect(cookie.refreshToken.value).toBeTruthy();
   expect(cookie.refreshToken.path).toBe("/v1/session");
+
+  token.setValue = cookie;
 
   expect(createUser.res.statusCode).toBe(SuccessStatusCode("AU", 10));
   expect(createUser.body).toStrictEqual(SuccessResponse(createUser, "AU", 10));

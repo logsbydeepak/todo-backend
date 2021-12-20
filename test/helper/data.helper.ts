@@ -1,3 +1,15 @@
+export const token = {
+  tokenValue: {},
+
+  get getValue() {
+    return token;
+  },
+
+  set setValue(token: any) {
+    this.tokenValue = token;
+  },
+};
+
 export const userData = {
   name: "Test User",
   email: "test@todo.com",

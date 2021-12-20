@@ -1,7 +1,7 @@
 import {
   createUserSuccessfully,
   createUserWithDifferentData,
-} from "../request/userRequest/create.user.request";
+} from "../../request/router/userRequest/create.user.request";
 import { userData } from "../../helper/data.helper";
 
 export const createUserTest = () => {

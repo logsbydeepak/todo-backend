@@ -15,16 +15,16 @@ export const checkAccessToken = async (
       return ErrorResponse(req, res, "BP", 11);
     }
 
+    const accessTokenDecryption = generateDecryption(accessToken);
+    if (!accessTokenDecryption) {
+      return ErrorResponse(req, res, "BP", 11);
+    }
+
     const accessTokenCount = await TokenModel.count({
       "tokens.accessToken.token": accessToken,
     });
 
-    if (accessToken === 0) {
-      return ErrorResponse(req, res, "BP", 11);
-    }
-
-    const accessTokenDecryption = generateDecryption(accessToken);
-    if (!accessTokenDecryption) {
+    if (accessTokenCount === 0) {
       return ErrorResponse(req, res, "BP", 11);
     }
 
