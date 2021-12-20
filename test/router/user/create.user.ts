@@ -1,3 +1,5 @@
+import cookieParser from "set-cookie-parser";
+
 import { request } from "../../helper/request.helper";
 import {
   SuccessResponse,
@@ -16,7 +18,14 @@ export const createUserWithDifferentData = async (data: object) => {
 export const createUserSuccessfully = async (data: object) => {
   const createUser: any = await request.post("/v1/user").send(data);
 
-  console.log(createUser.res.statusCode);
+  const cookie = cookieParser(createUser.res, {
+    map: true,
+  });
+
+  expect(cookie.accessToken.value).toBeTruthy();
+  expect(cookie.accessToken.path).toBe("/v1");
+  expect(cookie.refreshToken.value).toBeTruthy();
+  expect(cookie.refreshToken.path).toBe("/v1/session");
 
   expect(createUser.res.statusCode).toBe(SuccessStatusCode("AU", 10));
   expect(createUser.body).toStrictEqual(SuccessResponse(createUser, "AU", 10));
