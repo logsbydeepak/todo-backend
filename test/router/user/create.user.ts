@@ -1,32 +1,39 @@
-import cookieParser from "set-cookie-parser";
-
-import { request } from "../../helper/request.helper";
 import {
-  SuccessResponse,
-  ErrorResponse,
-  SuccessStatusCode,
-  ErrorStatusCode,
-} from "../../helper/response.helper";
+  createUserSuccessfully,
+  createUserWithDifferentData,
+} from "../request/userRequest/create.user.request";
+import { userData } from "../../helper/data.helper";
 
-export const createUserWithDifferentData = async (data: object) => {
-  const createUser: any = await request.post("/v1/user").send(data);
+export const createUserTest = () => {
+  const { name, email, password } = userData;
+  const extra = "value";
+  // body
+  test("send array insted of object", () => createUserWithDifferentData([]));
+  test("send empty object", () => createUserWithDifferentData({}));
+  test("send object with extra data", () =>
+    createUserWithDifferentData({ ...userData, extra }));
 
-  expect(createUser.res.statusCode).toBe(ErrorStatusCode("BP", 10));
-  expect(createUser.body).toStrictEqual(ErrorResponse(createUser, "BP", 10));
-};
+  // name
+  test("no name property", () =>
+    createUserWithDifferentData({ email, password, extra }));
+  test("name property empty", () =>
+    createUserWithDifferentData({ email, password, name: "" }));
 
-export const createUserSuccessfully = async (data: object) => {
-  const createUser: any = await request.post("/v1/user").send(data);
+  // email
+  test("no email property", () =>
+    createUserWithDifferentData({ password, name, extra }));
+  test("empty email property", () =>
+    createUserWithDifferentData({ password, name, email: "" }));
+  test("invalid email", () =>
+    createUserWithDifferentData({ password, name, email: "test.com" }));
 
-  const cookie = cookieParser(createUser.res, {
-    map: true,
-  });
+  // password
+  test("no password property", () =>
+    createUserWithDifferentData({ email, name, extra }));
+  test("empty password propery", () =>
+    createUserWithDifferentData({ email, password: "", name }));
+  test("invalid password", () =>
+    createUserWithDifferentData({ name, email, password: "abc" }));
 
-  expect(cookie.accessToken.value).toBeTruthy();
-  expect(cookie.accessToken.path).toBe("/v1");
-  expect(cookie.refreshToken.value).toBeTruthy();
-  expect(cookie.refreshToken.path).toBe("/v1/session");
-
-  expect(createUser.res.statusCode).toBe(SuccessStatusCode("AU", 10));
-  expect(createUser.body).toStrictEqual(SuccessResponse(createUser, "AU", 10));
+  test("successfully", () => createUserSuccessfully(userData));
 };
