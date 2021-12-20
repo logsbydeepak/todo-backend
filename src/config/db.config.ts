@@ -15,3 +15,8 @@ export const dbConnect = () => {
     process.exit(1);
   });
 };
+
+export const dbDrop = async () => {
+  await connection.dropDatabase();
+  await connection.close();
+};

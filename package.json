@@ -9,7 +9,9 @@
     "format": "prettier --write .",
     "format:watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
     "test": "cross-env NODE_ENV=test run-s test:start",
-    "test:start": "jest"
+    "test:watch": "cross-env NODE_ENV=test run-s test:watch:start",
+    "test:start": "jest",
+    "test:watch:start": "jest --watch --detectOpenHandles"
   },
   "repository": {
     "type": "git",

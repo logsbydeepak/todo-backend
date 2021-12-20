@@ -3,11 +3,11 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 
 import { checkEnv } from "../helper/env.helper";
-import { dbConnect } from "../config/db.config";
 import { router } from "../router";
+import { dbConnect } from "./db.config";
 
 checkEnv();
-dbConnect();
+// dbConnect();
 export const server: Express = express();
 
 server.use(helmet());

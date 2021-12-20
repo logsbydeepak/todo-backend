@@ -7,16 +7,20 @@ const { combine, timestamp, printf, colorize } = format;
 
 export const logger = createLogger({
   level: "info",
-  transports: [
+  transports: [],
+});
+
+if (NODE_ENV !== "test") {
+  logger.add(
     new transports.MongoDB({
       db: DB_LOG_URL as string,
       collection: "logs",
       options: {
         useUnifiedTopology: true,
       },
-    }),
-  ],
-});
+    })
+  );
+}
 
 const timeZone = () => new Date().toLocaleString();
 
