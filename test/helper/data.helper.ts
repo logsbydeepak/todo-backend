@@ -1,4 +1,4 @@
-export const token = {
+export const token: any = {
   tokenValue: {},
 
   get getValue() {
