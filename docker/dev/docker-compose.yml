@@ -1,0 +1,29 @@
+version: "3"
+services:
+  mongo_container:
+    image: mongo:5.0.5
+    ports:
+      - 27017:27017
+
+  todo_backend:
+    links:
+      - mongo_container
+    tty: true
+    ports:
+      - 4000:4000
+    build:
+      context: ../../
+      dockerfile: ./docker/dev/Dockerfile.dev
+    volumes:
+      - ../../:/home/node/todo-backend
+    depends_on:
+      - mongo_container
+
+  mongo_express:
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo_container
+    image: mongo-express:0.54.0
+    depends_on:
+      - mongo_container
+    ports:
+      - 8888:8081
