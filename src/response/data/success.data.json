@@ -22,6 +22,11 @@
         "messageCode": 13,
         "message": "user deleted successfully",
         "statusCode": 200
+      },
+      {
+        "messageCode": 14,
+        "message": "user sigin successfully",
+        "statusCode": 201
       }
     ]
   }
