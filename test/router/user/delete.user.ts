@@ -5,5 +5,5 @@ import { deleteUserSuccessfully } from "../../request/router/userRequest/delete.
 export const deleteUser = () => {
   checkAccessToken("delete", "/v1/user");
   checkPassword("delete", "/v1/user");
-  test("delete user success successfully", () => deleteUserSuccessfully());
+  test("delete user successfully", () => deleteUserSuccessfully());
 };
