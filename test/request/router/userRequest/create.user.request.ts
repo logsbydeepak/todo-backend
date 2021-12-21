@@ -27,7 +27,7 @@ export const createUserSuccessfully = async (data: object) => {
   expect(cookie.accessToken.value).toBeTruthy();
   expect(cookie.accessToken.path).toBe("/v1");
   expect(cookie.refreshToken.value).toBeTruthy();
-  expect(cookie.refreshToken.path).toBe("/v1/session");
+  expect(cookie.refreshToken.path).toBe("/v1/session/refresh");
 
   token.setValue = cookie;
 

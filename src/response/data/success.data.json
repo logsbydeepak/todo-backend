@@ -27,6 +27,11 @@
         "messageCode": 14,
         "message": "user sigin successfully",
         "statusCode": 201
+      },
+      {
+        "messageCode": 15,
+        "message": "user logout successfully",
+        "statusCode": 200
       }
     ]
   }
