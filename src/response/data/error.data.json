@@ -34,6 +34,16 @@
         "messageCode": 10,
         "message": "token expired",
         "statusCode": 401
+      },
+      {
+        "messageCode": 11,
+        "message": "cann't refresh access token",
+        "statusCode": 401
+      },
+      {
+        "messageCode": 12,
+        "message": "refresh token expired",
+        "statusCode": 401
       }
     ]
   },

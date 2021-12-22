@@ -20,3 +20,14 @@ export const accessTokenValidator = (token: string) => {
     return null;
   }
 };
+
+export const refreshTokenValidator = (token: string) => {
+  try {
+    return verify(token, REFRESH_TOKEN_SECRET as string);
+  } catch (error: any) {
+    if (error.name === "TokenExpiredError") {
+      return "TokenExpiredError";
+    }
+    return null;
+  }
+};
