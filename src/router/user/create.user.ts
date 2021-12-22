@@ -50,7 +50,7 @@ export const createUser = async (req: Request, res: Response) => {
       tokens: [
         {
           refreshToken: refreshTokenEncrypt,
-          accessToken: [{ token: accessTokenEncrypt }],
+          accessToken: accessTokenEncrypt,
         },
       ],
     });

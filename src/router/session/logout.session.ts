@@ -5,7 +5,6 @@ import {
 } from "../../helper/cookie.helper";
 import { TokenModel } from "../../model";
 import { ErrorResponse, SuccessResponse } from "../../response";
-import { TokenModelType } from "../../types/model.types";
 
 export const logoutSession = async (req: Request, res: Response) => {
   try {
@@ -17,10 +16,8 @@ export const logoutSession = async (req: Request, res: Response) => {
       return ErrorResponse(req, res, "AU", 10);
     }
 
-    dbToken.tokens = dbToken.tokens.filter((element: any) =>
-      element.accessToken.find(
-        (insideToken: any) => !(insideToken.token === accessToken)
-      )
+    dbToken.tokens = dbToken.tokens.filter(
+      (element: any) => !(element.accessToken === accessToken)
     );
 
     await dbToken.save();

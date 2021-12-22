@@ -72,11 +72,7 @@ export const accessTokenExpired = async (method: string, path: string) => {
     tokens: [
       {
         refreshToken: "abc",
-        accessToken: [
-          {
-            token: accessTokenEncrypt,
-          },
-        ],
+        accessToken: accessTokenEncrypt,
       },
     ],
   });

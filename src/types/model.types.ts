@@ -10,11 +10,7 @@ export interface TokenModelType extends Document {
   sessions: [
     {
       refreshSession: string;
-      accessSession: [
-        {
-          session: string;
-        }
-      ];
+      accessSession: string;
     }
   ];
 }

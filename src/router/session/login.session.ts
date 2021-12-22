@@ -60,11 +60,7 @@ export const loginSession = async (req: Request, res: Response) => {
 
     dbToken.tokens.unshift({
       refreshToken: refreshTokenEncrypt,
-      accessToken: [
-        {
-          token: accessTokenEncrypt,
-        },
-      ],
+      accessToken: accessTokenEncrypt,
     });
 
     dbToken.save();

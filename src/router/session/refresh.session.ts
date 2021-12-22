@@ -26,7 +26,7 @@ export const refreshSession = async (req: Request, res: Response) => {
     }
 
     const accessTokenCount = await TokenModel.count({
-      "tokens.accessToken.token": accessToken,
+      "tokens.accessToken": accessToken,
     });
 
     const refreshTokenCount = await TokenModel.count({
@@ -61,21 +61,14 @@ export const refreshSession = async (req: Request, res: Response) => {
       return ErrorResponse(req, res, "AU", 10);
     }
 
-    const refreshTokenIndex = dbToken.tokens.findIndex((element: any) =>
-      element.accessToken.find(
-        (insideElement: any) => insideElement.token === accessToken
-      )
+    const accessTokenIndex = dbToken.tokens.findIndex(
+      (element: any) => element.accessToken === accessToken
     );
-
-    const accessTokenIndex = dbToken.tokens[
-      refreshTokenIndex
-    ].accessToken.findIndex((element: any) => element.token === accessToken);
 
     const accessTokenRaw = accessTokenGenerator(refreshTokenData.id);
     const accessTokenEncrypt = generateEncryption(accessTokenRaw);
 
-    dbToken.tokens[refreshTokenIndex].accessToken[accessTokenIndex].token =
-      accessTokenEncrypt;
+    dbToken.tokens[accessTokenIndex].accessToken = accessTokenEncrypt;
 
     await dbToken.save();
 

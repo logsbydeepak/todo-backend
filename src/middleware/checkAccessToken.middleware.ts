@@ -21,7 +21,7 @@ export const checkAccessToken = async (
     }
 
     const accessTokenCount = await TokenModel.count({
-      "tokens.accessToken.token": accessToken,
+      "tokens.accessToken": accessToken,
     });
 
     if (accessTokenCount === 0) {

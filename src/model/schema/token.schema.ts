@@ -8,7 +8,7 @@ export const TokenSchema = new Schema({
     {
       _id: false,
       refreshToken: { type: String, required: true },
-      accessToken: [{ _id: false, token: { type: String, required: true } }],
+      accessToken: { type: String, required: true },
     },
   ],
 });
