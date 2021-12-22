@@ -8,5 +8,5 @@ export const sessionRouter = Router();
 
 sessionRouter.get("/", loginSession);
 sessionRouter.delete("/", checkAccessToken, logoutSession);
-// userRouter.patch("/refresh");
+// sessionRouter.patch("/refresh",checkAccessToken, refreshSession);
 // userRouter.delete("/refresh");
