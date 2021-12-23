@@ -9,7 +9,7 @@ export const templateResponse = (
   message: string,
   statusCode: number,
   data?: object
-) => {
+): void => {
   const responseCode = `${responseType === "ERROR" ? "ER" : "SU"}${
     messageTypeCode + messageCode
   }`;

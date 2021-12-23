@@ -1,26 +1,28 @@
 import { NextFunction, Request, Response } from "express";
-import { generateDecryption } from "../helper/security.helper";
-import { accessTokenValidator } from "../helper/token.helper";
-import { TokenModel, UserModel } from "../model";
+
 import { ErrorResponse } from "../response";
+import { TokenModel, UserModel } from "../model";
+import { accessTokenValidator } from "../helper/token.helper";
+import { generateDecryption } from "../helper/security.helper";
 
 export const checkAccessToken = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
-    const accessToken = req.cookies.accessToken;
+    const accessToken: string | null = req.cookies.accessToken;
     if (!accessToken) {
       return ErrorResponse(req, res, "BP", 11);
     }
 
-    const accessTokenDecryption = generateDecryption(accessToken);
+    const accessTokenDecryption: string | null =
+      generateDecryption(accessToken);
     if (!accessTokenDecryption) {
       return ErrorResponse(req, res, "BP", 11);
     }
 
-    const accessTokenCount = await TokenModel.count({
+    const accessTokenCount: number = await TokenModel.count({
       "tokens.accessToken": accessToken,
     });
 
@@ -29,6 +31,7 @@ export const checkAccessToken = async (
     }
 
     const accessTokenData: any = accessTokenValidator(accessTokenDecryption);
+
     if (!accessTokenData) {
       return ErrorResponse(req, res, "BP", 11);
     }
@@ -37,19 +40,21 @@ export const checkAccessToken = async (
       return ErrorResponse(req, res, "TP", 10);
     }
 
-    if (!accessTokenData.id) {
+    const { id }: { id: string } = accessTokenData;
+
+    if (!id) {
       return ErrorResponse(req, res, "BP", 11);
     }
 
-    const idCount = await UserModel.count({
-      _id: accessTokenData.id as string,
+    const idCount: number = await UserModel.count({
+      _id: id as string,
     });
 
     if (idCount === 0) {
       return ErrorResponse(req, res, "AU", 10);
     }
 
-    res.locals.userId = accessTokenData.id;
+    res.locals.userId = id;
 
     next();
   } catch {

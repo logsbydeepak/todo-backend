@@ -7,7 +7,7 @@ export const isEmailExist = async (
   req: Request,
   res: Response,
   email: string
-) => {
+): Promise<string | void> => {
   const emailCount = await UserModel.count({ email });
 
   if (emailCount !== 0) {

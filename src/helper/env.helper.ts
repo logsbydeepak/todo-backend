@@ -1,6 +1,6 @@
 import * as allEnv from "../config/env.config";
 
-export const checkEnv = () => {
+export const checkEnv = (): void => {
   Object.entries(allEnv).forEach(([_, value]) => {
     if (!value) {
       console.error(`Environment variable missing`);

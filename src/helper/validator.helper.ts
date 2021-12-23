@@ -1,15 +1,20 @@
-import { raw, Request, Response } from "express";
+import { Request, Response } from "express";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
 import { ErrorResponse } from "../response";
+import {
+  BodyDataType,
+  CreateTodoBodyType,
+  CreateUserBodyType,
+} from "../types/validator.types";
 
 export const validateBody = (
   req: Request,
   res: Response,
-  bodyData: any,
+  bodyData: BodyDataType,
   bodyDataCount: number
-) => {
+): void | BodyDataType => {
   if (bodyData.length === 0) {
     return ErrorResponse(req, res, "BP", 10);
   }
@@ -27,7 +32,7 @@ export const validateGeneral = (
   req: Request,
   res: Response,
   rawData: string
-) => {
+): void | string => {
   if (!rawData) {
     return ErrorResponse(req, res, "BP", 10);
   }
@@ -37,7 +42,11 @@ export const validateGeneral = (
   return rawData;
 };
 
-export const validateEmail = (req: Request, res: Response, email: string) => {
+export const validateEmail = (
+  req: Request,
+  res: Response,
+  email: string
+): string | void => {
   if (!email) {
     return ErrorResponse(req, res, "BP", 10);
   }
@@ -55,7 +64,7 @@ export const validatePassword = (
   req: Request,
   res: Response,
   password: string
-) => {
+): string | void => {
   if (!password) {
     return ErrorResponse(req, res, "BP", 10);
   }
@@ -69,7 +78,11 @@ export const validatePassword = (
   return password;
 };
 
-export const validateTask = (req: Request, res: Response, rawData: boolean) => {
+export const validateTask = (
+  req: Request,
+  res: Response,
+  rawData: boolean
+): void | boolean => {
   if (rawData === true || rawData === false) {
     return rawData;
   }

@@ -8,7 +8,7 @@ import { deleteUser } from "./user/delete.user";
 import { checkAccessToken } from "../middleware/checkAccessToken.middleware";
 import { checkPassword } from "../middleware/checkPassword.middleware";
 
-export const userRouter = Router();
+export const userRouter: Router = Router();
 
 userRouter.post("/", createUser);
 userRouter.get("/", checkAccessToken, getUser);

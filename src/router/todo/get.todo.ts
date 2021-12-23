@@ -3,9 +3,9 @@ import { validateGeneral } from "../../helper/validator.helper";
 import { TodoModel, TokenModel } from "../../model";
 import { ErrorResponse, SuccessResponse } from "../../response";
 
-export const getTodo = async (req: Request, res: Response) => {
+export const getTodo = async (req: Request, res: Response): Promise<void> => {
   try {
-    const userId = res.locals.userId;
+    const userId: string = res.locals.userId;
 
     const status = validateGeneral(req, res, req.query.status as string);
     if (!status) return;

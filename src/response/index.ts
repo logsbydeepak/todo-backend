@@ -10,7 +10,7 @@ export const ErrorResponse = (
   messageTypeCode: string,
   messageCode: number,
   data?: object
-) => {
+): void => {
   const responseData = errorData.find(
     (data: any) => data.messageTypeCode === messageTypeCode
   )!;

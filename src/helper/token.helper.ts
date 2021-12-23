@@ -1,16 +1,19 @@
-import { sign, verify } from "jsonwebtoken";
+import { JwtPayload, sign, verify } from "jsonwebtoken";
+
 import {
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET,
 } from "../config/env.config";
 
-export const accessTokenGenerator = (id: number) =>
+export const accessTokenGenerator = (id: number): string =>
   sign({ id }, ACCESS_TOKEN_SECRET as string, { expiresIn: "15m" });
 
-export const refreshTokenGenerator = (id: number) =>
+export const refreshTokenGenerator = (id: number): string =>
   sign({ id }, REFRESH_TOKEN_SECRET as string, { expiresIn: "30d" });
 
-export const accessTokenValidator = (token: string) => {
+export const accessTokenValidator = (
+  token: string
+): JwtPayload | null | string => {
   try {
     return verify(token, ACCESS_TOKEN_SECRET as string);
   } catch (error: any) {
@@ -21,7 +24,9 @@ export const accessTokenValidator = (token: string) => {
   }
 };
 
-export const refreshTokenValidator = (token: string) => {
+export const refreshTokenValidator = (
+  token: string
+): JwtPayload | null | string => {
   try {
     return verify(token, REFRESH_TOKEN_SECRET as string);
   } catch (error: any) {

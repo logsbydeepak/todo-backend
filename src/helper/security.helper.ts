@@ -5,9 +5,10 @@ import { ENCRYPT_SECRET } from "../config/env.config";
 
 const cryptr = new Cryptr(ENCRYPT_SECRET as string);
 
-export const generateEncryption = (token: string) => cryptr.encrypt(token);
+export const generateEncryption = (token: string): string =>
+  cryptr.encrypt(token);
 
-export const generateDecryption = (token: string) => {
+export const generateDecryption = (token: string): string | null => {
   try {
     return cryptr.decrypt(token);
   } catch (error: any) {
@@ -15,10 +16,11 @@ export const generateDecryption = (token: string) => {
   }
 };
 
-export const generateHashAndSalt = async (rawPassword: string) =>
-  await hash(rawPassword, 10);
+export const generateHashAndSalt = async (
+  rawPassword: string
+): Promise<string> => await hash(rawPassword, 10);
 
 export const validateHashAndSalt = async (
   rawPassword: string,
   dbPassword: string
-) => await compare(rawPassword, dbPassword);
+): Promise<boolean> => await compare(rawPassword, dbPassword);

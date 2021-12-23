@@ -1,14 +1,23 @@
 import { Request, Response } from "express";
-import { validateGeneral } from "../../helper/validator.helper";
-import { TodoModel } from "../../model";
-import { ErrorResponse, SuccessResponse } from "../../response";
 
-export const deleteTodo = async (req: Request, res: Response) => {
+import { TodoModel } from "../../model";
+import { TodoModelType } from "../../types/model.types";
+import { ErrorResponse, SuccessResponse } from "../../response";
+import { validateGeneral } from "../../helper/validator.helper";
+
+export const deleteTodo = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const userId = res.locals.userId;
+    const userId: string = res.locals.userId;
     const todoIdQuery = req.query.id;
 
-    const todoId = validateGeneral(req, res, todoIdQuery as string);
+    const todoId: string | void = validateGeneral(
+      req,
+      res,
+      todoIdQuery as string
+    );
     if (!todoId) return;
 
     const todo: any = await TodoModel.findById(todoId);

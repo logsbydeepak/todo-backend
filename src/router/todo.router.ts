@@ -6,7 +6,7 @@ import { deleteTodo } from "./todo/delete.todo";
 import { updateTodo } from "./todo/update.todo";
 import { checkAccessToken } from "../middleware/checkAccessToken.middleware";
 
-export const todoRouter = Router();
+export const todoRouter: Router = Router();
 
 todoRouter.get("/", checkAccessToken, getTodo);
 todoRouter.post("/", checkAccessToken, createTodo);

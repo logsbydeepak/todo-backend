@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { UserModel } from "../../model";
 import { ErrorResponse, SuccessResponse } from "../../response";
+import { UserModelType } from "../../types/model.types";
 
-export const getUser = async (req: Request, res: Response) => {
+export const getUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const userId = res.locals.userId;
+    const userId: string = res.locals.userId;
 
-    const dbUser = await UserModel.findById(userId);
+    const dbUser: UserModelType | null = await UserModel.findById(userId);
 
     if (!dbUser) {
       return ErrorResponse(req, res, "AU", 10);

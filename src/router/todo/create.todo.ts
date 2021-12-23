@@ -8,21 +8,32 @@ import {
 import { TodoModel } from "../../model";
 
 import { ErrorResponse, SuccessResponse } from "../../response";
+import { UserModelType } from "../../types/model.types";
+import {
+  BodyDataType,
+  CreateTodoBodyType,
+  CreateUserBodyType,
+} from "../../types/validator.types";
 
 export const createTodo = async (req: Request, res: Response) => {
   try {
-    const id = res.locals.userId;
+    const id: string = res.locals.userId;
 
-    const bodyData = validateBody(req, res, req.body, 2);
+    const bodyData: CreateTodoBodyType | void = validateBody(
+      req,
+      res,
+      req.body,
+      2
+    );
     if (!bodyData) return;
 
-    const task = validateGeneral(req, res, bodyData.task);
+    const task: string | void = validateGeneral(req, res, bodyData.task);
     if (!task) return;
 
-    const status = validateTask(req, res, bodyData.status);
+    const status: boolean | void = validateTask(req, res, bodyData.status);
     if (!(status === true || status === false)) return;
 
-    const newTodo = new TodoModel({
+    const newTodo: any = new TodoModel({
       owner: id,
       task,
       status,

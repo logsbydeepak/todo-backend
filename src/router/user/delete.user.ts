@@ -6,9 +6,12 @@ import {
 import { TokenModel, UserModel } from "../../model";
 import { ErrorResponse, SuccessResponse } from "../../response";
 
-export const deleteUser = async (req: Request, res: Response) => {
+export const deleteUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const id = res.locals.userId;
+    const id: string = res.locals.userId;
 
     await UserModel.findByIdAndRemove(id);
     await TokenModel.findByIdAndRemove(id);
