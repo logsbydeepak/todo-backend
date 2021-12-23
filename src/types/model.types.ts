@@ -14,3 +14,8 @@ export interface TokenModelType extends Document {
     }
   ];
 }
+
+export interface TodoModelType extends Document {
+  task: string;
+  status: boolean;
+}
