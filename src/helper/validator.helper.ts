@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { raw, Request, Response } from "express";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
@@ -67,4 +67,12 @@ export const validatePassword = (
   }
 
   return password;
+};
+
+export const validateTask = (req: Request, res: Response, rawData: boolean) => {
+  if (rawData === true || rawData === false) {
+    return rawData;
+  }
+
+  return ErrorResponse(req, res, "BP", 10);
 };

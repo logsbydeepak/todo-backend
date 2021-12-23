@@ -39,5 +39,16 @@
         "statusCode": 200
       }
     ]
+  },
+  {
+    "messageTypeCode": "TD",
+    "messageType": "TODO",
+    "response": [
+      {
+        "messageCode": 10,
+        "message": "todo created successfully",
+        "statusCode": 201
+      }
+    ]
   }
 ]

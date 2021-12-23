@@ -1,8 +1,11 @@
 import { Router } from "express";
-import { sessionRouter } from "./session.user";
+
+import { todoRouter } from "./todo.router";
 import { userRouter } from "./user.router";
+import { sessionRouter } from "./session.router";
 
 export const router = Router();
 
 router.use("/user", userRouter);
 router.use("/session", sessionRouter);
+router.use("/todo", todoRouter);
