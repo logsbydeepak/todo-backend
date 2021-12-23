@@ -1,11 +1,12 @@
-import { createLogger, transports, format } from "winston";
 import "winston-mongodb";
+import { Format } from "logform";
+import { createLogger, transports, format, Logger } from "winston";
 
 import { DB_LOG_URL, NODE_ENV } from "./env.config";
 
 const { combine, timestamp, printf, colorize } = format;
 
-export const logger = createLogger({
+export const logger: Logger = createLogger({
   level: "info",
   transports: [],
 });
@@ -22,9 +23,9 @@ if (NODE_ENV !== "test") {
   );
 }
 
-const timeZone = () => new Date().toLocaleString();
+const timeZone = (): string => new Date().toLocaleString();
 
-const consoleFormat = printf(
+const consoleFormat: Format = printf(
   ({ timestamp, level, message }) => `[${level}] [${timestamp}] ${message}`
 );
 

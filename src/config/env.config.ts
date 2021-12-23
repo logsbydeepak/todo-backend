@@ -2,6 +2,7 @@ import { env } from "process";
 import { config } from "dotenv";
 import { resolve } from "path";
 
+// get the root path of the project to import .env file
 const rootPath: string = resolve(__dirname + "../../../");
 export const NODE_ENV: string | undefined = env.NODE_ENV;
 

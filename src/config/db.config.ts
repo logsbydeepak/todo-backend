@@ -3,7 +3,7 @@ import { connection, connect } from "mongoose";
 import { DB_URL } from "./env.config";
 import { logger } from "./logger.config";
 
-export const dbConnect = () => {
+export const dbConnect = (): void => {
   connect(DB_URL as string);
 
   connection.on("open", () => {
@@ -16,7 +16,7 @@ export const dbConnect = () => {
   });
 };
 
-export const dbDrop = async () => {
+export const dbDrop = async (): Promise<void> => {
   await connection.dropDatabase();
   await connection.close();
 };
