@@ -53,6 +53,11 @@
         "messageCode": 11,
         "message": "todo deleted successfully",
         "statusCode": 201
+      },
+      {
+        "messageCode": 12,
+        "message": "get todo successfully",
+        "statusCode": 201
       }
     ]
   }
