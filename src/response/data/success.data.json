@@ -48,6 +48,11 @@
         "messageCode": 10,
         "message": "todo created successfully",
         "statusCode": 201
+      },
+      {
+        "messageCode": 11,
+        "message": "todo deleted successfully",
+        "statusCode": 201
       }
     ]
   }
