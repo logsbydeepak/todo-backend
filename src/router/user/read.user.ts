@@ -3,7 +3,7 @@ import { UserModel } from "../../model";
 import { ErrorResponse, SuccessResponse } from "../../response";
 import { UserModelType } from "../../types/model.types";
 
-export const getUser = async (req: Request, res: Response): Promise<void> => {
+export const readUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId: string = res.locals.userId;
 

@@ -6,7 +6,7 @@ import {
 import { TokenModel } from "../../model";
 import { ErrorResponse, SuccessResponse } from "../../response";
 
-export const logoutSession = async (req: Request, res: Response) => {
+export const deleteSession = async (req: Request, res: Response) => {
   try {
     const logoutAll = req.query.all;
     const accessToken = req.cookies.accessToken;

@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import { loginSession } from "./session/login.session";
-import { logoutSession } from "./session/logout.session";
-import { refreshSession } from "./session/refresh.session";
+import { createSession } from "./session/create.session";
+import { deleteSession } from "./session/delete.session";
+import { updateSession } from "./session/update.session";
 import { checkAccessToken } from "../middleware/checkAccessToken.middleware";
 
 export const sessionRouter: Router = Router();
 
-sessionRouter.get("/", loginSession);
-sessionRouter.delete("/", checkAccessToken, logoutSession);
-sessionRouter.patch("/refresh", refreshSession);
+sessionRouter.post("/", createSession);
+sessionRouter.delete("/", checkAccessToken, deleteSession);
+sessionRouter.put("/refresh", updateSession);

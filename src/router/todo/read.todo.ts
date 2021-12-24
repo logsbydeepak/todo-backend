@@ -3,7 +3,7 @@ import { validateGeneral } from "../../helper/validator.helper";
 import { TodoModel, TokenModel } from "../../model";
 import { ErrorResponse, SuccessResponse } from "../../response";
 
-export const getTodo = async (req: Request, res: Response): Promise<void> => {
+export const readTodo = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId: string = res.locals.userId;
 

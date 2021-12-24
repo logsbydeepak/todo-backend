@@ -2,9 +2,9 @@ import { Document } from "mongoose";
 
 export interface UserModelType extends Document {
   _id: number;
-  email: string | null;
-  password: string | null;
-  name: string | null;
+  email: string;
+  password: string;
+  name: String;
 }
 
 export interface TokenModelType extends Document {

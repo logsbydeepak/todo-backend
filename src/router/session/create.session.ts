@@ -21,7 +21,7 @@ import {
   setRefreshTokenCookie,
 } from "../../helper/cookie.helper";
 
-export const loginSession = async (req: Request, res: Response) => {
+export const createSession = async (req: Request, res: Response) => {
   try {
     const bodyData = validateBody(req, res, req.body, 2);
     if (!bodyData) return;

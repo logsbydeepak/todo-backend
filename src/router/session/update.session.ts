@@ -12,7 +12,7 @@ import {
 import { TokenModel } from "../../model";
 import { ErrorResponse, SuccessResponse } from "../../response";
 
-export const refreshSession = async (req: Request, res: Response) => {
+export const updateSession = async (req: Request, res: Response) => {
   try {
     const { accessToken, refreshToken } = req.cookies;
 
