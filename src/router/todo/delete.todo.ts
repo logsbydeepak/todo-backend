@@ -13,11 +13,7 @@ export const deleteTodo = async (
     const userId: string = res.locals.userId;
     const todoIdQuery = req.query.id;
 
-    const todoId: string | void = validateGeneral(
-      req,
-      res,
-      todoIdQuery as string
-    );
+    const todoId: string = validateGeneral(todoIdQuery as string);
     if (!todoId) return;
 
     const todo: any = await TodoModel.findById(todoId);

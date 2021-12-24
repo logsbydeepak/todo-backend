@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 
 import {
   setAccessTokenCookie,
@@ -26,31 +26,23 @@ import { UserModelType, TokenModelType } from "../../types/model.types";
 
 export const createUser = async (
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
-    const bodyData: CreateUserBodyType | void = validateBody(
-      req,
-      res,
-      req.body,
-      3
-    );
+    const bodyData: CreateUserBodyType = validateBody(req.body, 3);
     if (!bodyData) return;
 
-    const name: string | void = validateGeneral(req, res, bodyData.name);
+    const name: string = validateGeneral(bodyData.name);
     if (!name) return;
 
-    const email: string | void = validateEmail(req, res, bodyData.email);
+    const email: string = validateEmail(bodyData.email);
     if (!email) return;
 
-    const password: string | void = validatePassword(
-      req,
-      res,
-      bodyData.password
-    );
+    const password: string = validatePassword(bodyData.password);
     if (!password) return;
 
-    const dbEmailCheck: string | void = await isEmailExist(req, res, email);
+    const dbEmailCheck: string = await isEmailExist(email);
     if (!dbEmailCheck) return;
 
     const newUser: UserModelType = new UserModel({ name, email, password });
@@ -78,8 +70,8 @@ export const createUser = async (
     setAccessTokenCookie(res, accessTokenEncrypt);
     setRefreshTokenCookie(res, refreshTokenEncrypt);
 
-    SuccessResponse(req, res, "AU", 10);
+    return SuccessResponse(req, res, "AU", 10);
   } catch (error: any) {
-    ErrorResponse(req, res, "IS", 10);
+    return next(error);
   }
 };

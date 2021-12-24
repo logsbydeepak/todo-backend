@@ -23,14 +23,11 @@ import {
 
 export const createSession = async (req: Request, res: Response) => {
   try {
-    const bodyData = validateBody(req, res, req.body, 2);
-    if (!bodyData) return;
+    const bodyData = validateBody(req.body, 2);
 
-    const email = validateEmail(req, res, bodyData.email);
-    if (!email) return;
+    const email = validateEmail(bodyData.email);
 
-    const password = validatePassword(req, res, bodyData.password);
-    if (!password) return;
+    const password = validatePassword(bodyData.password);
 
     const dbUser = await UserModel.findOne({ email });
     if (!dbUser) {

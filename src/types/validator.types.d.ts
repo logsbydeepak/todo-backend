@@ -1,3 +1,5 @@
+import { ErrorRequestHandler } from "express";
+
 export interface CreateUserBodyType extends Object, Array<string> {
   name: string;
   email: string;
@@ -24,3 +26,13 @@ export interface BodyDataType
     CreateTodoBodyType,
     UpdateTodoBodyType,
     UpdateUserBodyType {}
+
+export interface ThrowErrorType {
+  ThrowError: {
+    messageTypeCode: string;
+    messageCode: number;
+    data: object | undefined;
+  };
+}
+
+export interface ErrorRequest extends ErrorRequestHandlerm, ThrowErrorType {}

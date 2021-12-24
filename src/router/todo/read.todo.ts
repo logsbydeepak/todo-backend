@@ -7,11 +7,9 @@ export const readTodo = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId: string = res.locals.userId;
 
-    const status = validateGeneral(req, res, req.query.status as string);
-    if (!status) return;
+    const status = validateGeneral(req.query.status as string);
 
-    const page = validateGeneral(req, res, req.query.page as string);
-    if (!page) return;
+    const page = validateGeneral(req.query.page as string);
 
     let dbTodo: any;
 

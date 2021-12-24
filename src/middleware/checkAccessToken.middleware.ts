@@ -24,8 +24,6 @@ export const checkAccessToken = async (
     }
 
     const chechAccessTokenDbExist: string | void = await dbAccessTokenExist(
-      req,
-      res,
       accessToken
     );
     if (chechAccessTokenDbExist) return;
@@ -46,10 +44,7 @@ export const checkAccessToken = async (
       return ErrorResponse(req, res, "BP", 11);
     }
 
-    await dbUserExist(req, res, id);
-
-    const chechUserExistWithId: number | void = await dbUserExist(req, res, id);
-    if (!chechUserExistWithId) return;
+    await dbUserExist(id);
 
     res.locals.userId = id;
 

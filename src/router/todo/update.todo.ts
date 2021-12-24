@@ -10,15 +10,10 @@ import { ErrorResponse, SuccessResponse } from "../../response";
 export const updateTodo = async (req: Request, res: Response) => {
   try {
     const userId = res.locals.userId;
-    const bodyData = validateBody(req, res, req.body, 3);
-    if (!bodyData) return;
-
-    const id = validateGeneral(req, res, bodyData.id);
-    if (!id) return;
-    const task = validateGeneral(req, res, bodyData.task);
-    if (!task) return;
-    const status = validateTask(req, res, bodyData.status);
-    if (!(status === true || status === false)) return;
+    const bodyData = validateBody(req.body, 3);
+    const id = validateGeneral(bodyData.id);
+    const task = validateGeneral(bodyData.task);
+    const status = validateTask(bodyData.status);
 
     const dbTodo: any = await TodoModel.findById(id);
     if (!dbTodo) {

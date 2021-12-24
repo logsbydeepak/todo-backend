@@ -17,20 +17,9 @@ export const updateUser = async (req: Request, res: Response) => {
   try {
     const userId: string = res.locals.userId;
 
-    const bodyData: UpdateUserBodyType | void = validateBody(
-      req,
-      res,
-      req.body,
-      3
-    );
-    if (!bodyData) return;
+    const bodyData: UpdateUserBodyType = validateBody(req.body, 3);
 
-    const toUpdate: string | void = validateGeneral(
-      req,
-      res,
-      bodyData.toUpdate
-    );
-    if (!toUpdate) return;
+    const toUpdate: string = validateGeneral(bodyData.toUpdate);
 
     const dbUser: UserModelType | null = await UserModel.findById(userId);
     if (!dbUser) {
@@ -39,26 +28,18 @@ export const updateUser = async (req: Request, res: Response) => {
 
     switch (toUpdate) {
       case "name":
-        const name: string | void = validateGeneral(req, res, bodyData.name);
-        if (!name) return;
+        const name: string = validateGeneral(bodyData.name);
         dbUser.name = name;
         break;
 
       case "email":
-        const email: string | void = validateEmail(req, res, bodyData.email);
-        if (!email) return;
-        const dbEmailCheck: string | void = await isEmailExist(req, res, email);
-        if (!dbEmailCheck) return;
+        const email: string = validateEmail(bodyData.email);
+        const dbEmailCheck: string = await isEmailExist(email);
         dbUser.email = email;
         break;
 
       case "password":
-        const password: string | void = validatePassword(
-          req,
-          res,
-          bodyData.password
-        );
-        if (!password) return;
+        const password: string = validatePassword(bodyData.password);
         dbUser.password = password;
         break;
 
