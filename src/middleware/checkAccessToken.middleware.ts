@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
 import { ErrorResponse } from "../response";
-import { UserModel } from "../model";
 import { accessTokenValidator } from "../helper/token.helper";
 import { generateDecryption } from "../helper/security.helper";
 import { dbAccessTokenExist, dbUserExist } from "../helper/db.helper";

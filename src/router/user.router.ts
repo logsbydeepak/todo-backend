@@ -5,8 +5,7 @@ import { updateUser } from "./user/update.user";
 import { createUser } from "./user/create.user";
 import { deleteUser } from "./user/delete.user";
 
-import { checkAccessToken } from "../middleware/checkAccessToken.middleware";
-import { checkPassword } from "../middleware/checkPassword.middleware";
+import { checkAccessToken, checkPassword } from "@middleware";
 
 export const userRouter: Router = Router();
 
