@@ -1,4 +1,4 @@
-import { model } from "mongoose";
+import { Model, model } from "mongoose";
 
 import { UserSchema } from "./schema/user.schema";
 import { TodoSchema } from "./schema/todo.schema";
@@ -10,6 +10,6 @@ import {
   TodoModelType,
 } from "../types/model.types";
 
-export const UserModel = model<UserModelType>("users", UserSchema);
-export const TodoModel = model<TodoModelType>("todos", TodoSchema);
-export const TokenModel = model<TokenModelType>("tokens", TokenSchema);
+export const UserModel: Model<UserModelType> = model("users", UserSchema);
+export const TodoModel: Model<TodoModelType> = model("todos", TodoSchema);
+export const TokenModel: Model<TokenModelType> = model("tokens", TokenSchema);

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { dbGetUserById } from "../helper/db.helper";
 
 import { validateHashAndSalt } from "../helper/security.helper";
 import { validatePassword } from "../helper/validator.helper";
@@ -20,11 +21,8 @@ export const checkPassword = async (
     );
     if (!currentPassword) return;
 
-    const dbUser: UserModelType | null = await UserModel.findById(userId);
-
-    if (!dbUser) {
-      return ErrorResponse(req, res, "AU", 10);
-    }
+    const dbUser: UserModelType | void = await dbGetUserById(req, res, userId);
+    if (!dbUser) return;
 
     const checkDbPassword: boolean = await validateHashAndSalt(
       currentPassword,

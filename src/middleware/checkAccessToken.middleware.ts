@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 
 import { ErrorResponse } from "../response";
-import { TokenModel, UserModel } from "../model";
+import { UserModel } from "../model";
 import { accessTokenValidator } from "../helper/token.helper";
 import { generateDecryption } from "../helper/security.helper";
+import { dbAccessTokenExist, dbUserExist } from "../helper/db.helper";
 
 export const checkAccessToken = async (
   req: Request,
@@ -22,13 +23,12 @@ export const checkAccessToken = async (
       return ErrorResponse(req, res, "BP", 11);
     }
 
-    const accessTokenCount: number = await TokenModel.count({
-      "tokens.accessToken": accessToken,
-    });
-
-    if (accessTokenCount === 0) {
-      return ErrorResponse(req, res, "BP", 11);
-    }
+    const chechAccessTokenDbExist: string | void = await dbAccessTokenExist(
+      req,
+      res,
+      accessToken
+    );
+    if (chechAccessTokenDbExist) return;
 
     const accessTokenData: any = accessTokenValidator(accessTokenDecryption);
 
@@ -46,13 +46,10 @@ export const checkAccessToken = async (
       return ErrorResponse(req, res, "BP", 11);
     }
 
-    const idCount: number = await UserModel.count({
-      _id: id as string,
-    });
+    await dbUserExist(req, res, id);
 
-    if (idCount === 0) {
-      return ErrorResponse(req, res, "AU", 10);
-    }
+    const chechUserExistWithId: number | void = await dbUserExist(req, res, id);
+    if (!chechUserExistWithId) return;
 
     res.locals.userId = id;
 

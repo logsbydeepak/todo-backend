@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 
 const ObjectId = Schema.Types.ObjectId;
 
-export const TokenSchema = new Schema({
+export const TokenSchema: Schema = new Schema({
   _id: ObjectId,
   tokens: [
     {

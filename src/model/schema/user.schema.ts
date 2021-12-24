@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+
 import { generateHashAndSalt } from "../../helper/security.helper";
 
 const defaultProperty = {
@@ -6,8 +7,7 @@ const defaultProperty = {
   type: String,
 };
 
-export const UserSchema = new Schema({
-  name: defaultProperty,
+export const UserSchema: Schema = new Schema({
   email: defaultProperty,
   password: defaultProperty,
 });
