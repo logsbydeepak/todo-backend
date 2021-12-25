@@ -1,7 +1,7 @@
 import { connection, connect } from "mongoose";
 
-import { DB_URL } from "./env.config";
-import { logger } from "./logger.config";
+import { DB_URL } from "@config/env";
+import { logger } from "@config/logger";
 
 export const dbConnect = (): void => {
   connect(DB_URL as string);

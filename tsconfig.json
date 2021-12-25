@@ -31,10 +31,22 @@
     "paths": {
       "@model": ["./model"],
       "@types": ["./types"],
-      "@config": ["./config"],
-      "@helper": ["./helper"],
+      "@router": ["./router"],
       "@response": ["./response"],
-      "@middleware": ["./middleware"]
+      "@middleware": ["./middleware"],
+
+      "@helper/cookie": ["./helper/cookie.helper.ts"],
+      "@helper/db": ["./helper/db.helper.ts"],
+      "@helper/env": ["./helper/env.helper.ts"],
+      "@helper/security": ["./helper/security.helper.ts"],
+      "@helper/server": ["./helper/server.helper.ts"],
+      "@helper/token": ["./helper/token.helper.ts"],
+      "@helper/validator": ["./helper/validator.helper.ts"],
+
+      "@config/db": ["./config/db.config.ts"],
+      "@config/env": ["./config/env.config.ts"],
+      "@config/logger": ["./config/logger.config.ts"],
+      "@config/server": ["./config/server.config.ts"]
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like `./node_modules/@types`. */

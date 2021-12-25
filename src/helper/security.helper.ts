@@ -1,7 +1,7 @@
 import Cryptr from "cryptr";
 import { hash, compare } from "bcryptjs";
 
-import { ENCRYPT_SECRET } from "../config/env.config";
+import { ENCRYPT_SECRET } from "@config/env";
 
 const cryptr = new Cryptr(ENCRYPT_SECRET as string);
 

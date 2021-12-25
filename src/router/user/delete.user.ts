@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
+
 import {
   removeAccessTokenCookie,
   removeRefreshTokenCookie,
-} from "../../helper/cookie.helper";
-import { TokenModel, UserModel } from "../../model";
-import { ErrorResponse, SuccessResponse } from "../../response";
+} from "@helper/cookie";
+
+import { TokenModel, UserModel } from "@model";
+import { ErrorResponse, SuccessResponse } from "@response";
 
 export const deleteUser = async (
   req: Request,

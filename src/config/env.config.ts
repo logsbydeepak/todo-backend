@@ -1,6 +1,6 @@
 import { env } from "process";
-import { config } from "dotenv";
 import { resolve } from "path";
+import { config } from "dotenv";
 
 // get the root path of the project to import .env file
 const rootPath: string = resolve(__dirname + "../../../");

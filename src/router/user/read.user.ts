@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import { UserModel } from "../../model";
-import { ErrorResponse, SuccessResponse } from "../../response";
-import { UserModelType } from "../../types/model.types";
+
+import { UserModel } from "@model";
+import { UserModelType } from "@types";
+import { ErrorResponse, SuccessResponse } from "@response";
 
 export const readUser = async (req: Request, res: Response): Promise<void> => {
   try {

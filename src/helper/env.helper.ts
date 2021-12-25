@@ -1,4 +1,4 @@
-import * as allEnv from "../config/env.config";
+import * as allEnv from "@config/env";
 
 export const checkEnv = (): void => {
   Object.entries(allEnv).forEach(([_, value]) => {

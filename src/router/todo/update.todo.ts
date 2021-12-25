@@ -1,11 +1,8 @@
 import { Request, Response } from "express";
-import {
-  validateBody,
-  validateGeneral,
-  validateTask,
-} from "../../helper/validator.helper";
-import { TodoModel } from "../../model";
-import { ErrorResponse, SuccessResponse } from "../../response";
+
+import { TodoModel } from "@model";
+import { ErrorResponse, SuccessResponse } from "@response";
+import { validateBody, validateGeneral, validateTask } from "@helper/validator";
 
 export const updateTodo = async (req: Request, res: Response) => {
   try {

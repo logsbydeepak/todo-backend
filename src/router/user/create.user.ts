@@ -1,28 +1,19 @@
-import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
-
-import {
-  setAccessTokenCookie,
-  setRefreshTokenCookie,
-} from "../../helper/cookie.helper";
-
-import {
-  accessTokenGenerator,
-  refreshTokenGenerator,
-} from "../../helper/token.helper";
+import { NextFunction, Request, Response } from "express";
 
 import {
   validateBody,
   validateEmail,
   validateGeneral,
   validatePassword,
-} from "../../helper/validator.helper";
+} from "@helper/validator";
 
-import { TokenModel, UserModel } from "../../model";
-import { isEmailExist } from "../../helper/db.helper";
-import { ErrorResponse, SuccessResponse } from "../../response";
-import { CreateUserBodyType } from "../../types/validator.types";
-import { generateEncryption } from "../../helper/security.helper";
-import { UserModelType, TokenModelType } from "../../types/model.types";
+import { isEmailExist } from "@helper/db";
+import { SuccessResponse } from "@response";
+import { TokenModel, UserModel } from "@model";
+import { generateEncryption } from "@helper/security";
+import { CreateUserBodyType, UserModelType, TokenModelType } from "@types";
+import { accessTokenGenerator, refreshTokenGenerator } from "@helper/token";
+import { setAccessTokenCookie, setRefreshTokenCookie } from "@helper/cookie";
 
 export const createUser = async (
   req: Request,

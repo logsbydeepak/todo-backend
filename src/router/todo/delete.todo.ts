@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 
-import { TodoModel } from "../../model";
-import { TodoModelType } from "../../types/model.types";
-import { ErrorResponse, SuccessResponse } from "../../response";
-import { validateGeneral } from "../../helper/validator.helper";
+import { TodoModel } from "@model";
+import { TodoModelType } from "@types";
+import { validateGeneral } from "@helper/validator";
+import { ErrorResponse, SuccessResponse } from "@response";
 
 export const deleteTodo = async (
   req: Request,

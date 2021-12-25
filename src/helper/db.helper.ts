@@ -1,6 +1,6 @@
-import { TokenModel, UserModel } from "../model";
-import { ErrorObject } from "../response";
-import { UserModelType } from "../types/model.types";
+import { UserModelType } from "@types";
+import { ErrorObject } from "@response";
+import { TokenModel, UserModel } from "@model";
 
 export const isEmailExist = async (email: string): Promise<string> => {
   const emailCount = await UserModel.count({ email });

@@ -5,13 +5,12 @@ import {
   validateEmail,
   validateGeneral,
   validatePassword,
-} from "../../helper/validator.helper";
-import { UserModel } from "../../model";
+} from "@helper/validator";
 
-import { isEmailExist } from "../../helper/db.helper";
-import { UserModelType } from "../../types/model.types";
-import { ErrorResponse, SuccessResponse } from "../../response";
-import { UpdateUserBodyType } from "../../types/validator.types";
+import { UserModel } from "@model";
+import { isEmailExist } from "@helper/db";
+import { ErrorResponse, SuccessResponse } from "@response";
+import { UserModelType, UpdateUserBodyType } from "@types";
 
 export const updateUser = async (req: Request, res: Response) => {
   try {

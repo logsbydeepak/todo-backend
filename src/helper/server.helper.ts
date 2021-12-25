@@ -1,12 +1,12 @@
-import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
-import { ErrorResponse, ErrorObject } from "../response";
-import { ErrorRequest } from "../types/validator.types";
+import { Request, Response } from "express";
+
+import { ErrorRequest } from "@types";
+import { ErrorResponse } from "@response";
 
 export const serverErrorHandler = (
   error: ErrorRequest,
   req: Request,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) => {
   if (error.ErrorObject) {
     const { messageTypeCode, messageCode } = error.ErrorObject;

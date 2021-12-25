@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import { validateGeneral } from "../../helper/validator.helper";
-import { TodoModel, TokenModel } from "../../model";
-import { ErrorResponse, SuccessResponse } from "../../response";
+
+import { TodoModel } from "@model";
+import { validateGeneral } from "@helper/validator";
+import { ErrorResponse, SuccessResponse } from "@response";
 
 export const readTodo = async (req: Request, res: Response): Promise<void> => {
   try {

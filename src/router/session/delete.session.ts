@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
+
 import {
   removeAccessTokenCookie,
   removeRefreshTokenCookie,
-} from "../../helper/cookie.helper";
-import { TokenModel } from "../../model";
-import { ErrorResponse, SuccessResponse } from "../../response";
+} from "@helper/cookie";
+
+import { TokenModel } from "@model";
+import { ErrorResponse, SuccessResponse } from "@response";
 
 export const deleteSession = async (req: Request, res: Response) => {
   try {

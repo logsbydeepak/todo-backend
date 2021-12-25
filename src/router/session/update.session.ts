@@ -1,16 +1,15 @@
 import { Request, Response } from "express";
-import { setAccessTokenCookie } from "../../helper/cookie.helper";
-import {
-  generateDecryption,
-  generateEncryption,
-} from "../../helper/security.helper";
+
 import {
   accessTokenGenerator,
   accessTokenValidator,
   refreshTokenValidator,
-} from "../../helper/token.helper";
-import { TokenModel } from "../../model";
-import { ErrorResponse, SuccessResponse } from "../../response";
+} from "@helper/token";
+
+import { TokenModel } from "@model";
+import { setAccessTokenCookie } from "@helper/cookie";
+import { ErrorResponse, SuccessResponse } from "@response";
+import { generateDecryption, generateEncryption } from "@helper/security";
 
 export const updateSession = async (req: Request, res: Response) => {
   try {

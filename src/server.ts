@@ -1,9 +1,9 @@
 import { connection } from "mongoose";
 
-import { server } from "./config/server.config";
-import { API_PORT } from "./config/env.config";
-import { logger } from "./config/logger.config";
-import { dbConnect } from "./config/db.config";
+import { API_PORT } from "@config/env";
+import { dbConnect } from "@config/db";
+import { server } from "@config/server";
+import { logger } from "@config/logger";
 
 dbConnect();
 connection.on("open", () => {

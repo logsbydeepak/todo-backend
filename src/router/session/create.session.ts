@@ -4,22 +4,13 @@ import {
   validateBody,
   validateEmail,
   validatePassword,
-} from "../../helper/validator.helper";
+} from "@helper/validator";
 
-import { TokenModel, UserModel } from "../../model";
-import { ErrorResponse, SuccessResponse } from "../../response";
-import {
-  generateEncryption,
-  validateHashAndSalt,
-} from "../../helper/security.helper";
-import {
-  accessTokenGenerator,
-  refreshTokenGenerator,
-} from "../../helper/token.helper";
-import {
-  setAccessTokenCookie,
-  setRefreshTokenCookie,
-} from "../../helper/cookie.helper";
+import { TokenModel, UserModel } from "@model";
+import { ErrorResponse, SuccessResponse } from "@response";
+import { generateEncryption, validateHashAndSalt } from "@helper/security";
+import { accessTokenGenerator, refreshTokenGenerator } from "@helper/token";
+import { setAccessTokenCookie, setRefreshTokenCookie } from "@helper/cookie";
 
 export const createSession = async (req: Request, res: Response) => {
   try {

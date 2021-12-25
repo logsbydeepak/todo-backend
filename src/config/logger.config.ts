@@ -2,7 +2,7 @@ import "winston-mongodb";
 import { Format } from "logform";
 import { createLogger, transports, format, Logger } from "winston";
 
-import { DB_LOG_URL, NODE_ENV } from "./env.config";
+import { DB_LOG_URL, NODE_ENV } from "@config/env";
 
 const { combine, timestamp, printf, colorize } = format;
 

@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 
-import { ErrorResponse } from "../response";
-import { accessTokenValidator } from "../helper/token.helper";
-import { generateDecryption } from "../helper/security.helper";
-import { dbAccessTokenExist, dbUserExist } from "../helper/db.helper";
+import { ErrorResponse } from "@response";
+import { accessTokenValidator } from "@helper/token";
+import { generateDecryption } from "@helper/security";
+import { dbAccessTokenExist, dbUserExist } from "@helper/db";
 
 export const checkAccessToken = async (
   req: Request,

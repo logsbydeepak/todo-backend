@@ -1,8 +1,8 @@
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import { ErrorObject } from "../response";
-import { BodyDataType } from "../types/validator.types";
+import { ErrorObject } from "@response";
+import { BodyDataType } from "@types";
 
 export const validateBody = (
   bodyData: BodyDataType,
