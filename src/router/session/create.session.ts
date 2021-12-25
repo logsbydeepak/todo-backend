@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import {
   validateBody,
@@ -6,13 +6,18 @@ import {
   validatePassword,
 } from "@helper/validator";
 
+import { TokenModelType } from "@types";
 import { TokenModel, UserModel } from "@model";
 import { ErrorResponse, SuccessResponse } from "@response";
 import { generateEncryption, validateHashAndSalt } from "@helper/security";
 import { accessTokenGenerator, refreshTokenGenerator } from "@helper/token";
 import { setAccessTokenCookie, setRefreshTokenCookie } from "@helper/cookie";
 
-export const createSession = async (req: Request, res: Response) => {
+export const createSession = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const bodyData = validateBody(req.body, 2);
 
@@ -40,24 +45,19 @@ export const createSession = async (req: Request, res: Response) => {
     const accessTokenEncrypt = generateEncryption(accessToken);
     const refreshTokenEncrypt = generateEncryption(refreshToken);
 
-    const dbToken: any = await TokenModel.findById(dbUser._id);
-
-    if (!dbToken) {
-      throw new Error();
-    }
-
-    dbToken.tokens.unshift({
+    const newToken: TokenModelType = new TokenModel({
+      owner: dbUserId,
       refreshToken: refreshTokenEncrypt,
       accessToken: accessTokenEncrypt,
     });
 
-    dbToken.save();
+    await newToken.save();
 
     setAccessTokenCookie(res, accessTokenEncrypt);
     setRefreshTokenCookie(res, refreshTokenEncrypt);
 
     SuccessResponse(req, res, "AU", 14);
   } catch (error: any) {
-    ErrorResponse(req, res, "IS", 10);
+    next(error);
   }
 };

@@ -19,25 +19,16 @@ export const createUser = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+) => {
   try {
     const bodyData: CreateUserBodyType = validateBody(req.body, 3);
-    if (!bodyData) return;
-
     const name: string = validateGeneral(bodyData.name);
-    if (!name) return;
-
     const email: string = validateEmail(bodyData.email);
-    if (!email) return;
-
     const password: string = validatePassword(bodyData.password);
-    if (!password) return;
 
-    const dbEmailCheck: string = await isEmailExist(email);
-    if (!dbEmailCheck) return;
+    await isEmailExist(email);
 
     const newUser: UserModelType = new UserModel({ name, email, password });
-
     const newUserId: number = newUser._id;
 
     const accessToken = accessTokenGenerator(newUserId);
@@ -46,13 +37,9 @@ export const createUser = async (
     const refreshTokenEncrypt = generateEncryption(refreshToken);
 
     const newToken: TokenModelType = new TokenModel({
-      _id: newUserId,
-      tokens: [
-        {
-          refreshToken: refreshTokenEncrypt,
-          accessToken: accessTokenEncrypt,
-        },
-      ],
+      owner: newUserId,
+      refreshToken: refreshTokenEncrypt,
+      accessToken: accessTokenEncrypt,
     });
 
     await newUser.save();
@@ -61,7 +48,7 @@ export const createUser = async (
     setAccessTokenCookie(res, accessTokenEncrypt);
     setRefreshTokenCookie(res, refreshTokenEncrypt);
 
-    return SuccessResponse(req, res, "AU", 10);
+    SuccessResponse(req, res, "AU", 10);
   } catch (error: any) {
     return next(error);
   }

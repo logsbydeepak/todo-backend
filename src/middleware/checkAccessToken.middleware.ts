@@ -22,10 +22,7 @@ export const checkAccessToken = async (
       return ErrorResponse(req, res, "BP", 11);
     }
 
-    const chechAccessTokenDbExist: string | void = await dbAccessTokenExist(
-      accessToken
-    );
-    if (chechAccessTokenDbExist) return;
+    await dbAccessTokenExist(accessToken);
 
     const accessTokenData: any = accessTokenValidator(accessTokenDecryption);
 

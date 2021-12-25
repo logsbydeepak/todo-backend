@@ -8,12 +8,9 @@ export interface UserModelType extends Document {
 }
 
 export interface TokenModelType extends Document {
-  sessions: [
-    {
-      refreshSession: string;
-      accessSession: string;
-    }
-  ];
+  owner: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface TodoModelType extends Document {
