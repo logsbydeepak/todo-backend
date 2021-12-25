@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 import { UserModelType } from "@types";
 import { ErrorResponse } from "@response";
-import { dbGetUserById } from "@helper/db";
+import { dbReadUserById } from "@helper/db";
 import { validatePassword } from "@helper/validator";
 import { validateHashAndSalt } from "@helper/security";
 
@@ -15,7 +15,7 @@ export const checkPassword = async (
     const userId: string = res.locals.userId;
     const currentPassword: string = validatePassword(req.body.currentPassword);
 
-    const dbUser: UserModelType | void = await dbGetUserById(userId);
+    const dbUser: UserModelType = await dbReadUserById(userId);
 
     const checkDbPassword: boolean = await validateHashAndSalt(
       currentPassword,

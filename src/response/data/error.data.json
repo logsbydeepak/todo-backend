@@ -16,6 +16,12 @@
     "response": [
       {
         "messageCode": 10,
+        "message": "body data missing",
+        "statusCode": 400
+      },
+
+      {
+        "messageCode": 11,
         "message": "invalid body data",
         "statusCode": 400
       },
@@ -55,6 +61,11 @@
         "messageCode": 10,
         "message": "user do not exist",
         "statusCode": 404
+      },
+      {
+        "messageCode": 11,
+        "message": "user already exists",
+        "statusCode": 400
       }
     ]
   }

@@ -7,13 +7,11 @@ import {
   validatePassword,
 } from "@helper/validator";
 
-import { isEmailExist } from "@helper/db";
+import { UserModel } from "@model";
 import { SuccessResponse } from "@response";
-import { TokenModel, UserModel } from "@model";
-import { generateEncryption } from "@helper/security";
 import { CreateUserBodyType, UserModelType, TokenModelType } from "@types";
-import { accessTokenGenerator, refreshTokenGenerator } from "@helper/token";
 import { setAccessTokenCookie, setRefreshTokenCookie } from "@helper/cookie";
+import { dbCreateAccessTokenAndRefreshToken, dbEmailExist } from "@helper/db";
 
 export const createUser = async (
   req: Request,
@@ -26,29 +24,21 @@ export const createUser = async (
     const email: string = validateEmail(bodyData.email);
     const password: string = validatePassword(bodyData.password);
 
-    await isEmailExist(email);
+    await dbEmailExist(email);
 
     const newUser: UserModelType = new UserModel({ name, email, password });
     const newUserId: number = newUser._id;
 
-    const accessToken = accessTokenGenerator(newUserId);
-    const refreshToken = refreshTokenGenerator(newUserId);
-    const accessTokenEncrypt = generateEncryption(accessToken);
-    const refreshTokenEncrypt = generateEncryption(refreshToken);
-
-    const newToken: TokenModelType = new TokenModel({
-      owner: newUserId,
-      refreshToken: refreshTokenEncrypt,
-      accessToken: accessTokenEncrypt,
-    });
+    const newToken: TokenModelType =
+      dbCreateAccessTokenAndRefreshToken(newUserId);
 
     await newUser.save();
     await newToken.save();
 
-    setAccessTokenCookie(res, accessTokenEncrypt);
-    setRefreshTokenCookie(res, refreshTokenEncrypt);
+    setAccessTokenCookie(res, newToken.accessToken);
+    setRefreshTokenCookie(res, newToken.refreshToken);
 
-    SuccessResponse(req, res, "AU", 10);
+    return SuccessResponse(req, res, "AU", 10);
   } catch (error: any) {
     return next(error);
   }

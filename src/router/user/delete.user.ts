@@ -1,28 +1,30 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import {
   removeAccessTokenCookie,
   removeRefreshTokenCookie,
 } from "@helper/cookie";
 
-import { TokenModel, UserModel } from "@model";
-import { ErrorResponse, SuccessResponse } from "@response";
+import { SuccessResponse } from "@response";
+import { TodoModel, TokenModel, UserModel } from "@model";
 
 export const deleteUser = async (
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
     const id: string = res.locals.userId;
 
     await UserModel.findByIdAndRemove(id);
+    await TodoModel.findByIdAndRemove(id);
     await TokenModel.findByIdAndRemove(id);
 
     removeAccessTokenCookie(res);
     removeRefreshTokenCookie(res);
 
-    SuccessResponse(req, res, "AU", 13);
+    return SuccessResponse(req, res, "AU", 13);
   } catch (error: any) {
-    ErrorResponse(req, res, "IS", 10);
+    return next(error);
   }
 };

@@ -14,7 +14,7 @@ export const validateBody = (
 
   const bodyDatalength: number = Object.keys(bodyData).length;
   if (bodyDatalength !== bodyDataCount) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 11);
   }
 
   return bodyData;
@@ -34,7 +34,7 @@ export const validateEmail = (email: string): string => {
 
   email = email.trim().toLowerCase();
   if (!isEmail(email)) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 11);
   }
 
   return email;
@@ -47,7 +47,7 @@ export const validatePassword = (password: string): string => {
 
   password = password.trim();
   if (!isStrongPassword(password)) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 11);
   }
 
   return password;
@@ -58,5 +58,5 @@ export const validateTask = (rawData: boolean): boolean => {
     return rawData;
   }
 
-  throw ErrorObject("BP", 10);
+  throw ErrorObject("BP", 11);
 };

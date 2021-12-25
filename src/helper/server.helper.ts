@@ -9,7 +9,6 @@ export const serverErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(error);
   if (error.ErrorObject) {
     const { messageTypeCode, messageCode } = error.ErrorObject;
     return ErrorResponse(req, res, messageTypeCode, messageCode);

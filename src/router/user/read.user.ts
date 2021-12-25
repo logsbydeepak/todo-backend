@@ -1,24 +1,23 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
-import { UserModel } from "@model";
 import { UserModelType } from "@types";
-import { ErrorResponse, SuccessResponse } from "@response";
+import { dbReadUserById } from "@helper/db";
+import { SuccessResponse } from "@response";
 
-export const readUser = async (req: Request, res: Response): Promise<void> => {
+export const readUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const userId: string = res.locals.userId;
-
-    const dbUser: UserModelType | null = await UserModel.findById(userId);
-
-    if (!dbUser) {
-      return ErrorResponse(req, res, "AU", 10);
-    }
+    const dbUser: UserModelType = await dbReadUserById(userId);
 
     SuccessResponse(req, res, "AU", 11, {
       name: dbUser.name,
       email: dbUser.email,
     });
   } catch (error: any) {
-    ErrorResponse(req, res, "IS", 10);
+    next(error);
   }
 };
