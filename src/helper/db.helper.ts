@@ -1,12 +1,12 @@
 import { TokenModel, UserModel } from "../model";
-import { ThrowError } from "../response";
+import { ErrorObject } from "../response";
 import { UserModelType } from "../types/model.types";
 
 export const isEmailExist = async (email: string): Promise<string> => {
   const emailCount = await UserModel.count({ email });
 
   if (emailCount !== 0) {
-    throw ThrowError("BP", 10);
+    throw ErrorObject("BP", 10);
   }
 
   return email;
@@ -20,7 +20,7 @@ export const dbAccessTokenExist = async (
   });
 
   if (accessTokenCount === 0) {
-    throw ThrowError("BP", 11);
+    throw ErrorObject("BP", 11);
   }
   return accessToken;
 };
@@ -31,7 +31,7 @@ export const dbUserExist = async (userId: string): Promise<number> => {
   });
 
   if (idCount === 0) {
-    throw ThrowError("AU", 10);
+    throw ErrorObject("AU", 10);
   }
 
   return idCount;
@@ -41,7 +41,7 @@ export const dbGetUserById = async (userId: string): Promise<UserModelType> => {
   const dbUser: UserModelType | null = await UserModel.findById(userId);
 
   if (!dbUser) {
-    throw ThrowError("AU", 10);
+    throw ErrorObject("AU", 10);
   }
 
   return dbUser;

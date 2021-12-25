@@ -27,12 +27,12 @@ export interface BodyDataType
     UpdateTodoBodyType,
     UpdateUserBodyType {}
 
-export interface ThrowErrorType {
-  ThrowError: {
+export interface ErrorObjectType {
+  ErrorObject: {
     messageTypeCode: string;
     messageCode: number;
     data: object | undefined;
   };
 }
 
-export interface ErrorRequest extends ErrorRequestHandlerm, ThrowErrorType {}
+export interface ErrorRequest extends ErrorRequestHandlerm, ErrorObjectType {}

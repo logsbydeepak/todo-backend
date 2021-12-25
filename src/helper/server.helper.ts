@@ -1,5 +1,5 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
-import { ErrorResponse, ThrowError } from "../response";
+import { ErrorResponse, ErrorObject } from "../response";
 import { ErrorRequest } from "../types/validator.types";
 
 export const serverErrorHandler = (
@@ -8,8 +8,8 @@ export const serverErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  if (error.ThrowError) {
-    const { messageTypeCode, messageCode } = error.ThrowError;
+  if (error.ErrorObject) {
+    const { messageTypeCode, messageCode } = error.ErrorObject;
     return ErrorResponse(req, res, messageTypeCode, messageCode);
   }
 };

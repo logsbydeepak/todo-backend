@@ -4,12 +4,12 @@ import errorData from "./data/error.data.json";
 import successData from "./data/success.data.json";
 import { templateResponse } from "./template.response";
 
-export const ThrowError = (
+export const ErrorObject = (
   messageTypeCode: string,
   messageCode: number,
   data?: object
 ) => ({
-  ThrowError: {
+  ErrorObject: {
     messageTypeCode,
     messageCode,
     data,
