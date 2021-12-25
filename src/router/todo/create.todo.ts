@@ -1,11 +1,15 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
+import { SuccessResponse } from "@response";
 import { CreateTodoBodyType } from "@types";
-import { ErrorResponse, SuccessResponse } from "@response";
 import { validateBody, validateGeneral, validateTask } from "@helper/validator";
 
-export const createTodo = async (req: Request, res: Response) => {
+export const createTodo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const id: string = res.locals.userId;
 
@@ -19,9 +23,9 @@ export const createTodo = async (req: Request, res: Response) => {
       status,
     });
 
-    newTodo.save();
-    SuccessResponse(req, res, "TD", 10);
+    await newTodo.save();
+    return SuccessResponse(req, res, "TD", 10);
   } catch (error: any) {
-    ErrorResponse(req, res, "IS", 10);
+    return next(error);
   }
 };

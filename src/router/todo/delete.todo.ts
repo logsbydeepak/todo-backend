@@ -1,35 +1,26 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
-import { TodoModelType } from "@types";
+import { dbReadTodo } from "@helper/db";
+import { SuccessResponse } from "@response";
 import { validateGeneral } from "@helper/validator";
-import { ErrorResponse, SuccessResponse } from "@response";
 
 export const deleteTodo = async (
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
     const userId: string = res.locals.userId;
-    const todoIdQuery = req.query.id;
+    const todoIdQuery: string = req.query.id as string;
 
-    const todoId: string = validateGeneral(todoIdQuery as string);
-    if (!todoId) return;
+    const todoId: string = validateGeneral(todoIdQuery);
 
-    const todo: any = await TodoModel.findById(todoId);
-
-    if (!todo) {
-      return ErrorResponse(req, res, "BP", 10);
-    }
-
-    if (todo.owner.toString() !== userId) {
-      return ErrorResponse(req, res, "AU", 10);
-    }
-
+    await dbReadTodo(todoId, userId);
     await TodoModel.findByIdAndDelete(todoId);
 
-    SuccessResponse(req, res, "TD", 11);
+    return SuccessResponse(req, res, "TD", 11);
   } catch (error: any) {
-    ErrorResponse(req, res, "IS", 10);
+    return next(error);
   }
 };

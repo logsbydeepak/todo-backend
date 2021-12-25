@@ -18,9 +18,13 @@ export interface CreateTodoBodyType extends Object, Array<string> {
   status: boolean;
 }
 
-export interface UpdateTodoBodyType extends Object, Array<string> {
+export interface UpdateTodoBodyType
+  extends Object,
+    Array<string>,
+    CreateTodoBodyType {
   id: string;
 }
+
 export interface BodyDataType
   extends CreateUserBodyType,
     CreateTodoBodyType,

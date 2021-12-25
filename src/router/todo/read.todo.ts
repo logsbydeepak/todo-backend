@@ -1,19 +1,21 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
 import { validateGeneral } from "@helper/validator";
 import { ErrorResponse, SuccessResponse } from "@response";
 
-export const readTodo = async (req: Request, res: Response): Promise<void> => {
+export const readTodo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const userId: string = res.locals.userId;
 
     const status = validateGeneral(req.query.status as string);
-
     const page = validateGeneral(req.query.page as string);
 
     let dbTodo: any;
-
     const pageInt = parseInt(page);
 
     if (isNaN(pageInt)) {
@@ -26,6 +28,7 @@ export const readTodo = async (req: Request, res: Response): Promise<void> => {
           pageInt
         );
         break;
+
       case "false":
         dbTodo = await TodoModel.find({ owner: userId, status: false }).limit(
           pageInt
@@ -46,8 +49,8 @@ export const readTodo = async (req: Request, res: Response): Promise<void> => {
       dbTodo[index].__v = undefined;
     });
 
-    SuccessResponse(req, res, "TD", 12, dbTodo);
+    return SuccessResponse(req, res, "TD", 12, dbTodo);
   } catch (error: any) {
-    ErrorResponse(req, res, "IS", 10);
+    return next(error);
   }
 };

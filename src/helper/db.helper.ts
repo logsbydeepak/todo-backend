@@ -1,7 +1,7 @@
 import { ErrorObject } from "@response";
-import { TokenModel, UserModel } from "@model";
+import { TodoModel, TokenModel, UserModel } from "@model";
 import { generateEncryption } from "@helper/security";
-import { TokenModelType, UserModelType } from "@types";
+import { TodoModelType, TokenModelType, UserModelType } from "@types";
 import { accessTokenGenerator, refreshTokenGenerator } from "@helper/token";
 
 export const dbEmailExist = async (email: string): Promise<void> => {
@@ -74,4 +74,17 @@ export const dbCreateAccessTokenAndRefreshToken = (
   });
 
   return newToken;
+};
+
+export const dbReadTodo = async (todoId: string, userId: string) => {
+  const dbTodo: TodoModelType | null = await TodoModel.findById(todoId);
+
+  if (!dbTodo) {
+    throw ErrorObject("BP", 10);
+  }
+
+  if (dbTodo.owner.toString() !== userId) {
+    throw ErrorObject("AU", 10);
+  }
+  return dbTodo;
 };

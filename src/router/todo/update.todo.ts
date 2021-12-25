@@ -1,33 +1,32 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
 import { ErrorResponse, SuccessResponse } from "@response";
 import { validateBody, validateGeneral, validateTask } from "@helper/validator";
+import { TodoModelType, UpdateTodoBodyType } from "@types";
+import { dbReadTodo } from "@helper/db";
 
-export const updateTodo = async (req: Request, res: Response) => {
+export const updateTodo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
-    const userId = res.locals.userId;
-    const bodyData = validateBody(req.body, 3);
-    const id = validateGeneral(bodyData.id);
-    const task = validateGeneral(bodyData.task);
-    const status = validateTask(bodyData.status);
+    const userId: string = res.locals.userId;
+    const bodyData: UpdateTodoBodyType = validateBody(req.body, 3);
+    const todoId: string = validateGeneral(bodyData.id);
+    const task: string = validateGeneral(bodyData.task);
+    const status: boolean = validateTask(bodyData.status);
 
-    const dbTodo: any = await TodoModel.findById(id);
-    if (!dbTodo) {
-      return ErrorResponse(req, res, "BP", 10);
-    }
-
-    if (dbTodo.owner.toString() !== userId) {
-      return ErrorResponse(req, res, "AU", 10);
-    }
+    const dbTodo: TodoModelType = await dbReadTodo(todoId, userId);
 
     dbTodo.task = task;
     dbTodo.status = status;
 
     await dbTodo.save();
 
-    SuccessResponse(req, res, "TD", 13);
+    return SuccessResponse(req, res, "TD", 13);
   } catch (error: any) {
-    ErrorResponse(req, res, "IS", 10);
+    return next(error);
   }
 };
