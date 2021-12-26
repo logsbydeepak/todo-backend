@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev run-s dev:start",
+    "dev": "cross-env NODE_ENV=dev run-s clean dev:start",
     "dev:start": "tsnd -r tsconfig-paths/register --rs --cache-directory \"./dist\" -- src/server.ts",
     "format": "prettier --write .",
     "format:watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",

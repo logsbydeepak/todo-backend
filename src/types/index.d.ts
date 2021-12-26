@@ -2,6 +2,12 @@ import { JwtPayload } from "jsonwebtoken";
 import { ErrorRequestHandler } from "express";
 import { Schema, Document, ObjectId } from "mongoose";
 
+interface PayloadId extends JwtPayload {
+  id: string;
+}
+
+export type TokenValidatorType = PayloadId | TokenExpiredError | null;
+
 export interface UserModelType extends Document {
   _id: string;
   email: string;
@@ -10,6 +16,7 @@ export interface UserModelType extends Document {
 }
 
 export interface TokenModelType extends Document {
+  id: string;
   owner: string;
   accessToken: string;
   refreshToken: string;
@@ -20,12 +27,6 @@ export interface TodoModelType extends Document {
   task: string;
   status: boolean;
 }
-
-interface PayloadId extends JwtPayload {
-  id: string;
-}
-
-export type TokenValidatorType = PayloadId | TokenExpiredError | null;
 
 export interface CreateUserBodyType extends Object, Array<string> {
   name: string;
@@ -40,6 +41,7 @@ export interface UpdateUserBodyType
   currentPassword: string;
   toUpdate: string;
 }
+
 export interface CreateTodoBodyType extends Object, Array<string> {
   task: string;
   status: boolean;
@@ -58,14 +60,10 @@ export interface BodyDataType
     UpdateTodoBodyType,
     UpdateUserBodyType {}
 
-export interface ErrorObjectType {
+export interface MyErrorRequestHandler extends ErrorRequestHandler {
   ErrorObject: {
     messageTypeCode: string;
     messageCode: number;
     data: object | undefined;
   };
 }
-
-export interface MyErrorRequestHandler
-  extends ErrorObjectType,
-    ErrorRequestHandler {}

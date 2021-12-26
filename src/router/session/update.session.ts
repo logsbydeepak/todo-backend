@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import {
   accessTokenGenerator,
@@ -11,7 +11,11 @@ import { setAccessTokenCookie } from "@helper/cookie";
 import { ErrorResponse, SuccessResponse } from "@response";
 import { generateDecryption, generateEncryption } from "@helper/security";
 
-export const updateSession = async (req: Request, res: Response) => {
+export const updateSession = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const { accessToken, refreshToken } = req.cookies;
 
@@ -73,8 +77,8 @@ export const updateSession = async (req: Request, res: Response) => {
 
     setAccessTokenCookie(res, accessTokenEncrypt);
 
-    SuccessResponse(req, res, "AU", 16);
+    return SuccessResponse(req, res, "AU", 16);
   } catch (error: any) {
-    ErrorResponse(req, res, "IS", 10);
+    return next(error);
   }
 };
