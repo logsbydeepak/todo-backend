@@ -1,4 +1,13 @@
+import { JwtPayload } from "jsonwebtoken";
 import { ErrorRequestHandler } from "express";
+
+import { ObjectIdType } from "@types";
+
+interface PayloadId extends JwtPayload {
+  id: ObjectIdType;
+}
+
+export type TokenValidatorType = PayloadId | TokenExpiredError | null;
 
 export interface CreateUserBodyType extends Object, Array<string> {
   name: string;

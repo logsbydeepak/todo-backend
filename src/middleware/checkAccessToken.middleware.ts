@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 
 import { ErrorResponse } from "@response";
+import { validateEmpty } from "@helper/validator";
 import { accessTokenValidator } from "@helper/token";
 import { generateDecryption } from "@helper/security";
+import { ObjectIdType, TokenValidatorType } from "@types";
 import { dbAccessTokenExist, dbUserExist } from "@helper/db";
 
 export const checkAccessToken = async (
@@ -11,41 +13,33 @@ export const checkAccessToken = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const accessToken: string | null = req.cookies.accessToken;
-    if (!accessToken) {
-      return ErrorResponse(req, res, "BP", 11);
-    }
-
-    const accessTokenDecryption: string | null =
-      generateDecryption(accessToken);
-    if (!accessTokenDecryption) {
-      return ErrorResponse(req, res, "BP", 11);
-    }
+    const accessToken: string = validateEmpty(req.cookies.accessToken);
+    const accessTokenDecryption: string = generateDecryption(accessToken);
 
     await dbAccessTokenExist(accessToken);
 
-    const accessTokenData: any = accessTokenValidator(accessTokenDecryption);
+    const accessTokenData: TokenValidatorType = accessTokenValidator(
+      accessTokenDecryption
+    );
 
     if (!accessTokenData) {
-      return ErrorResponse(req, res, "BP", 11);
+      return ErrorResponse(req, res, "TP", 13);
     }
 
     if (accessTokenData === "TokenExpiredError") {
       return ErrorResponse(req, res, "TP", 10);
     }
 
-    const { id }: { id: string } = accessTokenData;
-
-    if (!id) {
+    const userId: ObjectIdType = accessTokenData.id;
+    if (!userId) {
       return ErrorResponse(req, res, "BP", 11);
     }
 
-    await dbUserExist(id);
+    await dbUserExist(userId);
+    res.locals.userId = userId;
 
-    res.locals.userId = id;
-
-    next();
-  } catch {
-    ErrorResponse(req, res, "IS", 10);
+    return next();
+  } catch (error: any) {
+    return next(error);
   }
 };

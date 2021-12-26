@@ -9,11 +9,11 @@ const cryptr = new Cryptr(ENCRYPT_SECRET as string);
 export const generateEncryption = (token: string): string =>
   cryptr.encrypt(token);
 
-export const generateDecryption = (token: string): string | null => {
+export const generateDecryption = (token: string): string => {
   try {
     return cryptr.decrypt(token);
   } catch (error: any) {
-    return null;
+    throw ErrorObject("BP", 11);
   }
 };
 

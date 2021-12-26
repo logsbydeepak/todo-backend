@@ -30,7 +30,7 @@ export const dbAccessTokenExist = async (
   return;
 };
 
-export const dbUserExist = async (userId: string): Promise<void> => {
+export const dbUserExist = async (userId: ObjectIdType): Promise<void> => {
   const idCount: number = await UserModel.count({
     _id: userId,
   });

@@ -50,6 +50,11 @@
         "messageCode": 12,
         "message": "refresh token expired",
         "statusCode": 401
+      },
+      {
+        "messageCode": 13,
+        "message": "wrong token",
+        "statusCode": 401
       }
     ]
   },

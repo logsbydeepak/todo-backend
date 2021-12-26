@@ -26,14 +26,7 @@ export const createSession = async (
 
     const dbUser: UserModelType = await dbReadUserByEmail(email);
 
-    const checkDbPassword = await validateHashAndSalt(
-      password,
-      dbUser.password as string
-    );
-
-    if (!checkDbPassword) {
-      return ErrorResponse(req, res, "BP", 11);
-    }
+    await validateHashAndSalt(password, dbUser.password as string);
 
     const dbUserId = dbUser._id;
 
