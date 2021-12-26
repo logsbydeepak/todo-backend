@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
-import { validateGeneral } from "@helper/validator";
+import { validateEmpty } from "@helper/validator";
 import { ErrorResponse, SuccessResponse } from "@response";
 
 export const readTodo = async (
@@ -12,8 +12,8 @@ export const readTodo = async (
   try {
     const userId: string = res.locals.userId;
 
-    const status = validateGeneral(req.query.status as string);
-    const page = validateGeneral(req.query.page as string);
+    const status = validateEmpty(req.query.status as string);
+    const page = validateEmpty(req.query.page as string);
 
     let dbTodo: any;
     const pageInt = parseInt(page);

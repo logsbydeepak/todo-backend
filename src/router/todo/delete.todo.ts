@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { TodoModel } from "@model";
 import { dbReadTodo } from "@helper/db";
 import { SuccessResponse } from "@response";
-import { validateGeneral } from "@helper/validator";
+import { validateEmpty } from "@helper/validator";
 
 export const deleteTodo = async (
   req: Request,
@@ -14,7 +14,7 @@ export const deleteTodo = async (
     const userId: string = res.locals.userId;
     const todoIdQuery: string = req.query.id as string;
 
-    const todoId: string = validateGeneral(todoIdQuery);
+    const todoId: string = validateEmpty(todoIdQuery);
 
     await dbReadTodo(todoId, userId);
     await TodoModel.findByIdAndDelete(todoId);

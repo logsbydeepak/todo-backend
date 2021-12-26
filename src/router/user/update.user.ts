@@ -3,7 +3,7 @@ import { Response, Request, NextFunction } from "express";
 import {
   validateBody,
   validateEmail,
-  validateGeneral,
+  validateEmpty,
   validatePassword,
 } from "@helper/validator";
 
@@ -20,13 +20,13 @@ export const updateUser = async (
     const userId: string = res.locals.userId;
 
     const bodyData: UpdateUserBodyType = validateBody(req.body, 3);
-    const toUpdate: string = validateGeneral(bodyData.toUpdate);
+    const toUpdate: string = validateEmpty(bodyData.toUpdate);
 
     const dbUser: UserModelType = await dbReadUserById(userId);
 
     switch (toUpdate) {
       case "name":
-        dbUser.name = validateGeneral(bodyData.name);
+        dbUser.name = validateEmpty(bodyData.name);
         break;
 
       case "email":

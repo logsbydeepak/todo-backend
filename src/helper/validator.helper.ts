@@ -12,15 +12,15 @@ export const validateBody = (
     throw ErrorObject("BP", 10);
   }
 
-  const bodyDatalength: number = Object.keys(bodyData).length;
-  if (bodyDatalength !== bodyDataCount) {
+  const bodyDataLength: number = Object.keys(bodyData).length;
+  if (bodyDataLength !== bodyDataCount) {
     throw ErrorObject("BP", 11);
   }
 
   return bodyData;
 };
 
-export const validateGeneral = (rawData: string): string => {
+export const validateEmpty = (rawData: string): string => {
   if (!rawData) {
     throw ErrorObject("BP", 10);
   }

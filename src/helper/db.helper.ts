@@ -59,9 +59,7 @@ export const dbReadUserByEmail = async (
   return dbUser;
 };
 
-export const dbCreateAccessTokenAndRefreshToken = (
-  userId: number
-): TokenModelType => {
+export const dbCreateToken = (userId: number): TokenModelType => {
   const accessToken: string = accessTokenGenerator(userId);
   const refreshToken: string = refreshTokenGenerator(userId);
   const accessTokenEncrypt: string = generateEncryption(accessToken);

@@ -39,4 +39,6 @@ export interface ErrorObjectType {
   };
 }
 
-export interface ErrorRequest extends ErrorRequestHandlerm, ErrorObjectType {}
+export interface MyErrorRequestHandler
+  extends ErrorObjectType,
+    ErrorRequestHandler {}

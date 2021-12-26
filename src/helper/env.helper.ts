@@ -1,5 +1,6 @@
 import * as allEnv from "@config/env";
 
+// stop program if env is missing
 export const checkEnv = (): void => {
   Object.entries(allEnv).forEach(([_, value]) => {
     if (!value) {

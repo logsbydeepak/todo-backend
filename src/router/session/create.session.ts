@@ -12,10 +12,7 @@ import { ErrorResponse, SuccessResponse } from "@response";
 import { generateEncryption, validateHashAndSalt } from "@helper/security";
 import { accessTokenGenerator, refreshTokenGenerator } from "@helper/token";
 import { setAccessTokenCookie, setRefreshTokenCookie } from "@helper/cookie";
-import {
-  dbCreateAccessTokenAndRefreshToken,
-  dbReadUserByEmail,
-} from "@helper/db";
+import { dbCreateToken, dbReadUserByEmail } from "@helper/db";
 
 export const createSession = async (
   req: Request,
@@ -40,8 +37,7 @@ export const createSession = async (
 
     const dbUserId = dbUser._id;
 
-    const newToken: TokenModelType =
-      dbCreateAccessTokenAndRefreshToken(dbUserId);
+    const newToken: TokenModelType = dbCreateToken(dbUserId);
 
     await newToken.save();
 

@@ -26,8 +26,8 @@
         "statusCode": 400
       },
       {
-        "messageCode": 11,
-        "message": "invalid token",
+        "messageCode": 12,
+        "message": "cannot parse body",
         "statusCode": 400
       }
     ]
@@ -43,7 +43,7 @@
       },
       {
         "messageCode": 11,
-        "message": "cann't refresh access token",
+        "message": "can't refresh access token",
         "statusCode": 401
       },
       {
