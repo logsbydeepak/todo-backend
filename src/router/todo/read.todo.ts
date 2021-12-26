@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
-import { TokenModelType } from "@types";
+import { TodoModelType, TokenModelType } from "@types";
 import { validateEmpty } from "@helper/validator";
 import { ErrorResponse, SuccessResponse } from "@response";
 
@@ -12,46 +12,30 @@ export const readTodo = async (
 ): Promise<void> => {
   try {
     const userId: string = res.locals.userId;
+    const status = validateEmpty(req.query.status as string);
+    const page = validateEmpty(req.query.page as string);
 
-    const status = validateEmpty(req.query.status as string) as string;
-    const page = validateEmpty(req.query.page as string) as string;
-
-    let dbTodo: any;
     const pageInt = parseInt(page);
 
     if (isNaN(pageInt)) {
       return ErrorResponse(req, res, "BP", 10);
     }
 
-    switch (status) {
-      case "true":
-        await TodoModel.find({
-          owner: userId,
-          status: true,
-        }).limit(pageInt);
-        break;
+    if (status === "true" || status === "false" || status === "all") {
+      const dbTodo: TodoModelType[] = await TodoModel.find({
+        owner: userId,
+        status: status === "all" ? 0 : status,
+      });
 
-      case "false":
-        dbTodo = await TodoModel.find({ owner: userId, status: false }).limit(
-          pageInt
-        );
-        break;
+      dbTodo.forEach((element: any) => {
+        element.owner = undefined as unknown;
+        element.__v = undefined;
+      });
 
-      case "all":
-        dbTodo = await TodoModel.find({ owner: userId, status: 0 }).limit(
-          pageInt
-        );
-        break;
-      default:
-        return ErrorResponse(req, res, "BP", 10);
+      return SuccessResponse(req, res, "TD", 12, dbTodo);
     }
 
-    dbTodo.forEach((_: any, index: number) => {
-      dbTodo[index].owner = undefined;
-      dbTodo[index].__v = undefined;
-    });
-
-    return SuccessResponse(req, res, "TD", 12, dbTodo);
+    return ErrorResponse(req, res, "BP", 10);
   } catch (error: any) {
     return next(error);
   }
