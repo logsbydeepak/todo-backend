@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
 import { SuccessResponse } from "@response";
-import { CreateTodoBodyType } from "@types";
+import { CreateTodoBodyType, TodoModelType } from "@types";
 import { validateBody, validateEmpty, validateTask } from "@helper/validator";
 
 export const createTodo = async (
@@ -14,10 +14,10 @@ export const createTodo = async (
     const id: string = res.locals.userId;
 
     const bodyData: CreateTodoBodyType = validateBody(req.body, 2);
-    const task: string = validateEmpty(bodyData.task);
+    const task: string = validateEmpty(bodyData.task) as string;
     const status: boolean = validateTask(bodyData.status);
 
-    const newTodo: any = new TodoModel({
+    const newTodo: TodoModelType = new TodoModel({
       owner: id,
       task,
       status,

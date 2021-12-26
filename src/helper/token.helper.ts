@@ -2,12 +2,11 @@ import { sign, verify } from "jsonwebtoken";
 
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "@config/env";
 import { PayloadId, TokenValidatorType } from "@types";
-import { ErrorObject } from "@response";
 
-export const accessTokenGenerator = (id: number): string =>
+export const accessTokenGenerator = (id: string): string =>
   sign({ id }, ACCESS_TOKEN_SECRET as string, { expiresIn: "15m" });
 
-export const refreshTokenGenerator = (id: number): string =>
+export const refreshTokenGenerator = (id: string): string =>
   sign({ id }, REFRESH_TOKEN_SECRET as string, { expiresIn: "30d" });
 
 export const accessTokenValidator = (token: string): TokenValidatorType => {

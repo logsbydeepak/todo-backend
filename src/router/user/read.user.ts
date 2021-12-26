@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 import { dbReadUserById } from "@helper/db";
 import { SuccessResponse } from "@response";
-import { ObjectIdType, UserModelType } from "@types";
+import { UserModelType } from "@types";
 
 export const readUser = async (
   req: Request,
@@ -10,7 +10,7 @@ export const readUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId: ObjectIdType = res.locals.userId;
+    const userId: string = res.locals.userId;
     const dbUser: UserModelType = await dbReadUserById(userId);
 
     return SuccessResponse(req, res, "AU", 11, {

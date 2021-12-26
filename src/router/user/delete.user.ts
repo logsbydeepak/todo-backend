@@ -5,7 +5,6 @@ import {
   removeRefreshTokenCookie,
 } from "@helper/cookie";
 
-import { ObjectIdType } from "@types";
 import { SuccessResponse } from "@response";
 import { TodoModel, TokenModel, UserModel } from "@model";
 
@@ -15,7 +14,7 @@ export const deleteUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const id: ObjectIdType = res.locals.userId;
+    const id: string = res.locals.userId;
 
     await UserModel.findByIdAndRemove(id);
     await TodoModel.findByIdAndRemove(id);

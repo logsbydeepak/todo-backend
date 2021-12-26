@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-import { TodoModel } from "@model";
-import { ErrorResponse, SuccessResponse } from "@response";
+import { SuccessResponse } from "@response";
 import { validateBody, validateEmpty, validateTask } from "@helper/validator";
 import { TodoModelType, UpdateTodoBodyType } from "@types";
 import { dbReadTodo } from "@helper/db";

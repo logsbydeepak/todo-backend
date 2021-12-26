@@ -1,9 +1,7 @@
-import { Schema, Document } from "mongoose";
-
-export type ObjectIdType = Schema.Types.ObjectId;
+import { Schema, Document, ObjectId } from "mongoose";
 
 export interface UserModelType extends Document {
-  _id: ObjectId;
+  _id: string;
   email: string;
   password: string;
   name: String;
@@ -16,7 +14,8 @@ export interface TokenModelType extends Document {
 }
 
 export interface TodoModelType extends Document {
-  owner: ObjectId;
+  _id: string;
+  owner: string;
   task: string;
   status: boolean;
 }

@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 
 import { ErrorResponse } from "@response";
+import { TokenValidatorType } from "@types";
 import { validateEmpty } from "@helper/validator";
 import { accessTokenValidator } from "@helper/token";
 import { generateDecryption } from "@helper/security";
-import { ObjectIdType, TokenValidatorType } from "@types";
 import { dbAccessTokenExist, dbUserExist } from "@helper/db";
 
 export const checkAccessToken = async (
@@ -30,7 +30,7 @@ export const checkAccessToken = async (
       return ErrorResponse(req, res, "TP", 10);
     }
 
-    const userId: ObjectIdType = accessTokenData.id;
+    const userId: string = accessTokenData.id;
     if (!userId) {
       return ErrorResponse(req, res, "BP", 11);
     }

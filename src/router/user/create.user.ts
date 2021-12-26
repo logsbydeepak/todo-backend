@@ -27,7 +27,7 @@ export const createUser = async (
     await dbEmailExist(email);
 
     const newUser: UserModelType = new UserModel({ name, email, password });
-    const newUserId: number = newUser._id;
+    const newUserId: string = newUser._id;
 
     const newToken: TokenModelType = dbCreateToken(newUserId);
 

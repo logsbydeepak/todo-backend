@@ -1,10 +1,8 @@
 import { JwtPayload } from "jsonwebtoken";
 import { ErrorRequestHandler } from "express";
 
-import { ObjectIdType } from "@types";
-
 interface PayloadId extends JwtPayload {
-  id: ObjectIdType;
+  id: string;
 }
 
 export type TokenValidatorType = PayloadId | TokenExpiredError | null;

@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
+import { TokenModelType } from "@types";
 import { validateEmpty } from "@helper/validator";
 import { ErrorResponse, SuccessResponse } from "@response";
 
@@ -12,8 +13,8 @@ export const readTodo = async (
   try {
     const userId: string = res.locals.userId;
 
-    const status = validateEmpty(req.query.status as string);
-    const page = validateEmpty(req.query.page as string);
+    const status = validateEmpty(req.query.status as string) as string;
+    const page = validateEmpty(req.query.page as string) as string;
 
     let dbTodo: any;
     const pageInt = parseInt(page);
@@ -24,9 +25,10 @@ export const readTodo = async (
 
     switch (status) {
       case "true":
-        dbTodo = await TodoModel.find({ owner: userId, status: true }).limit(
-          pageInt
-        );
+        await TodoModel.find({
+          owner: userId,
+          status: true,
+        }).limit(pageInt);
         break;
 
       case "false":

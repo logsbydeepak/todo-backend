@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 import { dbReadUserById } from "@helper/db";
 import { validatePassword } from "@helper/validator";
-import { ObjectIdType, UserModelType } from "@types";
+import { UserModelType } from "@types";
 import { validateHashAndSalt } from "@helper/security";
 
 export const checkPassword = async (
@@ -11,7 +11,7 @@ export const checkPassword = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId: ObjectIdType = res.locals.userId;
+    const userId: string = res.locals.userId;
     const currentPassword: string = validatePassword(req.body.currentPassword);
 
     const dbUser: UserModelType = await dbReadUserById(userId);

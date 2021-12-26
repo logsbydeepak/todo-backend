@@ -9,7 +9,7 @@ import {
 
 import { dbReadUserById, dbEmailExist } from "@helper/db";
 import { ErrorResponse, SuccessResponse } from "@response";
-import { UserModelType, UpdateUserBodyType, ObjectIdType } from "@types";
+import { UserModelType, UpdateUserBodyType } from "@types";
 
 export const updateUser = async (
   req: Request,
@@ -17,7 +17,7 @@ export const updateUser = async (
   next: NextFunction
 ) => {
   try {
-    const userId: ObjectIdType = res.locals.userId;
+    const userId: string = res.locals.userId;
     const bodyData: UpdateUserBodyType = validateBody(req.body, 3);
     const toUpdate: string = validateEmpty(bodyData.toUpdate);
 
