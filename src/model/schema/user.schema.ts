@@ -8,6 +8,7 @@ const defaultProperty = {
 };
 
 export const UserSchema: Schema = new Schema({
+  name: defaultProperty,
   email: defaultProperty,
   password: defaultProperty,
 });

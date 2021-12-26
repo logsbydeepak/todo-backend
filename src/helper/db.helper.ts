@@ -1,7 +1,13 @@
+import {
+  ObjectIdType,
+  TodoModelType,
+  TokenModelType,
+  UserModelType,
+} from "@types";
+
 import { ErrorObject } from "@response";
-import { TodoModel, TokenModel, UserModel } from "@model";
 import { generateEncryption } from "@helper/security";
-import { TodoModelType, TokenModelType, UserModelType } from "@types";
+import { TodoModel, TokenModel, UserModel } from "@model";
 import { accessTokenGenerator, refreshTokenGenerator } from "@helper/token";
 
 export const dbEmailExist = async (email: string): Promise<void> => {
@@ -36,7 +42,7 @@ export const dbUserExist = async (userId: string): Promise<void> => {
 };
 
 export const dbReadUserById = async (
-  userId: string
+  userId: ObjectIdType
 ): Promise<UserModelType> => {
   const dbUser: UserModelType | null = await UserModel.findById(userId);
 

@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 
-import { UserModelType } from "@types";
 import { dbReadUserById } from "@helper/db";
 import { SuccessResponse } from "@response";
+import { ObjectIdType, UserModelType } from "@types";
 
 export const readUser = async (
   req: Request,
@@ -10,14 +10,14 @@ export const readUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId: string = res.locals.userId;
+    const userId: ObjectIdType = res.locals.userId;
     const dbUser: UserModelType = await dbReadUserById(userId);
 
-    SuccessResponse(req, res, "AU", 11, {
+    return SuccessResponse(req, res, "AU", 11, {
       name: dbUser.name,
       email: dbUser.email,
     });
   } catch (error: any) {
-    next(error);
+    return next(error);
   }
 };

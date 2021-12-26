@@ -64,7 +64,7 @@
       },
       {
         "messageCode": 11,
-        "message": "user already exists",
+        "message": "email already exists",
         "statusCode": 400
       }
     ]

@@ -2,6 +2,7 @@ import Cryptr from "cryptr";
 import { hash, compare } from "bcryptjs";
 
 import { ENCRYPT_SECRET } from "@config/env";
+import { ErrorObject } from "@response";
 
 const cryptr = new Cryptr(ENCRYPT_SECRET as string);
 
@@ -23,4 +24,10 @@ export const generateHashAndSalt = async (
 export const validateHashAndSalt = async (
   rawPassword: string,
   dbPassword: string
-): Promise<boolean> => await compare(rawPassword, dbPassword);
+): Promise<void> => {
+  const comparePassword = await compare(rawPassword, dbPassword);
+
+  if (!comparePassword) {
+    throw ErrorObject("BP", 11);
+  }
+};

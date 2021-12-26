@@ -9,15 +9,15 @@ import {
 
 import { UserModel } from "@model";
 import { SuccessResponse } from "@response";
+import { dbCreateToken, dbEmailExist } from "@helper/db";
 import { CreateUserBodyType, UserModelType, TokenModelType } from "@types";
 import { setAccessTokenCookie, setRefreshTokenCookie } from "@helper/cookie";
-import { dbCreateToken, dbEmailExist } from "@helper/db";
 
 export const createUser = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
     const bodyData: CreateUserBodyType = validateBody(req.body, 3);
     const name: string = validateEmpty(bodyData.name);
