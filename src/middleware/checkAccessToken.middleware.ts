@@ -5,7 +5,7 @@ import { TokenValidatorType } from "@types";
 import { validateEmpty } from "@helper/validator";
 import { accessTokenValidator } from "@helper/token";
 import { generateDecryption } from "@helper/security";
-import { dbAccessTokenExist, dbUserExist } from "@helper/db";
+import { dbTokenExist, dbUserExist } from "@helper/db";
 
 export const checkAccessToken = async (
   req: Request,
@@ -16,7 +16,7 @@ export const checkAccessToken = async (
     const accessToken: string = validateEmpty(req.cookies.accessToken);
     const accessTokenDecryption: string = generateDecryption(accessToken);
 
-    await dbAccessTokenExist(accessToken);
+    await dbTokenExist({ accessToken });
 
     const accessTokenData: TokenValidatorType = accessTokenValidator(
       accessTokenDecryption
