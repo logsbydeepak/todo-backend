@@ -1,8 +1,11 @@
 import { Schema } from "mongoose";
 
-import { generateHashAndSalt } from "../../helper/security.helper";
+import { generateHashAndSalt } from "@helper/security";
 
-const defaultProperty = {
+const defaultProperty: {
+  required: boolean;
+  type: StringConstructor;
+} = {
   required: true,
   type: String,
 };

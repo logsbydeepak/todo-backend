@@ -8,8 +8,8 @@ import {
 
 import { SuccessResponse } from "@response";
 import { validateHashAndSalt } from "@helper/security";
-import { TokenModelType, UserModelType } from "@types";
 import { dbCreateToken, dbReadUserByEmail } from "@helper/db";
+import { CreateUserBodyType, TokenModelType, UserModelType } from "@types";
 import { setAccessTokenCookie, setRefreshTokenCookie } from "@helper/cookie";
 
 export const createSession = async (
@@ -18,14 +18,14 @@ export const createSession = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const bodyData = validateBody(req.body, 2);
-    const email = validateEmail(bodyData.email);
-    const password = validatePassword(bodyData.password);
+    const bodyData: CreateUserBodyType = validateBody(req.body, 2);
+    const email: string = validateEmail(bodyData.email);
+    const password: string = validatePassword(bodyData.password);
 
     const dbUser: UserModelType = await dbReadUserByEmail(email);
     await validateHashAndSalt(password, dbUser.password as string);
 
-    const dbUserId = dbUser._id;
+    const dbUserId: string = dbUser._id;
     const newToken: TokenModelType = dbCreateToken(dbUserId);
     await newToken.save();
 

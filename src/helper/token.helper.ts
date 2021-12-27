@@ -1,7 +1,7 @@
 import { sign, verify } from "jsonwebtoken";
 
-import { TokenValidatorType } from "@types";
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "@config/env";
+import { AccessTokenValidatorType, RefreshTokenValidatorType } from "@types";
 
 export const accessTokenGenerator = (id: string): string =>
   sign({ id }, ACCESS_TOKEN_SECRET as string, {
@@ -16,7 +16,9 @@ export const refreshTokenGenerator = (
     expiresIn: "30d",
   });
 
-export const accessTokenValidator = (token: string): TokenValidatorType => {
+export const accessTokenValidator = (
+  token: string
+): AccessTokenValidatorType => {
   try {
     return verify(token, ACCESS_TOKEN_SECRET as string);
   } catch (error: any) {
@@ -27,7 +29,9 @@ export const accessTokenValidator = (token: string): TokenValidatorType => {
   }
 };
 
-export const refreshTokenValidator = (token: string): TokenValidatorType => {
+export const refreshTokenValidator = (
+  token: string
+): RefreshTokenValidatorType => {
   try {
     return verify(token, REFRESH_TOKEN_SECRET as string);
   } catch (error: any) {

@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express";
 import ms from "ms";
+import { NextFunction, Request, Response } from "express";
 
 import {
   accessTokenGenerator,
@@ -7,25 +7,31 @@ import {
   refreshTokenValidator,
 } from "@helper/token";
 
-import { validateEmpty } from "@helper/validator";
 import {
   removeAccessTokenCookie,
   removeRefreshTokenCookie,
   setAccessTokenCookie,
   setRefreshTokenCookie,
 } from "@helper/cookie";
-import { ErrorResponse, SuccessResponse } from "@response";
-import { TokenModelType, TokenValidatorType } from "@types";
-import { generateDecryption, generateEncryption } from "@helper/security";
+
+import {
+  AccessTokenValidatorType,
+  RefreshTokenValidatorType,
+  TokenModelType,
+} from "@types";
+
 import {
   dbCreateToken,
   dbReadAccessToken,
-  dbReadTodo,
   dbReadToken,
   dbTokenExist,
   dbUserExist,
 } from "@helper/db";
+
 import { TokenModel } from "@model";
+import { validateEmpty } from "@helper/validator";
+import { ErrorResponse, SuccessResponse } from "@response";
+import { generateDecryption, generateEncryption } from "@helper/security";
 
 export const updateSession = async (
   req: Request,
@@ -33,19 +39,19 @@ export const updateSession = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const accessToken = validateEmpty(req.cookies.accessToken);
-    const refreshToken = validateEmpty(req.cookies.refreshToken);
+    const accessToken: string = validateEmpty(req.cookies.accessToken);
+    const refreshToken: string = validateEmpty(req.cookies.refreshToken);
 
     await dbTokenExist({ accessToken });
     await dbTokenExist({ refreshToken });
 
-    const accessTokenDecryption = generateDecryption(accessToken);
-    const refreshTokenDecryption = generateDecryption(refreshToken);
+    const accessTokenDecryption: string = generateDecryption(accessToken);
+    const refreshTokenDecryption: string = generateDecryption(refreshToken);
 
-    const accessTokenData: TokenValidatorType = accessTokenValidator(
+    const accessTokenData: AccessTokenValidatorType = accessTokenValidator(
       accessTokenDecryption
     );
-    const refreshTokenData: TokenValidatorType = refreshTokenValidator(
+    const refreshTokenData: RefreshTokenValidatorType = refreshTokenValidator(
       refreshTokenDecryption
     );
 
@@ -63,7 +69,7 @@ export const updateSession = async (
       refreshTokenData.refreshTokenCount > 4
     ) {
       const newDbToken: TokenModelType = dbCreateToken(refreshTokenData.id);
-      newDbToken.save();
+      await newDbToken.save();
 
       setAccessTokenCookie(res, newDbToken.accessToken);
       setRefreshTokenCookie(res, newDbToken.refreshToken);
@@ -71,8 +77,8 @@ export const updateSession = async (
     }
 
     if (accessTokenData === "TokenExpiredError") {
-      const accessTokenRaw = accessTokenGenerator(refreshTokenData.id);
-      const accessTokenEncrypt = generateEncryption(accessTokenRaw);
+      const accessTokenRaw: string = accessTokenGenerator(refreshTokenData.id);
+      const accessTokenEncrypt: string = generateEncryption(accessTokenRaw);
 
       const dbToken: TokenModelType = await dbReadAccessToken(accessToken);
       dbToken.accessToken = accessTokenEncrypt;
@@ -82,7 +88,7 @@ export const updateSession = async (
       return SuccessResponse(req, res, "AU", 16);
     }
 
-    const dbToken = await dbReadToken({ accessToken });
+    const dbToken: TokenModelType = await dbReadToken({ accessToken });
     await TokenModel.deleteMany({ owner: dbToken.owner });
 
     removeAccessTokenCookie(res);

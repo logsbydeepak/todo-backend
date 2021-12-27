@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 
+import { UserModelType } from "@types";
 import { dbReadUserById } from "@helper/db";
 import { validatePassword } from "@helper/validator";
-import { UserModelType } from "@types";
 import { validateHashAndSalt } from "@helper/security";
 
 export const checkPassword = async (

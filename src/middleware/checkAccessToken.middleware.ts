@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { ErrorResponse } from "@response";
-import { TokenValidatorType } from "@types";
+import { AccessTokenValidatorType } from "@types";
 import { validateEmpty } from "@helper/validator";
 import { accessTokenValidator } from "@helper/token";
 import { generateDecryption } from "@helper/security";
@@ -18,7 +18,7 @@ export const checkAccessToken = async (
 
     await dbTokenExist({ accessToken });
 
-    const accessTokenData: TokenValidatorType = accessTokenValidator(
+    const accessTokenData: AccessTokenValidatorType = accessTokenValidator(
       accessTokenDecryption
     );
 

@@ -6,7 +6,7 @@ export const checkEnv = (): void => {
     if (!value) {
       console.error(`Environment variable missing`);
       console.table(allEnv);
-      process.exit(1);
+      return process.exit(1);
     }
   });
 };

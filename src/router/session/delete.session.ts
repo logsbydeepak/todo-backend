@@ -5,9 +5,9 @@ import {
   removeRefreshTokenCookie,
 } from "@helper/cookie";
 
+import { QueryType } from "@types";
 import { TokenModel } from "@model";
-import { TokenModelType } from "@types";
-import { ErrorResponse, SuccessResponse } from "@response";
+import { SuccessResponse } from "@response";
 
 export const deleteSession = async (
   req: Request,
@@ -15,7 +15,7 @@ export const deleteSession = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const logoutAll = req.query.all;
+    const logoutAll: QueryType = req.query.all;
     const accessToken: string = req.cookies.accessToken;
     const userId: string = res.locals.userId;
 

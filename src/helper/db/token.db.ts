@@ -31,36 +31,10 @@ export const dbTokenExist = async (
   return;
 };
 
-export const dbReadAccessToken = async (
-  accessToken: string
-): Promise<TokenModelType> => {
-  const dbToken: TokenModelType | null = await TokenModel.findOne({
-    accessToken,
-  });
-
-  if (!dbToken) {
-    throw ErrorObject("BP", 11);
-  }
-  return dbToken;
-};
-
 export const dbReadToken = async (
   data: { accessToken: string } | { refreshToken: string }
 ): Promise<TokenModelType> => {
   const dbToken: TokenModelType | null = await TokenModel.findOne(data);
-
-  if (!dbToken) {
-    throw ErrorObject("BP", 11);
-  }
-  return dbToken;
-};
-
-export const dbReadRefreshToken = async (
-  accessToken: string
-): Promise<TokenModelType> => {
-  const dbToken: TokenModelType | null = await TokenModel.findOne({
-    accessToken,
-  });
 
   if (!dbToken) {
     throw ErrorObject("BP", 11);

@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 
-import { MyErrorRequestHandler } from "@types";
 import { ErrorResponse } from "@response";
+import { MyErrorRequestHandler } from "@types";
 
 export const serverErrorHandler = (
   error: MyErrorRequestHandler,
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   if (error.ErrorObject) {
     const { messageTypeCode, messageCode } = error.ErrorObject;
     return ErrorResponse(req, res, messageTypeCode, messageCode);

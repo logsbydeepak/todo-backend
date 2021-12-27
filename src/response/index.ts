@@ -1,3 +1,4 @@
+import { ErrorObjectType } from "@types";
 import { Request, Response } from "express";
 
 import errorData from "./data/error.data.json";
@@ -8,7 +9,7 @@ export const ErrorObject = (
   messageTypeCode: string,
   messageCode: number,
   data?: object
-) => ({
+): ErrorObjectType => ({
   ErrorObject: {
     messageTypeCode,
     messageCode,

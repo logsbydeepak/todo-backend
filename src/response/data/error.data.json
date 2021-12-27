@@ -16,13 +16,12 @@
     "response": [
       {
         "messageCode": 10,
-        "message": "body data missing",
+        "message": "invalid body data",
         "statusCode": 400
       },
-
       {
         "messageCode": 11,
-        "message": "invalid body data",
+        "message": "body data missing",
         "statusCode": 400
       },
       {

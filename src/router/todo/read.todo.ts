@@ -12,10 +12,10 @@ export const readTodo = async (
 ): Promise<void> => {
   try {
     const userId: string = res.locals.userId;
-    const status = validateEmpty(req.query.status as string);
-    const page = validateEmpty(req.query.page as string);
+    const status: string = validateEmpty(req.query.status as string);
+    const page: string = validateEmpty(req.query.page as string);
 
-    const pageInt = parseInt(page);
+    const pageInt: number = parseInt(page);
 
     if (isNaN(pageInt)) {
       return ErrorResponse(req, res, "BP", 10);
@@ -24,13 +24,15 @@ export const readTodo = async (
     if (status === "true" || status === "false" || status === "all") {
       const dbTodo: TodoModelType[] = await TodoModel.find({
         owner: userId,
-        status: status === "all" ? 0 : status,
-      });
+        status: status === "all" ? [true, false] : status,
+      }).limit(pageInt);
 
-      dbTodo.forEach((element: any) => {
-        element.owner = undefined as unknown;
-        element.__v = undefined;
-      });
+      dbTodo.forEach(
+        (element: { owner: string | undefined; __v: string | undefined }) => {
+          element.owner = undefined;
+          element.__v = undefined;
+        }
+      );
 
       return SuccessResponse(req, res, "TD", 12, dbTodo);
     }
