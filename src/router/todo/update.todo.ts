@@ -13,8 +13,8 @@ export const updateTodo = async (
   try {
     const userId: string = res.locals.userId;
     const bodyData: UpdateTodoBodyType = validateBody(req.body, 3);
-    const todoId: string = validateEmpty(bodyData.id);
-    const task: string = validateEmpty(bodyData.task);
+    const todoId: string = validateEmpty(bodyData.id, "BP", 11);
+    const task: string = validateEmpty(bodyData.task, "BP", 11);
     const status: boolean = validateTask(bodyData.status);
 
     const dbTodo: TodoModelType = await dbReadTodo(todoId, userId);

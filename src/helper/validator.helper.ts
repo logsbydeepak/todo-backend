@@ -9,27 +9,31 @@ export const validateBody = (
   bodyDataCount: number
 ): BodyDataType => {
   if (bodyData.length === 0) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 11);
   }
 
   const bodyDataLength: number = Object.keys(bodyData).length;
   if (bodyDataLength !== bodyDataCount) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("BP", 10);
   }
 
   return bodyData;
 };
 
-export const validateEmpty = (rawData: string): string => {
+export const validateEmpty = (
+  rawData: string,
+  messageTypeCode: string,
+  messageCode: number
+): string => {
   if (!rawData) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject(messageTypeCode, messageCode);
   }
   return rawData.trim();
 };
 
 export const validateEmail = (email: string): string => {
   if (!email) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 11);
   }
 
   email = email.trim().toLowerCase();
@@ -42,12 +46,12 @@ export const validateEmail = (email: string): string => {
 
 export const validatePassword = (password: string): string => {
   if (!password) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 11);
   }
 
   password = password.trim();
   if (!isStrongPassword(password)) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("BP", 10);
   }
 
   return password;

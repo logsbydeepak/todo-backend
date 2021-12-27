@@ -1,4 +1,4 @@
-import ms from "ms";
+import moment from "moment";
 import { NextFunction, Request, Response } from "express";
 
 import {
@@ -22,7 +22,6 @@ import {
 
 import {
   dbCreateToken,
-  dbReadAccessToken,
   dbReadToken,
   dbTokenExist,
   dbUserExist,
@@ -39,8 +38,16 @@ export const updateSession = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const accessToken: string = validateEmpty(req.cookies.accessToken);
-    const refreshToken: string = validateEmpty(req.cookies.refreshToken);
+    const accessToken: string = validateEmpty(
+      req.cookies.accessToken,
+      "TP",
+      14
+    );
+    const refreshToken: string = validateEmpty(
+      req.cookies.refreshToken,
+      "TP",
+      14
+    );
 
     await dbTokenExist({ accessToken });
     await dbTokenExist({ refreshToken });
@@ -59,16 +66,28 @@ export const updateSession = async (
       return ErrorResponse(req, res, "TP", 11);
     }
     if (refreshTokenData === "TokenExpiredError") {
+      removeAccessTokenCookie(res);
+      removeRefreshTokenCookie(res);
       return ErrorResponse(req, res, "TP", 12);
     }
 
     await dbUserExist(refreshTokenData.id);
 
+    const timeBeforeExpire = moment
+      .unix(refreshTokenData.exp)
+      .subtract(1, "day")
+      .unix();
+
     if (
-      refreshTokenData.exp <= ms("29d") &&
-      refreshTokenData.refreshTokenCount > 4
+      refreshTokenData.exp >= timeBeforeExpire &&
+      refreshTokenData.refreshTokenRefreshCount < 4
     ) {
-      const newDbToken: TokenModelType = dbCreateToken(refreshTokenData.id);
+      await TokenModel.deleteOne({ accessToken });
+
+      const newDbToken: TokenModelType = dbCreateToken(
+        refreshTokenData.id,
+        refreshTokenData.refreshTokenRefreshCount + 1
+      );
       await newDbToken.save();
 
       setAccessTokenCookie(res, newDbToken.accessToken);
@@ -76,11 +95,18 @@ export const updateSession = async (
       return SuccessResponse(req, res, "AU", 16);
     }
 
+    if (refreshTokenData.refreshTokenRefreshCount >= 4) {
+      await TokenModel.deleteOne({ refreshToken });
+      removeAccessTokenCookie(res);
+      removeRefreshTokenCookie(res);
+      return ErrorResponse(req, res, "TP", 12);
+    }
+
     if (accessTokenData === "TokenExpiredError") {
       const accessTokenRaw: string = accessTokenGenerator(refreshTokenData.id);
       const accessTokenEncrypt: string = generateEncryption(accessTokenRaw);
 
-      const dbToken: TokenModelType = await dbReadAccessToken(accessToken);
+      const dbToken: TokenModelType = await dbReadToken({ accessToken });
       dbToken.accessToken = accessTokenEncrypt;
       await dbToken.save();
 

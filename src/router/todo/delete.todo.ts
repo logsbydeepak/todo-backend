@@ -14,7 +14,7 @@ export const deleteTodo = async (
     const userId: string = res.locals.userId;
     const todoIdQuery: string = req.query.id as string;
 
-    const todoId: string = validateEmpty(todoIdQuery) as string;
+    const todoId: string = validateEmpty(todoIdQuery, "QP", 11) as string;
 
     await dbReadTodo(todoId, userId);
     await TodoModel.findByIdAndDelete(todoId);

@@ -26,7 +26,7 @@ export const createSession = async (
     await validateHashAndSalt(password, dbUser.password as string);
 
     const dbUserId: string = dbUser._id;
-    const newToken: TokenModelType = dbCreateToken(dbUserId);
+    const newToken: TokenModelType = dbCreateToken(dbUserId, 1);
     await newToken.save();
 
     setAccessTokenCookie(res, newToken.accessToken);

@@ -13,7 +13,7 @@ export const refreshTokenGenerator = (
   refreshTokenRefreshCount: number
 ): string =>
   sign({ id, refreshTokenRefreshCount }, REFRESH_TOKEN_SECRET as string, {
-    expiresIn: "30d",
+    expiresIn: "10000",
   });
 
 export const accessTokenValidator = (

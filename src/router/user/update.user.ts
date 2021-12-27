@@ -19,13 +19,13 @@ export const updateUser = async (
   try {
     const userId: string = res.locals.userId;
     const bodyData: UpdateUserBodyType = validateBody(req.body, 3);
-    const toUpdate: string = validateEmpty(bodyData.toUpdate);
+    const toUpdate: string = validateEmpty(bodyData.toUpdate, "BP", 11);
 
     const dbUser: UserModelType = await dbReadUserById(userId);
 
     switch (toUpdate) {
       case "name":
-        dbUser.name = validateEmpty(bodyData.name);
+        dbUser.name = validateEmpty(bodyData.name, "BP", 11);
         break;
 
       case "email":

@@ -14,7 +14,7 @@ export const createTodo = async (
     const id: string = res.locals.userId;
 
     const bodyData: CreateTodoBodyType = validateBody(req.body, 2);
-    const task: string = validateEmpty(bodyData.task) as string;
+    const task: string = validateEmpty(bodyData.task, "BP", 11) as string;
     const status: boolean = validateTask(bodyData.status);
 
     const newTodo: TodoModelType = new TodoModel({

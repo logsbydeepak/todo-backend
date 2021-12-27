@@ -52,7 +52,12 @@
       },
       {
         "messageCode": 13,
-        "message": "wrong token",
+        "message": "invalid token",
+        "statusCode": 401
+      },
+      {
+        "messageCode": 14,
+        "message": "token missing",
         "statusCode": 401
       }
     ]
@@ -69,6 +74,22 @@
       {
         "messageCode": 11,
         "message": "email already exists",
+        "statusCode": 400
+      }
+    ]
+  },
+  {
+    "messageTypeCode": "QP",
+    "messageType": "QUERY_PARSE",
+    "response": [
+      {
+        "messageCode": 10,
+        "message": "invalid query parameter",
+        "statusCode": 404
+      },
+      {
+        "messageCode": 11,
+        "message": "query parameter missing",
         "statusCode": 400
       }
     ]

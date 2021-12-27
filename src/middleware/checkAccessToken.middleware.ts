@@ -13,7 +13,11 @@ export const checkAccessToken = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const accessToken: string = validateEmpty(req.cookies.accessToken);
+    const accessToken: string = validateEmpty(
+      req.cookies.accessToken,
+      "TP",
+      14
+    );
     const accessTokenDecryption: string = generateDecryption(accessToken);
 
     await dbTokenExist({ accessToken });
@@ -32,7 +36,7 @@ export const checkAccessToken = async (
 
     const userId: string = accessTokenData.id;
     if (!userId) {
-      return ErrorResponse(req, res, "BP", 11);
+      return ErrorResponse(req, res, "TP", 13);
     }
 
     await dbUserExist(userId);

@@ -20,7 +20,7 @@ export const createUser = async (
 ): Promise<void> => {
   try {
     const bodyData: CreateUserBodyType = validateBody(req.body, 3);
-    const name: string = validateEmpty(bodyData.name);
+    const name: string = validateEmpty(bodyData.name, "BP", 11);
     const email: string = validateEmail(bodyData.email);
     const password: string = validatePassword(bodyData.password);
 
@@ -29,7 +29,7 @@ export const createUser = async (
     const newUser: UserModelType = new UserModel({ name, email, password });
     const newUserId: string = newUser._id;
 
-    const newToken: TokenModelType = dbCreateToken(newUserId);
+    const newToken: TokenModelType = dbCreateToken(newUserId, 1);
 
     await newUser.save();
     await newToken.save();

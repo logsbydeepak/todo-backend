@@ -5,9 +5,12 @@ import { generateEncryption } from "@helper/security";
 import { TokenModel } from "@model";
 import { accessTokenGenerator, refreshTokenGenerator } from "@helper/token";
 
-export const dbCreateToken = (userId: string): TokenModelType => {
+export const dbCreateToken = (
+  userId: string,
+  refreshTokenCount: number
+): TokenModelType => {
   const accessToken: string = accessTokenGenerator(userId);
-  const refreshToken: string = refreshTokenGenerator(userId, 1);
+  const refreshToken: string = refreshTokenGenerator(userId, refreshTokenCount);
   const accessTokenEncrypt: string = generateEncryption(accessToken);
   const refreshTokenEncrypt: string = generateEncryption(refreshToken);
 
@@ -26,7 +29,7 @@ export const dbTokenExist = async (
   const dbTokenCount: number = await TokenModel.count({ data });
 
   if (dbTokenCount === 0) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("TP", 13);
   }
   return;
 };
@@ -37,7 +40,7 @@ export const dbReadToken = async (
   const dbToken: TokenModelType | null = await TokenModel.findOne(data);
 
   if (!dbToken) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("TP", 13);
   }
   return dbToken;
 };
