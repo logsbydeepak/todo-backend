@@ -9,5 +9,5 @@ import { checkAccessToken } from "@middleware";
 export const sessionRouter: Router = Router();
 
 sessionRouter.post("/", createSession);
-sessionRouter.delete("/", checkAccessToken, deleteSession);
 sessionRouter.put("/refresh", updateSession);
+sessionRouter.delete("/", checkAccessToken, deleteSession);

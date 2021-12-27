@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import ms from "ms";
 
 import {
   accessTokenGenerator,
@@ -6,10 +7,25 @@ import {
   refreshTokenValidator,
 } from "@helper/token";
 
-import { TokenModel } from "@model";
-import { setAccessTokenCookie } from "@helper/cookie";
+import { validateEmpty } from "@helper/validator";
+import {
+  removeAccessTokenCookie,
+  removeRefreshTokenCookie,
+  setAccessTokenCookie,
+  setRefreshTokenCookie,
+} from "@helper/cookie";
 import { ErrorResponse, SuccessResponse } from "@response";
+import { TokenModelType, TokenValidatorType } from "@types";
 import { generateDecryption, generateEncryption } from "@helper/security";
+import {
+  dbCreateToken,
+  dbReadAccessToken,
+  dbReadTodo,
+  dbReadToken,
+  dbTokenExist,
+  dbUserExist,
+} from "@helper/db";
+import { TokenModel } from "@model";
 
 export const updateSession = async (
   req: Request,
@@ -17,35 +33,21 @@ export const updateSession = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { accessToken, refreshToken } = req.cookies;
+    const accessToken = validateEmpty(req.cookies.accessToken);
+    const refreshToken = validateEmpty(req.cookies.refreshToken);
 
-    if (!accessToken || !refreshToken) {
-      return ErrorResponse(req, res, "BP", 11);
-    }
+    await dbTokenExist({ accessToken });
+    await dbTokenExist({ refreshToken });
+
     const accessTokenDecryption = generateDecryption(accessToken);
     const refreshTokenDecryption = generateDecryption(refreshToken);
-    if (!accessTokenDecryption || !refreshTokenDecryption) {
-      return ErrorResponse(req, res, "BP", 11);
-    }
 
-    const accessTokenCount = await TokenModel.count({
-      "tokens.accessToken": accessToken,
-    });
-
-    const refreshTokenCount = await TokenModel.count({
-      "tokens.refreshToken": refreshToken,
-    });
-
-    if (accessTokenCount === 0 || refreshTokenCount === 0) {
-      return ErrorResponse(req, res, "BP", 11);
-    }
-
-    const accessTokenData: any = accessTokenValidator(accessTokenDecryption);
-    const refreshTokenData: any = refreshTokenValidator(refreshTokenDecryption);
-
-    if (!accessTokenData || !refreshTokenData) {
-      return ErrorResponse(req, res, "BP", 11);
-    }
+    const accessTokenData: TokenValidatorType = accessTokenValidator(
+      accessTokenDecryption
+    );
+    const refreshTokenData: TokenValidatorType = refreshTokenValidator(
+      refreshTokenDecryption
+    );
 
     if (accessTokenData !== "TokenExpiredError") {
       return ErrorResponse(req, res, "TP", 11);
@@ -54,30 +56,38 @@ export const updateSession = async (
       return ErrorResponse(req, res, "TP", 12);
     }
 
-    if (!refreshTokenData.id) {
-      return ErrorResponse(req, res, "BP", 11);
+    await dbUserExist(refreshTokenData.id);
+
+    if (
+      refreshTokenData.exp <= ms("29d") &&
+      refreshTokenData.refreshTokenCount > 4
+    ) {
+      const newDbToken: TokenModelType = dbCreateToken(refreshTokenData.id);
+      newDbToken.save();
+
+      setAccessTokenCookie(res, newDbToken.accessToken);
+      setRefreshTokenCookie(res, newDbToken.refreshToken);
+      return SuccessResponse(req, res, "AU", 16);
     }
 
-    const dbToken: any = await TokenModel.findById(refreshTokenData.id);
+    if (accessTokenData === "TokenExpiredError") {
+      const accessTokenRaw = accessTokenGenerator(refreshTokenData.id);
+      const accessTokenEncrypt = generateEncryption(accessTokenRaw);
 
-    if (!dbToken) {
-      return ErrorResponse(req, res, "AU", 10);
+      const dbToken: TokenModelType = await dbReadAccessToken(accessToken);
+      dbToken.accessToken = accessTokenEncrypt;
+      await dbToken.save();
+
+      setAccessTokenCookie(res, accessTokenEncrypt);
+      return SuccessResponse(req, res, "AU", 16);
     }
 
-    const accessTokenIndex = dbToken.tokens.findIndex(
-      (element: any) => element.accessToken === accessToken
-    );
+    const dbToken = await dbReadToken({ accessToken });
+    await TokenModel.deleteMany({ owner: dbToken.owner });
 
-    const accessTokenRaw = accessTokenGenerator(refreshTokenData.id);
-    const accessTokenEncrypt = generateEncryption(accessTokenRaw);
-
-    dbToken.tokens[accessTokenIndex].accessToken = accessTokenEncrypt;
-
-    await dbToken.save();
-
-    setAccessTokenCookie(res, accessTokenEncrypt);
-
-    return SuccessResponse(req, res, "AU", 16);
+    removeAccessTokenCookie(res);
+    removeRefreshTokenCookie(res);
+    return ErrorResponse(req, res, "TP", 11);
   } catch (error: any) {
     return next(error);
   }
