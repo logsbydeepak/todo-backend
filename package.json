@@ -15,7 +15,7 @@
     "build": "run-s clean build:start",
     "build:start": "tsc",
     "clean": "rimraf dist",
-    "prod": "node ./dist/server.js"
+    "prod": "node -r tsconfig-paths/register ./dist/server.js"
   },
   "repository": {
     "type": "git",

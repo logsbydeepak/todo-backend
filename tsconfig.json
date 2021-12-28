@@ -1,4 +1,5 @@
 {
+  "extends": "./paths.tsconfig.json",
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
@@ -27,27 +28,6 @@
     "module": "commonjs" /* Specify what module code is generated. */,
     // "rootDir": "./",                                  /* Specify the root folder within your source files. */
     // "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
-    "baseUrl": "./src" /* Specify the base directory to resolve non-relative module names. */,
-    "paths": {
-      "@model": ["./model"],
-      "@types": ["./types"],
-      "@router": ["./router"],
-      "@response": ["./response"],
-      "@middleware": ["./middleware"],
-
-      "@helper/cookie": ["./helper/cookie.helper.ts"],
-      "@helper/db": ["./helper/db/index.ts"],
-      "@helper/env": ["./helper/env.helper.ts"],
-      "@helper/security": ["./helper/security.helper.ts"],
-      "@helper/server": ["./helper/server.helper.ts"],
-      "@helper/token": ["./helper/token.helper.ts"],
-      "@helper/validator": ["./helper/validator.helper.ts"],
-
-      "@config/db": ["./config/db.config.ts"],
-      "@config/env": ["./config/env.config.ts"],
-      "@config/logger": ["./config/logger.config.ts"],
-      "@config/server": ["./config/server.config.ts"]
-    } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like `./node_modules/@types`. */
     // "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
