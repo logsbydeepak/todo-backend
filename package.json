@@ -13,7 +13,7 @@
     "test:start": "jest",
     "test:watch:start": "jest --watch --detectOpenHandles",
     "build": "run-s clean build:start",
-    "build:start": "tsc",
+    "build:start": "tsc --project tsconfig.prod.json",
     "clean": "rimraf dist",
     "prod": "node -r tsconfig-paths/register ./dist/server.js"
   },

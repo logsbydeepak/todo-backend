@@ -19,7 +19,9 @@
       "@config/db": ["./config/db.config"],
       "@config/env": ["./config/env.config"],
       "@config/logger": ["./config/logger.config"],
-      "@config/server": ["./config/server.config"]
+      "@config/server": ["./config/server.config"],
+
+      "@test": ["./../test/router/user.router.ts"]
     }
   }
 }

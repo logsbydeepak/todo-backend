@@ -1,4 +1,4 @@
-import { compilerOptions } from "./paths.tsconfig.json";
+import { compilerOptions } from "./tsconfig.paths.json";
 import { pathsToModuleNameMapper } from "ts-jest";
 
 module.exports = {
