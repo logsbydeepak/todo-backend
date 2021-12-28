@@ -1,11 +1,12 @@
-import { token, userData } from "../../../helper/data.helper";
-import { request } from "../../../helper/request.helper";
 import {
   ErrorResponse,
   ErrorStatusCode,
   SuccessResponse,
   SuccessStatusCode,
-} from "../../../helper/response.helper";
+} from "@tt-helper/response";
+
+import { request } from "@tt-helper/request";
+import { token, userData } from "@tt-helper/data";
 
 export const updateUserWithDifferentDataSuccess = async (data: any) => {
   const accessToken = token.getValue.tokenValue.accessToken.value;

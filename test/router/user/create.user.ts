@@ -1,8 +1,9 @@
 import {
   createUserSuccessfully,
   createUserWithDifferentData,
-} from "../../request/router/userRequest/create.user.request";
-import { userData } from "../../helper/data.helper";
+} from "@tt-request/router/user";
+
+import { userData } from "@tt-helper/data";
 
 export const createUserTest = () => {
   const { name, email, password } = userData;

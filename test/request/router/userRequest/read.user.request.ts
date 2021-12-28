@@ -1,10 +1,7 @@
-import { request } from "../../../helper/request.helper";
-import { token } from "../../../helper/data.helper";
-import {
-  SuccessResponse,
-  SuccessStatusCode,
-} from "../../../helper/response.helper";
-import { userData } from "../../../helper/data.helper";
+import { token } from "@tt-helper/data";
+import { userData } from "@tt-helper/data";
+import { request } from "@tt-helper/request";
+import { SuccessResponse, SuccessStatusCode } from "@tt-helper/response";
 
 export const getUserInfoSuccessfully = async () => {
   const accessToken = token.getValue.tokenValue.accessToken.value;

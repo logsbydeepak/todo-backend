@@ -1,6 +1,6 @@
-import { token } from "../../helper/data.helper";
-import { request } from "../../helper/request.helper";
-import { ErrorResponse, ErrorStatusCode } from "../../helper/response.helper";
+import { token } from "@tt-helper/data";
+import { request } from "@tt-helper/request";
+import { ErrorResponse, ErrorStatusCode } from "@tt-helper/response";
 
 export const checkPasswordWithDifferentValue = async (
   method: string,

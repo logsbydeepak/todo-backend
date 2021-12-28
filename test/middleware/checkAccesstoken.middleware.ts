@@ -4,8 +4,7 @@ import {
   accessTokenDoNotExistDB,
   wrongAccessToken,
   accessTokenExpired,
-  wrongAccessTokenPayloadId,
-} from "../request/middleware/accessToken.request";
+} from "../request/middlewareRequest/checkAccessToken.middleware.request";
 
 export const checkAccessToken = (method: string, path: string) => {
   test("empty token", () => emptyCookieToken(method, path));

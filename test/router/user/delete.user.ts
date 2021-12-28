@@ -1,8 +1,7 @@
-import { checkAccessToken } from "../../middleware/checkAccesstoken.middleware";
-import { checkPassword } from "../../middleware/checkPassword.middleware";
-import { deleteUserSuccessfully } from "../../request/router/userRequest/delete.user.request";
+import { deleteUserSuccessfully } from "@tt-request/router/user";
+import { checkAccessToken, checkPassword } from "@tt-router/middleware";
 
-export const deleteUser = () => {
+export const deleteUserTest = () => {
   checkAccessToken("delete", "/v1/user");
   checkPassword("delete", "/v1/user");
   test("delete user successfully", () => deleteUserSuccessfully());

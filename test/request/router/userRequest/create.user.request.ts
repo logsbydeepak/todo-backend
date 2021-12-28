@@ -1,14 +1,14 @@
 import cookieParser from "set-cookie-parser";
 
-import { request } from "../../../helper/request.helper";
 import {
   SuccessResponse,
   ErrorResponse,
   SuccessStatusCode,
   ErrorStatusCode,
-} from "../../../helper/response.helper";
+} from "@tt-helper/response";
 
-import { token } from "../../../helper/data.helper";
+import { token } from "@tt-helper/data";
+import { request } from "@tt-helper/request";
 
 export const createUserWithDifferentData = async (data: object) => {
   const createUser: any = await request.post("/v1/user").send(data);

@@ -1,10 +1,10 @@
 import { sign } from "jsonwebtoken";
-import { ACCESS_TOKEN_SECRET } from "../../../src/config/env.config";
-import { generateEncryption } from "../../../src/helper/security.helper";
-import { TokenModel, UserModel } from "../../../src/model";
-import { userData } from "../../helper/data.helper";
-import { request } from "../../helper/request.helper";
-import { ErrorResponse, ErrorStatusCode } from "../../helper/response.helper";
+import { userData } from "@tt-helper/data";
+import { request } from "@tt-helper/request";
+import { TokenModel, UserModel } from "@model";
+import { ACCESS_TOKEN_SECRET } from "@config/env";
+import { generateEncryption } from "@helper/security";
+import { ErrorResponse, ErrorStatusCode } from "@tt-helper/response";
 
 export const emptyCookieToken = async (method: string, path: string) => {
   // @ts-ignore

@@ -1,9 +1,6 @@
-import { token, userData } from "../../../helper/data.helper";
-import { request } from "../../../helper/request.helper";
-import {
-  SuccessResponse,
-  SuccessStatusCode,
-} from "../../../helper/response.helper";
+import { request } from "@tt-helper/request";
+import { token, userData } from "@tt-helper/data";
+import { SuccessResponse, SuccessStatusCode } from "@tt-helper/response";
 
 export const deleteUserSuccessfully = async () => {
   const currentPassword = userData.password;

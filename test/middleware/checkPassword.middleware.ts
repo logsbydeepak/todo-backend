@@ -1,4 +1,4 @@
-import { checkPasswordWithDifferentValue } from "../request/middleware/password.request";
+import { checkPasswordWithDifferentValue } from "../request/middlewareRequest/checkPassword.middleware.request";
 
 export const checkPassword = (method: string, path: string) => {
   test("current password not provided", () =>

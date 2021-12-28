@@ -5,8 +5,11 @@
       "@model": ["./model"],
       "@types": ["./types"],
       "@router": ["./router"],
-      "@response": ["./response"],
       "@middleware": ["./middleware"],
+
+      "@response": ["./response"],
+      "@response/data/error": ["./response/data/error.data.json"],
+      "@response/data/success": ["./response/data/success.data.json"],
 
       "@helper/cookie": ["./helper/cookie.helper"],
       "@helper/db": ["./helper/db/index"],
@@ -21,7 +24,15 @@
       "@config/logger": ["./config/logger.config"],
       "@config/server": ["./config/server.config"],
 
-      "@test": ["./../test/router/user.router.ts"]
+      "@tt-router/user": ["./../test/router/user"],
+      "@tt-router/middleware": ["./../test/middleware"],
+
+      "@tt-request/middleware": ["./../test/request/middlewareRequest"],
+      "@tt-request/router/user": ["./../test/request/router/userRequest"],
+
+      "@tt-helper/request": ["./../test/helper/request.helper"],
+      "@tt-helper/data": ["./../test/helper/data.helper"],
+      "@tt-helper/response": ["./../test/helper/response.helper"]
     }
   }
 }

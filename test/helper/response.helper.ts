@@ -1,5 +1,5 @@
-import errorData from "../../src/response/data/error.data.json";
-import successData from "../../src/response/data/success.data.json";
+import successData from "@response/data/success";
+import errorData from "@response/data/error";
 
 export const SuccessResponse = (
   request: any,

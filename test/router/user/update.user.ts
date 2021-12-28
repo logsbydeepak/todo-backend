@@ -1,12 +1,12 @@
-import { userData } from "../../helper/data.helper";
-import { checkAccessToken } from "../../middleware/checkAccesstoken.middleware";
-import { checkPassword } from "../../middleware/checkPassword.middleware";
 import {
   updateUserWithDifferentDataError,
   updateUserWithDifferentDataSuccess,
-} from "../../request/router/userRequest/update.user";
+} from "@tt-request/router/user";
 
-export const updateUser = () => {
+import { userData } from "@tt-helper/data";
+import { checkAccessToken, checkPassword } from "@tt-router/middleware";
+
+export const updateUserTest = () => {
   checkAccessToken("patch", "/v1/user");
   checkPassword("patch", "/v1/user");
 
