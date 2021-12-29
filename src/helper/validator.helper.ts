@@ -8,7 +8,7 @@ export const validateBody = (
   bodyData: BodyDataType,
   bodyDataCount: number
 ): BodyDataType => {
-  if (bodyData.length === 0) {
+  if (bodyData.length >= 0) {
     throw ErrorObject("BP", 11);
   }
 
@@ -38,7 +38,7 @@ export const validateEmail = (email: string): string => {
 
   email = email.trim().toLowerCase();
   if (!isEmail(email)) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("BP", 10);
   }
 
   return email;

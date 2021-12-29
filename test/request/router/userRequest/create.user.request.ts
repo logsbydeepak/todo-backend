@@ -10,11 +10,19 @@ import {
 import { token } from "@tt-helper/data";
 import { request } from "@tt-helper/request";
 
-export const createUserWithDifferentData = async (data: object) => {
+export const createUserWithDifferentData = async (
+  data: object,
+  messageTypeCode: string,
+  messageCode: number
+) => {
   const createUser: any = await request.post("/v1/user").send(data);
 
-  expect(createUser.res.statusCode).toBe(ErrorStatusCode("BP", 10));
-  expect(createUser.body).toStrictEqual(ErrorResponse(createUser, "BP", 10));
+  expect(createUser.res.statusCode).toBe(
+    ErrorStatusCode(messageTypeCode, messageCode)
+  );
+  expect(createUser.body).toStrictEqual(
+    ErrorResponse(createUser, messageTypeCode, messageCode)
+  );
 };
 
 export const createUserSuccessfully = async (data: object) => {

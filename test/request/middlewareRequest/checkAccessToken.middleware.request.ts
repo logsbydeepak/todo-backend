@@ -10,9 +10,9 @@ export const emptyCookieToken = async (method: string, path: string) => {
   // @ts-ignore
   const middlewareRequest = await request[method](path);
 
-  expect(middlewareRequest.res.statusCode).toBe(ErrorStatusCode("BP", 11));
+  expect(middlewareRequest.res.statusCode).toBe(ErrorStatusCode("TP", 14));
   expect(middlewareRequest.body).toStrictEqual(
-    ErrorResponse(middlewareRequest, "BP", 11)
+    ErrorResponse(middlewareRequest, "TP", 14)
   );
 };
 
@@ -22,9 +22,9 @@ export const emptyAccessToken = async (method: string, path: string) => {
     "accessToken=",
   ]);
 
-  expect(middlewareRequest.res.statusCode).toBe(ErrorStatusCode("BP", 11));
+  expect(middlewareRequest.res.statusCode).toBe(ErrorStatusCode("TP", 14));
   expect(middlewareRequest.body).toStrictEqual(
-    ErrorResponse(middlewareRequest, "BP", 11)
+    ErrorResponse(middlewareRequest, "TP", 14)
   );
 };
 
@@ -52,9 +52,9 @@ export const accessTokenDoNotExistDB = async (method: string, path: string) => {
     `accessToken=${accessTokenEncrypt}`,
   ]);
 
-  expect(middlewareRequest.res.statusCode).toBe(ErrorStatusCode("BP", 11));
+  expect(middlewareRequest.res.statusCode).toBe(ErrorStatusCode("TP", 13));
   expect(middlewareRequest.body).toStrictEqual(
-    ErrorResponse(middlewareRequest, "BP", 11)
+    ErrorResponse(middlewareRequest, "TP", 13)
   );
 };
 
@@ -68,13 +68,9 @@ export const accessTokenExpired = async (method: string, path: string) => {
   const accessTokenEncrypt = generateEncryption(accessToken);
 
   const newToken = new TokenModel({
-    _id: newUser._id,
-    tokens: [
-      {
-        refreshToken: "abc",
-        accessToken: accessTokenEncrypt,
-      },
-    ],
+    owner: newUser._id,
+    refreshToken: "abc",
+    accessToken: accessTokenEncrypt,
   });
 
   await newUser.save();

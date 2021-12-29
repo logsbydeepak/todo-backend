@@ -4,7 +4,7 @@ import { SuccessResponse, SuccessStatusCode } from "@tt-helper/response";
 
 export const deleteUserSuccessfully = async () => {
   const currentPassword = userData.password;
-  const accessToken = token.getValue.tokenValue.accessToken.value;
+  const accessToken = token.getValue.accessToken.value;
 
   const user: any = await request
     .delete("/v1/user")

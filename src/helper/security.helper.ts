@@ -28,6 +28,6 @@ export const validateHashAndSalt = async (
   const comparePassword = await compare(rawPassword, dbPassword);
 
   if (!comparePassword) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("BP", 10);
   }
 };

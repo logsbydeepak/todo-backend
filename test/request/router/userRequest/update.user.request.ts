@@ -9,9 +9,9 @@ import { request } from "@tt-helper/request";
 import { token, userData } from "@tt-helper/data";
 
 export const updateUserWithDifferentDataSuccess = async (data: any) => {
-  const accessToken = token.getValue.tokenValue.accessToken.value;
+  const accessToken = token.getValue.accessToken.value;
   const user: any = await request
-    .patch("/v1/user")
+    .put("/v1/user")
     .send(data)
     .set("Cookie", [`accessToken=${accessToken}`]);
 
@@ -38,9 +38,9 @@ export const updateUserWithDifferentDataError = async (
   messageTypeCode: string,
   messageCode: number
 ) => {
-  const accessToken = token.getValue.tokenValue.accessToken.value;
+  const accessToken = token.getValue.accessToken.value;
   const user: any = await request
-    .patch("/v1/user")
+    .put("/v1/user")
     .send(data)
     .set("Cookie", [`accessToken=${accessToken}`]);
 

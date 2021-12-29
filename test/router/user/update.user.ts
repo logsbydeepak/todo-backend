@@ -7,14 +7,14 @@ import { userData } from "@tt-helper/data";
 import { checkAccessToken, checkPassword } from "@tt-router/middleware";
 
 export const updateUserTest = () => {
-  checkAccessToken("patch", "/v1/user");
-  checkPassword("patch", "/v1/user");
+  checkAccessToken("put", "/v1/user");
+  checkPassword("put", "/v1/user");
 
   test("send array insted of object", () =>
-    updateUserWithDifferentDataError([], "BP", 10));
+    updateUserWithDifferentDataError([], "BP", 11));
 
   test("send empty object", () =>
-    updateUserWithDifferentDataError({}, "BP", 10));
+    updateUserWithDifferentDataError({}, "BP", 11));
 
   test("send extra data", () =>
     updateUserWithDifferentDataError(
@@ -32,7 +32,7 @@ export const updateUserTest = () => {
     updateUserWithDifferentDataError(
       { currentPassword: userData.password, email: "email", extra: "value" },
       "BP",
-      10
+      11
     ));
 
   test("toUpdate property is empty", () =>
@@ -46,28 +46,28 @@ export const updateUserTest = () => {
     updateUserWithDifferentDataError(
       { currentPassword: userData.password, email: "email", toUpdate: "other" },
       "BP",
-      10
+      11
     ));
 
   test("name property is not provided", () =>
     updateUserWithDifferentDataError(
       { currentPassword: userData.password, toUpdate: "name", extra: "value" },
       "BP",
-      10
+      11
     ));
 
   test("name property is empty", () =>
     updateUserWithDifferentDataError(
       { currentPassword: userData.password, name: "", toUpdate: "name" },
       "BP",
-      10
+      11
     ));
 
   test("email property is not provided", () =>
     updateUserWithDifferentDataError(
       { currentPassword: userData.password, toUpdate: "email", extra: "value" },
       "BP",
-      10
+      11
     ));
 
   test("update name", () =>
@@ -81,7 +81,7 @@ export const updateUserTest = () => {
     updateUserWithDifferentDataError(
       { currentPassword: userData.password, email: "", toUpdate: "email" },
       "BP",
-      10
+      11
     ));
 
   test("invalid email", () =>
@@ -110,7 +110,7 @@ export const updateUserTest = () => {
         extra: "value",
       },
       "BP",
-      10
+      11
     ));
 
   test("password property is empty", () =>
@@ -121,7 +121,7 @@ export const updateUserTest = () => {
         toUpdate: "password",
       },
       "BP",
-      10
+      11
     ));
 
   test("invalid password", () =>

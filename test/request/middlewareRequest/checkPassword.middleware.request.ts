@@ -9,7 +9,7 @@ export const checkPasswordWithDifferentValue = async (
   messageTypeCode: string,
   messageCode: number
 ) => {
-  const accessToken = token.getValue.tokenValue.accessToken.value;
+  const accessToken = token.getValue.accessToken.value;
   // @ts-ignore
   const user = await request[method](path)
     .send(password)

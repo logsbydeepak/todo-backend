@@ -2,7 +2,7 @@ import { checkPasswordWithDifferentValue } from "../request/middlewareRequest/ch
 
 export const checkPassword = (method: string, path: string) => {
   test("current password not provided", () =>
-    checkPasswordWithDifferentValue(method, path, {}, "BP", 10));
+    checkPasswordWithDifferentValue(method, path, {}, "BP", 11));
 
   test("current password field is empty", () =>
     checkPasswordWithDifferentValue(
@@ -10,7 +10,7 @@ export const checkPassword = (method: string, path: string) => {
       path,
       { currentPassword: "" },
       "BP",
-      10
+      11
     ));
 
   test("weak current password", () =>

@@ -2,7 +2,7 @@ export const token: any = {
   tokenValue: {},
 
   get getValue() {
-    return token;
+    return this.tokenValue;
   },
 
   set setValue(token: any) {

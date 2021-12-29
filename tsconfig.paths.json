@@ -24,6 +24,8 @@
       "@config/logger": ["./config/logger.config"],
       "@config/server": ["./config/server.config"],
 
+      "@tt-types": ["./../test/types"],
+
       "@tt-router/user": ["./../test/router/user"],
       "@tt-router/middleware": ["./../test/middleware"],
 
