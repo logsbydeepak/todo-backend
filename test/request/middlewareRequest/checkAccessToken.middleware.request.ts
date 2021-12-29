@@ -85,6 +85,8 @@ export const accessTokenExpired = async (method: string, path: string) => {
   expect(middlewareRequest.body).toStrictEqual(
     ErrorResponse(middlewareRequest, "TP", 10)
   );
+  await UserModel.findByIdAndRemove(newUser._id);
+  await TokenModel.findByIdAndRemove(newToken._id);
 };
 
 export const wrongAccessTokenPayloadId = async (
@@ -98,16 +100,8 @@ export const wrongAccessTokenPayloadId = async (
   const accessTokenEncrypt = generateEncryption(accessToken);
   const newToken = new TokenModel({
     _id: "no id",
-    tokens: [
-      {
-        refreshToken: "abc",
-        accessToken: [
-          {
-            token: accessTokenEncrypt,
-          },
-        ],
-      },
-    ],
+    refreshToken: "abc",
+    accessToken: accessTokenEncrypt,
   });
 
   await newToken.save();
@@ -121,4 +115,6 @@ export const wrongAccessTokenPayloadId = async (
   expect(middlewareRequest.body).toStrictEqual(
     ErrorResponse(middlewareRequest, "AU", 10)
   );
+
+  await TokenModel.findByIdAndRemove(newToken._id);
 };

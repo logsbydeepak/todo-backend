@@ -3,7 +3,7 @@ import {
   updateUserWithDifferentDataSuccess,
 } from "@tt-request/router/user";
 
-import { userData } from "@tt-helper/data";
+import { resetUserData, userData } from "@tt-helper/data";
 import { checkAccessToken, checkPassword } from "@tt-router/middleware";
 
 export const updateUserTest = () => {
@@ -141,4 +141,6 @@ export const updateUserTest = () => {
       toUpdate: "password",
       password: "123456789A!a",
     }));
+
+  resetUserData();
 };

@@ -6,14 +6,21 @@ import {
 } from "@tt-helper/response";
 
 import { request } from "@tt-helper/request";
-import { token, userData } from "@tt-helper/data";
+import { userData } from "@tt-helper/data";
+import { TokenModel, UserModel } from "@model";
+import { dbCreateToken } from "@helper/db";
 
 export const updateUserWithDifferentDataSuccess = async (data: any) => {
-  const accessToken = token.getValue.accessToken.value;
+  const newUser = new UserModel(userData);
+  const newToken = dbCreateToken(newUser._id, 1);
+
+  await newUser.save();
+  await newToken.save();
+
   const user: any = await request
     .put("/v1/user")
     .send(data)
-    .set("Cookie", [`accessToken=${accessToken}`]);
+    .set("Cookie", [`accessToken=${newToken.accessToken}`]);
 
   expect(user.res.statusCode).toBe(SuccessStatusCode("AU", 12));
   expect(user.body).toStrictEqual(SuccessResponse(user, "AU", 12));
@@ -31,6 +38,9 @@ export const updateUserWithDifferentDataSuccess = async (data: any) => {
       userData.password = data.password;
       break;
   }
+
+  await UserModel.findByIdAndRemove(newUser._id);
+  await TokenModel.findByIdAndRemove(newToken._id);
 };
 
 export const updateUserWithDifferentDataError = async (
@@ -38,11 +48,16 @@ export const updateUserWithDifferentDataError = async (
   messageTypeCode: string,
   messageCode: number
 ) => {
-  const accessToken = token.getValue.accessToken.value;
+  const newUser = new UserModel(userData);
+  const newToken = dbCreateToken(newUser._id, 1);
+
+  await newUser.save();
+  await newToken.save();
+
   const user: any = await request
     .put("/v1/user")
     .send(data)
-    .set("Cookie", [`accessToken=${accessToken}`]);
+    .set("Cookie", [`accessToken=${newToken.accessToken}`]);
 
   expect(user.res.statusCode).toBe(
     ErrorStatusCode(messageTypeCode, messageCode)
@@ -50,4 +65,7 @@ export const updateUserWithDifferentDataError = async (
   expect(user.body).toStrictEqual(
     ErrorResponse(user, messageTypeCode, messageCode)
   );
+
+  await UserModel.findByIdAndRemove(newUser._id);
+  await TokenModel.findByIdAndRemove(newToken._id);
 };

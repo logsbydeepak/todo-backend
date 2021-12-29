@@ -15,3 +15,9 @@ export const userData = {
   email: "test@todo.com",
   password: "123456A1!a",
 };
+
+export const resetUserData = () => {
+  userData.name = "Test User";
+  userData.email = "test@todo.com";
+  userData.password = "123456A1!a";
+};

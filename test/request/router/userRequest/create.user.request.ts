@@ -7,8 +7,9 @@ import {
   ErrorStatusCode,
 } from "@tt-helper/response";
 
-import { token } from "@tt-helper/data";
+import { userData } from "@tt-helper/data";
 import { request } from "@tt-helper/request";
+import { TokenModel, UserModel } from "@model";
 
 export const createUserWithDifferentData = async (
   data: object,
@@ -37,8 +38,21 @@ export const createUserSuccessfully = async (data: object) => {
   expect(cookie.refreshToken.value).toBeTruthy();
   expect(cookie.refreshToken.path).toBe("/v1/session/refresh");
 
-  token.setValue = cookie;
-
   expect(createUser.res.statusCode).toBe(SuccessStatusCode("AU", 10));
   expect(createUser.body).toStrictEqual(SuccessResponse(createUser, "AU", 10));
+
+  await UserModel.deleteOne({ email: userData.email });
+  await TokenModel.deleteOne({ accessToken: cookie.accessToken.value });
+};
+
+export const userAlreadyExist = async (data: any) => {
+  const newUser = new UserModel(data);
+  await newUser.save();
+
+  const createUser: any = await request.post("/v1/user").send(data);
+
+  expect(createUser.res.statusCode).toBe(ErrorStatusCode("AU", 11));
+  expect(createUser.body).toStrictEqual(ErrorResponse(createUser, "AU", 11));
+
+  await UserModel.findByIdAndRemove(newUser._id);
 };

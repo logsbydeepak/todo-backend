@@ -1,6 +1,7 @@
 import {
   createUserSuccessfully,
   createUserWithDifferentData,
+  userAlreadyExist,
 } from "@tt-request/router/user";
 
 import { userData } from "@tt-helper/data";
@@ -53,6 +54,5 @@ export const createUserTest = () => {
 
   test("successfully create user", () => createUserSuccessfully(userData));
 
-  test("email already exist", () =>
-    createUserWithDifferentData(userData, "AU", 11));
+  test("email already exist", () => userAlreadyExist(userData));
 };
