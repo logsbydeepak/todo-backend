@@ -7,7 +7,7 @@ import {
   deleteUserTest,
 } from "@tt-router/user";
 
-import { createTodoTest } from "@tt-router/todo";
+import { createTodoTest, deleteTodoTest } from "@tt-router/todo";
 
 beforeAll(() => {
   dbConnect();
@@ -21,7 +21,8 @@ describe("USER ROUTER", () => {
 });
 
 describe("TODO ROUTER", () => {
-  describe("POST create TODO test", createTodoTest);
+  describe("POST create todo test", createTodoTest);
+  describe("DELETE todo test", deleteTodoTest);
 });
 
 afterAll(() => {
