@@ -27,16 +27,16 @@ export const checkAccessToken = async (
     );
 
     if (!accessTokenData) {
-      return ErrorResponse(req, res, "TP", 13);
+      return ErrorResponse(res, "TP", 13);
     }
 
     if (accessTokenData === "TokenExpiredError") {
-      return ErrorResponse(req, res, "TP", 10);
+      return ErrorResponse(res, "TP", 10);
     }
 
     const userId: string = accessTokenData.id;
     if (!userId) {
-      return ErrorResponse(req, res, "TP", 13);
+      return ErrorResponse(res, "TP", 13);
     }
 
     await dbUserExist(userId);

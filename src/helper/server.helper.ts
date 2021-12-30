@@ -11,12 +11,12 @@ export const serverErrorHandler = (
 ): void => {
   if (error.ErrorObject) {
     const { messageTypeCode, messageCode } = error.ErrorObject;
-    return ErrorResponse(req, res, messageTypeCode, messageCode);
+    return ErrorResponse(res, messageTypeCode, messageCode);
   }
 
   if (error.name === "SyntaxError") {
-    return ErrorResponse(req, res, "BP", 12);
+    return ErrorResponse(res, "BP", 12);
   }
-  ErrorResponse(req, res, "IS", 10);
+  ErrorResponse(res, "IS", 10);
   next();
 };

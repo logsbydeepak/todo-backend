@@ -63,12 +63,12 @@ export const updateSession = async (
     );
 
     if (accessTokenData !== "TokenExpiredError") {
-      return ErrorResponse(req, res, "TP", 11);
+      return ErrorResponse(res, "TP", 11);
     }
     if (refreshTokenData === "TokenExpiredError") {
       removeAccessTokenCookie(res);
       removeRefreshTokenCookie(res);
-      return ErrorResponse(req, res, "TP", 12);
+      return ErrorResponse(res, "TP", 12);
     }
 
     await dbUserExist(refreshTokenData.id);
@@ -92,14 +92,14 @@ export const updateSession = async (
 
       setAccessTokenCookie(res, newDbToken.accessToken);
       setRefreshTokenCookie(res, newDbToken.refreshToken);
-      return SuccessResponse(req, res, "AU", 16);
+      return SuccessResponse(res, { message: "token update successfully" });
     }
 
     if (refreshTokenData.refreshTokenRefreshCount >= 4) {
       await TokenModel.deleteOne({ refreshToken });
       removeAccessTokenCookie(res);
       removeRefreshTokenCookie(res);
-      return ErrorResponse(req, res, "TP", 12);
+      return ErrorResponse(res, "TP", 12);
     }
 
     if (accessTokenData === "TokenExpiredError") {
@@ -111,7 +111,7 @@ export const updateSession = async (
       await dbToken.save();
 
       setAccessTokenCookie(res, accessTokenEncrypt);
-      return SuccessResponse(req, res, "AU", 16);
+      return SuccessResponse(res, { message: "token updated successfully" });
     }
 
     const dbToken: TokenModelType = await dbReadToken({ accessToken });
@@ -119,7 +119,7 @@ export const updateSession = async (
 
     removeAccessTokenCookie(res);
     removeRefreshTokenCookie(res);
-    return ErrorResponse(req, res, "TP", 11);
+    return ErrorResponse(res, "TP", 11);
   } catch (error: any) {
     return next(error);
   }

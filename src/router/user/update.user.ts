@@ -39,12 +39,12 @@ export const updateUser = async (
         break;
 
       default:
-        return ErrorResponse(req, res, "BP", 11);
+        return ErrorResponse(res, "BP", 11);
     }
 
     await dbUser.save();
 
-    return SuccessResponse(req, res, "AU", 12);
+    return SuccessResponse(res, { name: dbUser.name, email: dbUser.email });
   } catch (error: any) {
     return next(error);
   }

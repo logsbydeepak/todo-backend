@@ -28,7 +28,7 @@ export const deleteSession = async (
     removeAccessTokenCookie(res);
     removeRefreshTokenCookie(res);
 
-    SuccessResponse(req, res, "AU", 15);
+    SuccessResponse(res, { message: "user do not exist" });
   } catch (error: any) {
     return next(error);
   }

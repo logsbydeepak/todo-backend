@@ -45,6 +45,7 @@ export interface TokenModelType extends Document {
 }
 
 export interface TodoModelType extends Document {
+  _id: string;
   owner: string;
   task: string;
   status: boolean;
@@ -87,7 +88,6 @@ export interface ErrorObjectType {
   ErrorObject: {
     messageTypeCode: string;
     messageCode: number;
-    data: object | undefined;
   };
 }
 

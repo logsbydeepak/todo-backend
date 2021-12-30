@@ -23,7 +23,7 @@ export const deleteUser = async (
     removeAccessTokenCookie(res);
     removeRefreshTokenCookie(res);
 
-    return SuccessResponse(req, res, "AU", 13);
+    return SuccessResponse(res, { message: "user do not exist" });
   } catch (error: any) {
     return next(error);
   }

@@ -18,7 +18,7 @@ export const readTodo = async (
     const pageInt: number = parseInt(page);
 
     if (isNaN(pageInt)) {
-      return ErrorResponse(req, res, "QP", 10);
+      return ErrorResponse(res, "QP", 10);
     }
 
     if (status === "true" || status === "false" || status === "all") {
@@ -34,10 +34,10 @@ export const readTodo = async (
         }
       );
 
-      return SuccessResponse(req, res, "TD", 12, dbTodo);
+      return SuccessResponse(res, dbTodo);
     }
 
-    return ErrorResponse(req, res, "QP", 10);
+    return ErrorResponse(res, "QP", 10);
   } catch (error: any) {
     return next(error);
   }
