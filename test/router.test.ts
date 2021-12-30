@@ -5,7 +5,9 @@ import {
   readUserTest,
   updateUserTest,
   deleteUserTest,
-} from "./router/user";
+} from "@tt-router/user";
+
+import { createTodoTest } from "@tt-router/todo";
 
 beforeAll(() => {
   dbConnect();
@@ -16,6 +18,10 @@ describe("USER ROUTER", () => {
   describe("GET update user info", readUserTest);
   describe("PUT user", updateUserTest);
   describe("DELETE remove user", deleteUserTest);
+});
+
+describe("TODO ROUTER", () => {
+  describe("POST create TODO test", createTodoTest);
 });
 
 afterAll(() => {

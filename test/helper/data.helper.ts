@@ -21,3 +21,8 @@ export const resetUserData = () => {
   userData.email = "test@todo.com";
   userData.password = "123456A1!a";
 };
+
+export const todoData = {
+  task: "task 1",
+  status: true,
+};

@@ -27,10 +27,12 @@
       "@tt-types": ["./../test/types"],
 
       "@tt-router/user": ["./../test/router/user"],
+      "@tt-router/todo": ["./../test/router/todo"],
       "@tt-router/middleware": ["./../test/middleware"],
 
       "@tt-request/middleware": ["./../test/request/middlewareRequest"],
       "@tt-request/router/user": ["./../test/request/router/userRequest"],
+      "@tt-request/router/todo": ["./../test/request/router/todoRequest"],
 
       "@tt-helper/request": ["./../test/helper/request.helper"],
       "@tt-helper/data": ["./../test/helper/data.helper"],

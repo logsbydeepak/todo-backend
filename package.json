@@ -11,7 +11,7 @@
     "test": "cross-env NODE_ENV=test run-s test:start",
     "test:watch": "cross-env NODE_ENV=test run-s test:watch:start",
     "test:start": "jest",
-    "test:watch:start": "jest --watch --detectOpenHandles",
+    "test:watch:start": "jest --watchAll",
     "build": "run-s clean build:start",
     "build:start": "tsc --project tsconfig.prod.json",
     "clean": "rimraf dist",
