@@ -8,14 +8,10 @@
     "dev:start": "tsnd -r tsconfig-paths/register --rs --cache-directory \"./dist\" -- src/server.ts",
     "format": "prettier --write .",
     "format:watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
-    "test": "cross-env NODE_ENV=test run-s test:start",
-    "test:watch": "cross-env NODE_ENV=test run-s test:watch:start",
-    "test:start": "jest",
-    "test:watch:start": "jest --watchAll",
     "build": "run-s clean build:start",
     "build:start": "tsc",
     "clean": "rimraf dist",
-    "prod": "node -r tsconfig-paths/register ./dist/server.js"
+    "prod": "cross-env TS_NODE_BASEURL=./dist NODE_ENV=prod node -r tsconfig-paths/register ./dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -36,7 +32,6 @@
     "@types/jsonwebtoken": "^8.5.6",
     "@types/validator": "^13.7.1",
     "bcryptjs": "^2.4.3",
-    "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.1.0",
     "prettier": "^2.5.1",
@@ -46,6 +41,7 @@
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
+    "cross-env": "^7.0.3",
     "cryptr": "^6.0.2",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
