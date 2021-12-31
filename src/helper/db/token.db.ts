@@ -24,12 +24,14 @@ export const dbCreateToken = (
 };
 
 export const dbTokenExist = async (
-  data: { accessToken: string } | { refreshToken: string }
+  data: { accessToken: string } | { refreshToken: string },
+  messageTypeCode: string,
+  messageCode: number
 ): Promise<void> => {
   const dbTokenCount: number = await TokenModel.count(data);
 
   if (dbTokenCount === 0) {
-    throw ErrorObject("TP", 13);
+    throw ErrorObject(messageTypeCode, messageCode);
   }
   return;
 };

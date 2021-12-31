@@ -13,7 +13,7 @@ export const generateDecryption = (token: string): string => {
   try {
     return cryptr.decrypt(token);
   } catch (error: any) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("TP", 15);
   }
 };
 
@@ -28,6 +28,6 @@ export const validateHashAndSalt = async (
   const comparePassword = await compare(rawPassword, dbPassword);
 
   if (!comparePassword) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 20);
   }
 };

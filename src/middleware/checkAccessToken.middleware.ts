@@ -20,23 +20,23 @@ export const checkAccessToken = async (
     );
     const accessTokenDecryption: string = generateDecryption(accessToken);
 
-    await dbTokenExist({ accessToken });
+    await dbTokenExist({ accessToken }, "TP", 15);
 
     const accessTokenData: AccessTokenValidatorType = accessTokenValidator(
       accessTokenDecryption
     );
 
     if (!accessTokenData) {
-      return ErrorResponse(res, "TP", 13);
+      return ErrorResponse(res, "TP", 15);
     }
 
     if (accessTokenData === "TokenExpiredError") {
-      return ErrorResponse(res, "TP", 10);
+      return ErrorResponse(res, "TP", 16);
     }
 
     const userId: string = accessTokenData.id;
     if (!userId) {
-      return ErrorResponse(res, "TP", 13);
+      return ErrorResponse(res, "TP", 15);
     }
 
     await dbUserExist(userId);

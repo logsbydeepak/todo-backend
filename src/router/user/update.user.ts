@@ -19,13 +19,13 @@ export const updateUser = async (
   try {
     const userId: string = res.locals.userId;
     const bodyData: UpdateUserBodyType = validateBody(req.body, 3);
-    const toUpdate: string = validateEmpty(bodyData.toUpdate, "BP", 11);
+    const toUpdate: string = validateEmpty(bodyData.toUpdate, "BP", 18);
 
     const dbUser: UserModelType = await dbReadUserById(userId);
 
     switch (toUpdate) {
       case "name":
-        dbUser.name = validateEmpty(bodyData.name, "BP", 11);
+        dbUser.name = validateEmpty(bodyData.name, "BP", 13);
         break;
 
       case "email":
@@ -39,7 +39,7 @@ export const updateUser = async (
         break;
 
       default:
-        return ErrorResponse(res, "BP", 11);
+        return ErrorResponse(res, "BP", 19);
     }
 
     await dbUser.save();

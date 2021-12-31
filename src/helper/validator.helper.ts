@@ -9,12 +9,12 @@ export const validateBody = (
   bodyDataCount: number
 ): BodyDataType => {
   if (bodyData.length >= 0) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("BP", 10);
   }
 
   const bodyDataLength: number = Object.keys(bodyData).length;
   if (bodyDataLength !== bodyDataCount) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 11);
   }
 
   return bodyData;
@@ -33,12 +33,12 @@ export const validateEmpty = (
 
 export const validateEmail = (email: string): string => {
   if (!email) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("BP", 14);
   }
 
   email = email.trim().toLowerCase();
   if (!isEmail(email)) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 15);
   }
 
   return email;
@@ -46,12 +46,12 @@ export const validateEmail = (email: string): string => {
 
 export const validatePassword = (password: string): string => {
   if (!password) {
-    throw ErrorObject("BP", 11);
+    throw ErrorObject("BP", 16);
   }
 
   password = password.trim();
   if (!isStrongPassword(password)) {
-    throw ErrorObject("BP", 10);
+    throw ErrorObject("BP", 17);
   }
 
   return password;

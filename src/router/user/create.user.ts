@@ -20,7 +20,7 @@ export const createUser = async (
 ): Promise<void> => {
   try {
     const bodyData: CreateUserBodyType = validateBody(req.body, 3);
-    const name: string = validateEmpty(bodyData.name, "BP", 11);
+    const name: string = validateEmpty(bodyData.name, "BP", 13);
     const email: string = validateEmail(bodyData.email);
     const password: string = validatePassword(bodyData.password);
 
