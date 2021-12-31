@@ -4,6 +4,9 @@ services:
     image: mongo:5.0.5
     ports:
       - 27017:27017
+    networks:
+      - dev_network
+    container_name: todo_dev_backend_mongo_container
 
   todo_backend:
     links:
@@ -18,6 +21,9 @@ services:
       - ../../:/home/node/todo-backend
     depends_on:
       - mongo_container
+    networks:
+      - dev_network
+    container_name: todo_dev_backend_api
 
   mongo_express:
     environment:
@@ -27,3 +33,10 @@ services:
       - mongo_container
     ports:
       - 8888:8081
+    networks:
+      - dev_network
+    container_name: todo_dev_backend_mongo_express
+
+networks:
+  dev_network:
+    name: todo_dev_backend_network

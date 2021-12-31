@@ -51,9 +51,50 @@ npm install
 npm run dev
 ```
 
+### With `Docker`
+
+step 1 is `optional`
+
+1. build build compose
+
+```bash
+docker-compose -f docker/dev/docker-compose.yml build
+```
+
+2. run docker compose
+
+```bash
+docker-compose -f docker/dev/docker-compose.yml up -d
+```
+
+3. attach to container
+
+```bash
+docker exec -it todo_dev_backend_api /bin/sh
+```
+
+By default Port number 4000 of host and container is opened and port 8888 for mongo express.
+
+MongoDB connection url inside container `mongodb://todo_dev_backend_mongo_container:27017`. Use this in [dev.env](#run-in-development). And `mongodb://localhost:27017` in host.
+
+4. set [dev.env](#run-in-development)
+5. install package
+
+```bash
+npm install
+```
+
+6. start
+
+```bash
+npm run dev
+```
+
+API will start at http://localhost:4000
+
 ## RUN in `production`
 
-1. set all the env property in system
+1. set all the [env](#run-in-development) property in system
 2. install package
 
 ```bin
