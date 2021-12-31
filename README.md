@@ -64,17 +64,11 @@ npm install
 
 ```bin
 npm run build
-````
-
-4. start
-
-```bash
-npm run prod
 ```
 
-`optional` after building project
+`optional` 5 and 6 step
 
-5.  remove `node_modules`
+4.  remove `node_modules`
 
 ```bin
 rm -rf node_modules
@@ -82,14 +76,42 @@ rm -rf node_modules
 
 or remove manually
 
-6. install production package
+5. install production package
 
 ```bin
 npm install --production
 ```
 
-7. start
+6. start
 
 ```bin
 npm run prod
+```
+
+### With `Docker`
+
+1. Build image
+
+```bash
+docker build -t [REPOSITORY]:[TAG] -f docker/prod/Dockerfile .
+
+# example
+docker build -t todo-api-prod:v1 -f docker/prod/Dockerfile .
+```
+
+2. Run image
+
+```bash
+# with env file
+docker run --detach --env-file [env file path] -p [HOST PORT]:[CONTAINER PORT] [IMAGE]
+
+# example
+docker run --detach --env-file ./prod.env -p [HOST PORT]:[CONTAINER PORT] todo-api-prod:v1
+
+# set env manually
+docker run --detach \
+-e KEY=VALUE \
+-e KEY=VALUE \
+-p [HOST PORT]:[CONTAINER PORT] \
+[IMAGE]
 ```
