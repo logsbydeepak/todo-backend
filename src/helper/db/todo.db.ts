@@ -6,11 +6,11 @@ export const dbReadTodo = async (todoId: string, userId: string) => {
   const dbTodo: TodoModelType | null = await TodoModel.findById(todoId);
 
   if (!dbTodo) {
-    throw ErrorObject("QP", 11);
+    throw ErrorObject("BP", 27);
   }
 
   if (dbTodo.owner.toString() !== userId) {
-    throw ErrorObject("QP", 10);
+    throw ErrorObject("BP", 27);
   }
   return dbTodo;
 };

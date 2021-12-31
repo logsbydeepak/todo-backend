@@ -12,13 +12,13 @@ export const readTodo = async (
 ): Promise<void> => {
   try {
     const userId: string = res.locals.userId;
-    const status: string = validateEmpty(req.query.status as string, "QP", 11);
-    const page: string = validateEmpty(req.query.page as string, "QP", 11);
+    const status: string = validateEmpty(req.query.status as string, "QP", 12);
+    const page: string = validateEmpty(req.query.page as string, "QP", 13);
 
     const pageInt: number = parseInt(page);
 
     if (isNaN(pageInt)) {
-      return ErrorResponse(res, "QP", 10);
+      return ErrorResponse(res, "QP", 14);
     }
 
     if (status === "true" || status === "false" || status === "all") {
@@ -37,7 +37,7 @@ export const readTodo = async (
       return SuccessResponse(res, dbTodo);
     }
 
-    return ErrorResponse(res, "QP", 10);
+    return ErrorResponse(res, "QP", 15);
   } catch (error: any) {
     return next(error);
   }

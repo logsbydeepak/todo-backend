@@ -58,9 +58,13 @@ export const validatePassword = (password: string): string => {
 };
 
 export const validateTask = (rawData: boolean): boolean => {
-  if (rawData === true || rawData === false) {
+  if (typeof rawData === "boolean") {
     return rawData;
   }
 
-  throw ErrorObject("BP", 11);
+  if (!rawData) {
+    throw ErrorObject("BP", 23);
+  }
+
+  throw ErrorObject("BP", 24);
 };

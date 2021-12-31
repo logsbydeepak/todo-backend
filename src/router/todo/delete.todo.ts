@@ -19,7 +19,7 @@ export const deleteTodo = async (
     await dbReadTodo(todoId, userId);
     await TodoModel.findByIdAndDelete(todoId);
 
-    return SuccessResponse(res, { message: "Todo not found" });
+    return SuccessResponse(res, { message: "todo removed successfully" });
   } catch (error: any) {
     return next(error);
   }

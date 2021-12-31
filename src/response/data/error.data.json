@@ -53,7 +53,23 @@
         "statusCode": 400
       },
       { "messageCode": 20, "message": "wrong password", "statusCode": 400 },
-      { "messageCode": 21, "message": "task is required", "statusCode": 400 }
+      { "messageCode": 21, "message": "task is required", "statusCode": 400 },
+      { "messageCode": 22, "message": "status is required", "statusCode": 400 },
+      {
+        "messageCode": 25,
+        "message": "status is of type boolean",
+        "statusCode": 400
+      },
+      {
+        "messageCode": 26,
+        "message": "id is required",
+        "statusCode": 400
+      },
+      {
+        "messageCode": 27,
+        "message": "invalid id",
+        "statusCode": 400
+      }
     ]
   },
   {
@@ -119,12 +135,32 @@
     "response": [
       {
         "messageCode": 10,
-        "message": "invalid query parameter",
+        "message": "id is required",
         "statusCode": 404
       },
       {
         "messageCode": 11,
-        "message": "query parameter missing",
+        "message": "invalid id",
+        "statusCode": 400
+      },
+      {
+        "messageCode": 12,
+        "message": "status is required",
+        "statusCode": 400
+      },
+      {
+        "messageCode": 13,
+        "message": "page is required",
+        "statusCode": 400
+      },
+      {
+        "messageCode": 14,
+        "message": "invalid page",
+        "statusCode": 400
+      },
+      {
+        "messageCode": 15,
+        "message": "invalid status",
         "statusCode": 400
       }
     ]
