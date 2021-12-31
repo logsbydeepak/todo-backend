@@ -18,7 +18,11 @@ export const checkAccessToken = async (
       "TP",
       14
     );
-    const accessTokenDecryption: string = generateDecryption(accessToken);
+    const accessTokenDecryption: string = generateDecryption(
+      accessToken,
+      "TP",
+      15
+    );
 
     await dbTokenExist({ accessToken }, "TP", 15);
 

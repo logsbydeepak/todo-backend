@@ -39,7 +39,7 @@ export const dbReadUserByEmail = async (
   const dbUser: UserModelType | null = await UserModel.findOne({ email });
 
   if (!dbUser) {
-    throw ErrorObject("AU", 10);
+    throw ErrorObject("AU", 27);
   }
 
   return dbUser;

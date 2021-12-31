@@ -49,12 +49,20 @@ export const updateSession = async (
       14
     );
 
-    await dbTokenExist({ accessToken });
-    await dbTokenExist({ refreshToken });
+    await dbTokenExist({ accessToken }, "TP", 15);
+    await dbTokenExist({ refreshToken }, "TP", 11);
 
-    const accessTokenDecryption: string = generateDecryption(accessToken);
-    const refreshTokenDecryption: string = generateDecryption(refreshToken);
-
+    const accessTokenDecryption: string = generateDecryption(
+      accessToken,
+      "TP",
+      15
+    );
+    const refreshTokenDecryption: string = generateDecryption(
+      refreshToken,
+      "TP",
+      11
+    );
+    1;
     const accessTokenData: AccessTokenValidatorType = accessTokenValidator(
       accessTokenDecryption
     );
@@ -63,12 +71,12 @@ export const updateSession = async (
     );
 
     if (accessTokenData !== "TokenExpiredError") {
-      return ErrorResponse(res, "TP", 11);
+      return ErrorResponse(res, "TP", 12);
     }
     if (refreshTokenData === "TokenExpiredError") {
       removeAccessTokenCookie(res);
       removeRefreshTokenCookie(res);
-      return ErrorResponse(res, "TP", 12);
+      return ErrorResponse(res, "TP", 13);
     }
 
     await dbUserExist(refreshTokenData.id);
@@ -92,14 +100,16 @@ export const updateSession = async (
 
       setAccessTokenCookie(res, newDbToken.accessToken);
       setRefreshTokenCookie(res, newDbToken.refreshToken);
-      return SuccessResponse(res, { message: "token update successfully" });
+      return SuccessResponse(res, {
+        message: "access and refresh token updated successfully",
+      });
     }
 
     if (refreshTokenData.refreshTokenRefreshCount >= 4) {
       await TokenModel.deleteOne({ refreshToken });
       removeAccessTokenCookie(res);
       removeRefreshTokenCookie(res);
-      return ErrorResponse(res, "TP", 12);
+      return ErrorResponse(res, "TP", 17);
     }
 
     if (accessTokenData === "TokenExpiredError") {
@@ -111,7 +121,9 @@ export const updateSession = async (
       await dbToken.save();
 
       setAccessTokenCookie(res, accessTokenEncrypt);
-      return SuccessResponse(res, { message: "token updated successfully" });
+      return SuccessResponse(res, {
+        message: "access token updated successfully",
+      });
     }
 
     const dbToken: TokenModelType = await dbReadToken({ accessToken });
@@ -119,7 +131,7 @@ export const updateSession = async (
 
     removeAccessTokenCookie(res);
     removeRefreshTokenCookie(res);
-    return ErrorResponse(res, "TP", 11);
+    return ErrorResponse(res, "TP", 18);
   } catch (error: any) {
     return next(error);
   }

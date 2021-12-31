@@ -9,11 +9,15 @@ const cryptr = new Cryptr(ENCRYPT_SECRET as string);
 export const generateEncryption = (token: string): string =>
   cryptr.encrypt(token);
 
-export const generateDecryption = (token: string): string => {
+export const generateDecryption = (
+  token: string,
+  messageCodeType: string,
+  messageCode: number
+): string => {
   try {
     return cryptr.decrypt(token);
   } catch (error: any) {
-    throw ErrorObject("TP", 15);
+    throw ErrorObject(messageCodeType, messageCode);
   }
 };
 

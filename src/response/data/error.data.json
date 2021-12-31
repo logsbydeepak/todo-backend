@@ -52,7 +52,7 @@
         "message": "invalid toUpdate",
         "statusCode": 400
       },
-      { "messageCode": 20, "message": "wrong password", "statusCode": 400 },
+      { "messageCode": 20, "message": "invalid password", "statusCode": 400 },
       { "messageCode": 21, "message": "task is required", "statusCode": 400 },
       { "messageCode": 22, "message": "status is required", "statusCode": 400 },
       {
@@ -69,6 +69,11 @@
         "messageCode": 27,
         "message": "invalid id",
         "statusCode": 400
+      },
+      {
+        "messageCode": 27,
+        "message": "wrong email",
+        "statusCode": 400
       }
     ]
   },
@@ -78,22 +83,22 @@
     "response": [
       {
         "messageCode": 10,
-        "message": "token expired",
+        "message": "refresh token is required",
         "statusCode": 401
       },
       {
         "messageCode": 11,
-        "message": "can't refresh access token",
+        "message": "invalid refresh token",
         "statusCode": 401
       },
       {
         "messageCode": 12,
-        "message": "refresh token expired",
+        "message": "access token is not expired",
         "statusCode": 401
       },
       {
         "messageCode": 13,
-        "message": "invalid token",
+        "message": "refresh token expired",
         "statusCode": 401
       },
       {
@@ -109,6 +114,16 @@
       {
         "messageCode": 16,
         "message": "access token expired",
+        "statusCode": 401
+      },
+      {
+        "messageCode": 17,
+        "message": "cannot update refresh token",
+        "statusCode": 401
+      },
+      {
+        "messageCode": 18,
+        "message": "cannot update access token",
         "statusCode": 401
       }
     ]
