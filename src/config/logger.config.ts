@@ -8,7 +8,15 @@ const { combine, timestamp, printf, colorize } = format;
 
 export const logger: Logger = createLogger({
   level: "info",
-  transports: [],
+  transports: [
+    new transports.MongoDB({
+      db: DB_LOG_URL as string,
+      collection: "logs",
+      options: {
+        useUnifiedTopology: true,
+      },
+    }),
+  ],
 });
 
 if (NODE_ENV !== "test") {
