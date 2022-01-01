@@ -17,7 +17,7 @@
 ```json
 {
   "data": {
-    ...
+    # response data
   }
 }
 ```
@@ -37,3 +37,9 @@ All error response data [**error.data.json**](/src/response/data/error.data.json
 [**READ TODO**](/docs/todo/read.todo.md) <br/>
 [**UPDATE TODO**](/docs/todo/update.todo.md) <br/>
 [**DELETE TODO**](/docs/todo/delete.todo.md) <br/>
+
+## Session Router
+
+[**CREATE SESSION**](/docs/session/create.session.md) <br/>
+[**UPDATE SESSION**](/docs/session/update.session.md) <br/>
+[**DELETE SESSION**](/docs/session/delete.session.md) <br/>
