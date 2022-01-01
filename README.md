@@ -4,6 +4,8 @@ TODO REST API
 
 It is a personal project
 
+**[API Documentation](docs/api.md)**
+
 ### Clone project
 
 ```bash
