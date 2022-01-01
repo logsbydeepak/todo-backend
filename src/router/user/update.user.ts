@@ -44,7 +44,10 @@ export const updateUser = async (
 
     await dbUser.save();
 
-    return SuccessResponse(res, { name: dbUser.name, email: dbUser.email });
+    return SuccessResponse(res, 200, {
+      name: dbUser.name,
+      email: dbUser.email,
+    });
   } catch (error: any) {
     return next(error);
   }

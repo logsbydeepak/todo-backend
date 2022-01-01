@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
 import { dbReadTodo } from "@helper/db";
-import { SuccessResponse } from "@response";
 import { validateEmpty } from "@helper/validator";
 
 export const deleteTodo = async (
@@ -19,7 +18,8 @@ export const deleteTodo = async (
     await dbReadTodo(todoId, userId);
     await TodoModel.findByIdAndDelete(todoId);
 
-    return SuccessResponse(res, { message: "todo removed successfully" });
+    res.statusCode = 204;
+    return;
   } catch (error: any) {
     return next(error);
   }

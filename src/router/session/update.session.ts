@@ -28,8 +28,8 @@ import {
 } from "@helper/db";
 
 import { TokenModel } from "@model";
+import { ErrorResponse } from "@response";
 import { validateEmpty } from "@helper/validator";
-import { ErrorResponse, SuccessResponse } from "@response";
 import { generateDecryption, generateEncryption } from "@helper/security";
 
 export const updateSession = async (
@@ -100,9 +100,8 @@ export const updateSession = async (
 
       setAccessTokenCookie(res, newDbToken.accessToken);
       setRefreshTokenCookie(res, newDbToken.refreshToken);
-      return SuccessResponse(res, {
-        message: "access and refresh token updated successfully",
-      });
+      res.statusCode = 204;
+      return;
     }
 
     if (refreshTokenData.refreshTokenRefreshCount >= 4) {
@@ -121,9 +120,8 @@ export const updateSession = async (
       await dbToken.save();
 
       setAccessTokenCookie(res, accessTokenEncrypt);
-      return SuccessResponse(res, {
-        message: "access token updated successfully",
-      });
+      res.statusCode = 204;
+      return;
     }
 
     const dbToken: TokenModelType = await dbReadToken({ accessToken });

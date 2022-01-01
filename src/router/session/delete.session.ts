@@ -7,7 +7,6 @@ import {
 
 import { QueryType } from "@types";
 import { TokenModel } from "@model";
-import { SuccessResponse } from "@response";
 
 export const deleteSession = async (
   req: Request,
@@ -28,7 +27,9 @@ export const deleteSession = async (
     removeAccessTokenCookie(res);
     removeRefreshTokenCookie(res);
 
-    SuccessResponse(res, { message: "user logout successfully" });
+    res.statusCode = 204;
+
+    return;
   } catch (error: any) {
     return next(error);
   }

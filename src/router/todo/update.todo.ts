@@ -24,7 +24,7 @@ export const updateTodo = async (
 
     await dbTodo.save();
 
-    return SuccessResponse(res, {
+    return SuccessResponse(res, 200, {
       id: dbTodo._id,
       task: dbTodo.task,
       status: dbTodo.status,

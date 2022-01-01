@@ -24,7 +24,7 @@ export const createTodo = async (
     });
 
     await newTodo.save();
-    return SuccessResponse(res, {
+    return SuccessResponse(res, 201, {
       id: newTodo._id,
       task: newTodo.task,
       status: newTodo.status,

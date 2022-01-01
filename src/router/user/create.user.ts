@@ -37,7 +37,10 @@ export const createUser = async (
     setAccessTokenCookie(res, newToken.accessToken);
     setRefreshTokenCookie(res, newToken.refreshToken);
 
-    return SuccessResponse(res, { name: newUser.name, email: newUser.email });
+    return SuccessResponse(res, 201, {
+      name: newUser.name,
+      email: newUser.email,
+    });
   } catch (error: any) {
     return next(error);
   }

@@ -34,7 +34,7 @@ export const readTodo = async (
         }
       );
 
-      return SuccessResponse(res, dbTodo);
+      return SuccessResponse(res, 200, dbTodo);
     }
 
     return ErrorResponse(res, "QP", 15);

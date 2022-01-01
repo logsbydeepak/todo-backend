@@ -13,7 +13,7 @@ export const readUser = async (
     const userId: string = res.locals.userId;
     const dbUser: UserModelType = await dbReadUserById(userId);
 
-    return SuccessResponse(res, {
+    return SuccessResponse(res, 200, {
       name: dbUser.name,
       email: dbUser.email,
     });

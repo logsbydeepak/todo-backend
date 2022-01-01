@@ -34,7 +34,12 @@ export const ErrorResponse = (
   });
 };
 
-export const SuccessResponse = (res: Response, data: object) => {
+export const SuccessResponse = (
+  res: Response,
+  status: number,
+  data: object
+) => {
+  res.statusCode = status;
   res.send({
     data: {
       ...data,

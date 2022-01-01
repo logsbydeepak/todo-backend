@@ -5,7 +5,6 @@ import {
   removeRefreshTokenCookie,
 } from "@helper/cookie";
 
-import { SuccessResponse } from "@response";
 import { TodoModel, TokenModel, UserModel } from "@model";
 
 export const deleteUser = async (
@@ -23,7 +22,8 @@ export const deleteUser = async (
     removeAccessTokenCookie(res);
     removeRefreshTokenCookie(res);
 
-    return SuccessResponse(res, { message: "user removed successfully" });
+    res.statusCode = 204;
+    return;
   } catch (error: any) {
     return next(error);
   }

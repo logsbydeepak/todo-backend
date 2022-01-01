@@ -32,7 +32,10 @@ export const createSession = async (
     setAccessTokenCookie(res, newToken.accessToken);
     setRefreshTokenCookie(res, newToken.refreshToken);
 
-    return SuccessResponse(res, { name: dbUser.name, email: dbUser.email });
+    return SuccessResponse(res, 201, {
+      name: dbUser.name,
+      email: dbUser.email,
+    });
   } catch (error: any) {
     return next(error);
   }
