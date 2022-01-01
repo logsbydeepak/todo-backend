@@ -2,23 +2,21 @@
 
 - **URL**
 
-`PUT /v1/user`
+  `PUT /v1/user` <br/>
+  `AUTHENTICATION`
 
-`AUTHENTICATION`
-
-- **URL Params**
-
+- **URL Params** <br/>
   None
 
 - **Data Params**
 
-```json
-{
-  "currentPassword": "Password@1!",
-  "toUpdate": "email",
-  "email": "test1@email.com"
-}
-```
+  ```json
+  {
+    "currentPassword": "Password@1!",
+    "toUpdate": "email",
+    "email": "test1@email.com"
+  }
+  ```
 
 **VALUE**
 

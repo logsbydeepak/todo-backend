@@ -2,22 +2,20 @@
 
 - **URL**
 
-`POST /v1/todo`
+  `POST /v1/todo` <br/>
+  `AUTHENTICATION`
 
-`AUTHENTICATION`
-
-- **URL Params**
-
+- **URL Params** <br/>
   None
 
 - **Data Params**
 
-```json
-{
-  "task": "task 1",
-  "status": true
-}
-```
+  ```json
+  {
+    "task": "task 1",
+    "status": true
+  }
+  ```
 
 **Value:**
 

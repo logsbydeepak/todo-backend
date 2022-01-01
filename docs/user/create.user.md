@@ -2,7 +2,7 @@
 
 - **URL**
 
-`POST /v1/user`
+  `POST /v1/user`
 
 - **URL Params**
 
@@ -10,13 +10,13 @@
 
 - **Data Params**
 
-```json
-{
-  "name": "test user",
-  "email": "test@email.com",
-  "password": "Password@1!"
-}
-```
+  ```json
+  {
+    "name": "test user",
+    "email": "test@email.com",
+    "password": "Password@1!"
+  }
+  ```
 
 - **Success Response:**
 

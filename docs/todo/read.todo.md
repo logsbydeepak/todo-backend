@@ -2,7 +2,7 @@
 
 - **URL**
 
-`DELETE /v1/todo`
+`GET /v1/todo`
 
 `AUTHENTICATION`
 
@@ -10,18 +10,17 @@
 
   **Required:**
 
-  `page="1"`
+  `page="1"` <br/>
   `status="false"`
 
   **Value:**
 
-  **page:** `integer value` or `0` to get all the todo
-
+  **page:** `integer value` or `0` to get all the todo <br/>
   **status:** `true` or `false`
 
 - **Data Params**
 
-None
+  None
 
 - **Success Response:**
 

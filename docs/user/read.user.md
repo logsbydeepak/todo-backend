@@ -2,17 +2,14 @@
 
 - **URL**
 
-`GET /v1/user`
+  `GET /v1/user` <br/>
+  `AUTHENTICATION`
 
-`AUTHENTICATION`
-
-- **URL Params**
-
+- **URL Params** <br/>
   None
 
-- **Data Params**
-
-None
+- **Data Params** <br/>
+  None
 
 - **Success Response:**
 

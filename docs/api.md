@@ -12,24 +12,28 @@
 }
 ```
 
-All error response data [**`error.data.json`**](/src/response/data/error.data.json)
+### Success Response Structure
+
+```json
+{
+  "data": {
+    ...
+  }
+}
+```
+
+All error response data [**error.data.json**](/src/response/data/error.data.json)
 
 ## User Router
 
-[**POST USER**](/docs/user/create.user.md)
-
-[**READ USER**](/docs/user/read.user.md)
-
-[**UPDATE USER**](/docs/user/update.user.md)
-
-[**DELETE USER**](/docs/user/delete.user.md)
+[**CREATE USER**](/docs/user/create.user.md)<br/>
+[**READ USER**](/docs/user/read.user.md)<br/>
+[**UPDATE USER**](/docs/user/update.user.md)<br/>
+[**DELETE USER**](/docs/user/delete.user.md)<br/>
 
 ## Todo Router
 
-[**POST TODO**](/docs/todo/create.todo.md)
-
-[**READ TODO**](/docs/todo/read.todo.md)
-
-[**UPDATE TODO**](/docs/todo/update.todo.md)
-
-[**DELETE TODO**](/docs/todo/delete.todo.md)
+[**CREATE TODO**](/docs/todo/create.todo.md) <br/>
+[**READ TODO**](/docs/todo/read.todo.md) <br/>
+[**UPDATE TODO**](/docs/todo/update.todo.md) <br/>
+[**DELETE TODO**](/docs/todo/delete.todo.md) <br/>

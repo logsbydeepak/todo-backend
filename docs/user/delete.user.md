@@ -2,21 +2,19 @@
 
 - **URL**
 
-`DELETE /v1/user`
-
-`AUTHENTICATION`
+  `DELETE /v1/user`<br/>
+  `AUTHENTICATION`
 
 - **URL Params**
 
-```json
-{
-  "currentPassword": "Password@1!"
-}
-```
+  ```json
+  {
+    "currentPassword": "Password@1!"
+  }
+  ```
 
-- **Data Params**
-
-None
+- **Data Params** <br/>
+  None
 
 - **Success Response:**
 
