@@ -1,6 +1,4 @@
-# Create User
-
-Create new user
+# CREATE USER
 
 - **URL**
 

@@ -1,18 +1,16 @@
-# DELETE USER
+# DELETE TODO
 
 - **URL**
 
-`DELETE /v1/user`
+`DELETE /v1/todo`
 
 `AUTHENTICATION`
 
 - **URL Params**
 
-```json
-{
-  "currentPassword": "Password@1!"
-}
-```
+  **Required:**
+
+  `id="61c9d2c3df3feac98cf40180"`
 
 - **Data Params**
 
@@ -22,4 +20,4 @@ None
 
   - **Code:** 204
 
-    **Content:** None
+    **Content:**: None

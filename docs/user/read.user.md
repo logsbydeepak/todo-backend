@@ -1,6 +1,4 @@
-# Read User
-
-Get user information
+# READ USER
 
 - **URL**
 

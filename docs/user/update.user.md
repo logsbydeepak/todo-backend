@@ -1,6 +1,4 @@
-# Update User
-
-Update user information
+# UPDATE USER
 
 - **URL**
 
@@ -16,11 +14,15 @@ Update user information
 
 ```json
 {
-    "currentPassword": "Password@1!"
-    "toUpdate": "email",
-    "email": "test1@email.com",
+  "currentPassword": "Password@1!",
+  "toUpdate": "email",
+  "email": "test1@email.com"
 }
 ```
+
+**VALUE**
+
+**toUpdate:** `name` or `email` or `password`
 
 - **Success Response:**
 
