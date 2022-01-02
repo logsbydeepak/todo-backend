@@ -18,14 +18,12 @@
   }
   ```
 
-**VALUE**
-
-**toUpdate:** `name` or `email` or `password`
+  **Value: ** <br/>
+  **toUpdate:** `name` or `email` or `password`
 
 - **Success Response:**
 
-  - **Code:** 200
-
+  - **Code:** 200 <br/>
     **Content:**
 
     ```json

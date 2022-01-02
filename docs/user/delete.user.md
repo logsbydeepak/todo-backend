@@ -18,6 +18,5 @@
 
 - **Success Response:**
 
-  - **Code:** 204
-
+  - **Code:** 204 <br/>
     **Content:** None

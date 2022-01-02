@@ -17,14 +17,12 @@
   }
   ```
 
-**Value:**
-
-**status:** `true` or `false`
+  **Value:**<br/>
+  **status:** `true` or `false`
 
 - **Success Response:**
 
-  - **Code:** 201
-
+  - **Code:** 201 <br/>
     **Content:**
 
     ```json

@@ -13,8 +13,7 @@
 
 - **Success Response:**
 
-  - **Code:** 200
-
+  - **Code:** 200 <br/>
     **Content:**
 
     ```json

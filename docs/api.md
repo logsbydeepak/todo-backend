@@ -17,7 +17,7 @@
 ```json
 {
   "data": {
-    # response data
+    ...
   }
 }
 ```

@@ -7,7 +7,7 @@
 
 - **URL Params**
 
-  **Required:**
+  **Required:** <br/>
   `id="61c9d2c3df3feac98cf40180"`
 
 - **Data Params** <br/>
@@ -15,6 +15,5 @@
 
 - **Success Response:**
 
-  - **Code:** 204
-
+  - **Code:** 204 <br/>
     **Content:**: None

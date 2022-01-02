@@ -19,8 +19,7 @@
 
 - **Success Response:**
 
-  - **Code:** 201
-
+  - **Code:** 201 <br/>
     **Content:**
 
     ```json

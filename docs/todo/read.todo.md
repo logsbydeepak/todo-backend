@@ -2,30 +2,25 @@
 
 - **URL**
 
-`GET /v1/todo`
-
-`AUTHENTICATION`
+  `GET /v1/todo` <br/>
+  `AUTHENTICATION`
 
 - **URL Params**
 
-  **Required:**
-
+  **Required:** <br/>
   `page="1"` <br/>
   `status="false"`
 
-  **Value:**
-
+  **Value:** <br/>
   **page:** `integer value` or `0` to get all the todo <br/>
   **status:** `true` or `false`
 
-- **Data Params**
-
+- **Data Params** <br/>
   None
 
 - **Success Response:**
 
-  - **Code:** 200
-
+  - **Code:** 200 <br/>
     **Content:**:
 
     ```json
