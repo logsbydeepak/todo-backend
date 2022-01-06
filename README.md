@@ -57,19 +57,13 @@ npm run dev
 
 step 1 is `optional`
 
-1. build build compose
+1. run docker compose
 
 ```bash
-docker-compose -f docker/dev/docker-compose.yml build
+docker-compose -p todo_dev_backend -f docker/dev/docker-compose.yml up -d
 ```
 
-2. run docker compose
-
-```bash
-docker-compose -f docker/dev/docker-compose.yml up -d
-```
-
-3. attach to container
+2. attach to container
 
 ```bash
 docker exec -it todo_dev_backend_api /bin/sh
