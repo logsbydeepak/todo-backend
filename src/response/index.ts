@@ -25,6 +25,8 @@ export const ErrorResponse = (
   const responseMessage = responseData.response.find(
     (data) => data.messageCode === messageCode
   )!;
+
+  res.statusCode = responseMessage.statusCode;
   res.send({
     error: {
       title: responseData.messageType,
