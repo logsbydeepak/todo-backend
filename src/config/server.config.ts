@@ -10,7 +10,7 @@ import { serverErrorHandler } from "@helper/server";
 checkEnv();
 export const server: Express = express();
 
-server.use(cors());
+server.use(cors({ origin: true, credentials: true }));
 server.use(helmet());
 server.use(json());
 server.use(cookieParser());
