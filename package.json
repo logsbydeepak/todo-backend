@@ -7,7 +7,7 @@
     "dev": "cross-env NODE_ENV=dev run-s clean dev:start",
     "dev:start": "tsnd -r tsconfig-paths/register --rs --cache-directory \"./dist\" -- src/server.ts",
     "format": "prettier --write .",
-    "format:watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
+    "format:watch": "onchange \"**/*\" --exclude-path .prettierignore -- prettier --write --ignore-unknown {{changed}}",
     "build": "run-s clean build:start",
     "build:start": "tsc",
     "clean": "rimraf dist",
