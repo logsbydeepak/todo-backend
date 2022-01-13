@@ -48,7 +48,6 @@ export const updateSession = async (
       "TP",
       14
     );
-
     await dbTokenExist({ accessToken }, "TP", 15);
     await dbTokenExist({ refreshToken }, "TP", 11);
 
@@ -57,12 +56,13 @@ export const updateSession = async (
       "TP",
       15
     );
+
     const refreshTokenDecryption: string = generateDecryption(
       refreshToken,
       "TP",
       11
     );
-    1;
+
     const accessTokenData: AccessTokenValidatorType = accessTokenValidator(
       accessTokenDecryption
     );
@@ -73,6 +73,7 @@ export const updateSession = async (
     if (accessTokenData !== "TokenExpiredError") {
       return ErrorResponse(res, "TP", 12);
     }
+
     if (refreshTokenData === "TokenExpiredError") {
       removeAccessTokenCookie(res);
       removeRefreshTokenCookie(res);
@@ -87,7 +88,7 @@ export const updateSession = async (
       .unix();
 
     if (
-      refreshTokenData.exp >= timeBeforeExpire &&
+      refreshTokenData.exp <= timeBeforeExpire &&
       refreshTokenData.refreshTokenRefreshCount < 4
     ) {
       await TokenModel.deleteOne({ accessToken });
@@ -101,6 +102,7 @@ export const updateSession = async (
       setAccessTokenCookie(res, newDbToken.accessToken);
       setRefreshTokenCookie(res, newDbToken.refreshToken);
       res.statusCode = 204;
+      res.send();
       return;
     }
 
@@ -121,6 +123,7 @@ export const updateSession = async (
 
       setAccessTokenCookie(res, accessTokenEncrypt);
       res.statusCode = 204;
+      res.send();
       return;
     }
 

@@ -5,7 +5,7 @@ import { AccessTokenValidatorType, RefreshTokenValidatorType } from "@types";
 
 export const accessTokenGenerator = (id: string): string =>
   sign({ id }, ACCESS_TOKEN_SECRET as string, {
-    expiresIn: "15m",
+    expiresIn: "1m",
   });
 
 export const refreshTokenGenerator = (
@@ -13,7 +13,7 @@ export const refreshTokenGenerator = (
   refreshTokenRefreshCount: number
 ): string =>
   sign({ id, refreshTokenRefreshCount }, REFRESH_TOKEN_SECRET as string, {
-    expiresIn: "10000",
+    expiresIn: "30d",
   });
 
 export const accessTokenValidator = (
