@@ -23,8 +23,8 @@ export const createSession = async (
     const password: string = validatePassword(bodyData.password);
 
     const dbUser: UserModelType = await dbReadUserByEmail(email);
-    await validateHashAndSalt(password, dbUser.password as string);
 
+    await validateHashAndSalt(password, dbUser.password as string);
     const dbUserId: string = dbUser._id;
     const newToken: TokenModelType = dbCreateToken(dbUserId, 1);
     await newToken.save();

@@ -43,8 +43,6 @@ export const SuccessResponse = (
 ) => {
   res.statusCode = status;
   res.send({
-    data: {
-      ...data,
-    },
+    data,
   });
 };
