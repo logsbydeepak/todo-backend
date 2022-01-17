@@ -13,19 +13,27 @@ export const readTodo = async (
   try {
     const userId: string = res.locals.userId;
     const status: string = validateEmpty(req.query.status as string, "QP", 12);
-    const page: string = validateEmpty(req.query.page as string, "QP", 13);
+    const skip: string = validateEmpty(req.query.skip as string, "QP", 13);
+    const limit: string = validateEmpty(req.query.limit as string, "QP", 16);
 
-    const pageInt: number = parseInt(page);
+    const skipInt: number = parseInt(skip);
+    const limitInt: number = parseInt(limit);
 
-    if (isNaN(pageInt)) {
+    if (isNaN(skipInt)) {
       return ErrorResponse(res, "QP", 14);
+    }
+
+    if (isNaN(limitInt)) {
+      return ErrorResponse(res, "QP", 17);
     }
 
     if (status === "true" || status === "false" || status === "all") {
       const dbTodo: TodoModelType[] = await TodoModel.find({
         owner: userId,
         status: status === "all" ? [true, false] : status,
-      }).limit(pageInt);
+      })
+        .skip(skipInt)
+        .limit(limitInt);
 
       dbTodo.forEach(
         (element: { owner: string | undefined; __v: string | undefined }) => {

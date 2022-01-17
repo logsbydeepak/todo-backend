@@ -165,17 +165,27 @@
       },
       {
         "messageCode": 13,
-        "message": "page is required",
+        "message": "skip is required",
         "statusCode": 400
       },
       {
         "messageCode": 14,
-        "message": "invalid page",
+        "message": "invalid skip",
         "statusCode": 400
       },
       {
         "messageCode": 15,
         "message": "invalid status",
+        "statusCode": 400
+      },
+      {
+        "messageCode": 16,
+        "message": "limit is required",
+        "statusCode": 400
+      },
+      {
+        "messageCode": 17,
+        "message": "invalid limit",
         "statusCode": 400
       }
     ]
