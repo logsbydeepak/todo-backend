@@ -50,6 +50,7 @@ export interface TodoModelType extends Document {
   task: string;
   status: boolean;
   __v: string;
+  updatedAt: string;
 }
 
 export interface CreateUserBodyType extends Object, Array<string> {

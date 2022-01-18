@@ -32,13 +32,19 @@ export const readTodo = async (
         owner: userId,
         status: status === "all" ? [true, false] : status,
       })
+        .sort("-updatedAt")
         .skip(skipInt)
         .limit(limitInt);
 
       dbTodo.forEach(
-        (element: { owner: string | undefined; __v: string | undefined }) => {
+        (element: {
+          owner: string | undefined;
+          __v: string | undefined;
+          updatedAt: string | undefined;
+        }) => {
           element.owner = undefined;
           element.__v = undefined;
+          element.updatedAt = undefined;
         }
       );
 
