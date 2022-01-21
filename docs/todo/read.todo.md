@@ -8,11 +8,13 @@
 - **URL Params**
 
   **Required:** <br/>
-  `page="1"` <br/>
+  `skip="0"` <br/>
+  `limit="2"` <br/>
   `status="false"`
 
   **Value:** <br/>
-  **page:** `integer value` or `0` to get all the todo <br/>
+  **skip:** `integer value` <br/>
+  **limit:** `integer value` or `0` to get all the todo <br/>
   **status:** `true` or `false`
 
 - **Data Params** <br/>
