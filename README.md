@@ -34,8 +34,8 @@ ENCRYPT_SECRET
 
 ```
 API_PORT=4000
-DB_URL=mongodb://localhost:27017/todo
-DB_LOG_URL=mongodb://localhost:27017/todo-logs
+DB_URL=mongodb://mongo_container:27017/todo
+DB_LOG_URL=mongodb://mongo_container:27017/todo-logs
 ACCESS_TOKEN_SECRET=B9xSfjmzuChskF8RkzXpJQXkWKCwvCTGB2atamCfNKxK2gcbF
 REFRESH_TOKEN_SECRET=B9xSfjmzuChskF8RkzXpJQXkWKCwvCTGB2atamCfNKxK2gcbF
 ENCRYPT_SECRET=B9xSfjmzuChskF8RkzXpJQXkWKCwvCTGB2atamCfNKxK2gcbF
