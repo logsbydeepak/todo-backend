@@ -1,6 +1,8 @@
 import { NODE_ENV } from "@config/env";
 import { Response } from "express";
 
+const hour = 3600000;
+
 export const setAccessTokenCookie = (
   res: Response,
   accessToken: string
@@ -10,6 +12,7 @@ export const setAccessTokenCookie = (
     httpOnly: true,
     secure: NODE_ENV === "prod",
     sameSite: "strict",
+    maxAge: 90 * hour,
   });
 
 export const setRefreshTokenCookie = (
@@ -21,6 +24,7 @@ export const setRefreshTokenCookie = (
     httpOnly: true,
     secure: NODE_ENV === "prod",
     sameSite: "strict",
+    maxAge: 90 * hour,
   });
 
 export const removeAccessTokenCookie = (res: Response): Response =>

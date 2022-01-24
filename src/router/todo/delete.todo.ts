@@ -19,6 +19,7 @@ export const deleteTodo = async (
     await TodoModel.findByIdAndDelete(todoId);
 
     res.statusCode = 204;
+    res.send();
     return;
   } catch (error: any) {
     return next(error);
