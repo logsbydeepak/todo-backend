@@ -28,7 +28,7 @@ export const deleteSession = async (
     removeRefreshTokenCookie(res);
 
     res.statusCode = 204;
-
+    res.send();
     return;
   } catch (error: any) {
     return next(error);

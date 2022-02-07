@@ -3,6 +3,15 @@ import { Response } from "express";
 
 const hour = 3600000;
 
+export const setAuthCookie = (res: Response): Response =>
+  res.cookie("auth", "true", {
+    path: "/",
+    httpOnly: true,
+    secure: NODE_ENV === "prod",
+    sameSite: "strict",
+    maxAge: 90 * hour,
+  });
+
 export const setAccessTokenCookie = (
   res: Response,
   accessToken: string
