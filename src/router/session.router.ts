@@ -4,10 +4,11 @@ import { createSession } from "./session/create.session";
 import { deleteSession } from "./session/delete.session";
 import { updateSession } from "./session/update.session";
 
-import { checkAccessToken } from "@middleware";
+import { checkAccessToken, checkPassword } from "@middleware";
 
 export const sessionRouter: Router = Router();
 
 sessionRouter.post("/", createSession);
 sessionRouter.put("/refresh", updateSession);
 sessionRouter.delete("/", checkAccessToken, deleteSession);
+sessionRouter.delete("/all", checkAccessToken, checkPassword, deleteSession);
