@@ -1,53 +1,42 @@
 import { NODE_ENV } from "@config/env";
-import { Response } from "express";
+import { CookieOptions, Response } from "express";
 
-const hour = 3600000;
+const defaultConfig: CookieOptions = {
+  httpOnly: true,
+  maxAge: 3600000 * 90,
+  secure: NODE_ENV === "prod",
+  sameSite: NODE_ENV === "prod" ? "none" : false,
+};
 
 export const setAuthCookie = (res: Response): Response =>
   res.cookie("auth", "true", {
+    ...defaultConfig,
     path: "/",
-    httpOnly: true,
-    secure: NODE_ENV === "prod",
-    sameSite: "strict",
-    maxAge: 90 * hour,
   });
 
 export const setAccessTokenCookie = (
   res: Response,
   accessToken: string
 ): Response =>
-  res.cookie("accessToken", accessToken, {
-    path: "/v1",
-    httpOnly: true,
-    secure: NODE_ENV === "prod",
-    sameSite: "none",
-    maxAge: 90 * hour,
-  });
+  res.cookie("accessToken", accessToken, { ...defaultConfig, path: "/v1" });
 
 export const setRefreshTokenCookie = (
   res: Response,
   refreshToken: string
 ): Response =>
   res.cookie("refreshToken", refreshToken, {
+    ...defaultConfig,
     path: "/v1/session/refresh",
-    httpOnly: true,
-    secure: NODE_ENV === "prod",
-    maxAge: 90 * hour,
-    sameSite: "none",
   });
 
 export const removeAccessTokenCookie = (res: Response): Response =>
   res.clearCookie("accessToken", {
+    ...defaultConfig,
     path: "/v1",
-    httpOnly: true,
-    secure: NODE_ENV === "prod",
-    sameSite: "none",
   });
 
 export const removeRefreshTokenCookie = (res: Response): Response =>
   res.clearCookie("refreshToken", {
+    ...defaultConfig,
     path: "/v1/session/refresh",
-    httpOnly: true,
-    secure: NODE_ENV === "prod",
-    sameSite: "none",
   });
