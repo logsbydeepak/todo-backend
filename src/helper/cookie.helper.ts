@@ -20,6 +20,7 @@ export const setAccessTokenCookie = (
     path: "/v1",
     httpOnly: true,
     secure: NODE_ENV === "prod",
+    sameSite: "none",
     maxAge: 90 * hour,
   });
 
@@ -32,6 +33,7 @@ export const setRefreshTokenCookie = (
     httpOnly: true,
     secure: NODE_ENV === "prod",
     maxAge: 90 * hour,
+    sameSite: "none",
   });
 
 export const removeAccessTokenCookie = (res: Response): Response =>
@@ -39,6 +41,7 @@ export const removeAccessTokenCookie = (res: Response): Response =>
     path: "/v1",
     httpOnly: true,
     secure: NODE_ENV === "prod",
+    sameSite: "none",
   });
 
 export const removeRefreshTokenCookie = (res: Response): Response =>
@@ -46,4 +49,5 @@ export const removeRefreshTokenCookie = (res: Response): Response =>
     path: "/v1/session/refresh",
     httpOnly: true,
     secure: NODE_ENV === "prod",
+    sameSite: "none",
   });
