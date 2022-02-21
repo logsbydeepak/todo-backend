@@ -22,7 +22,7 @@ git clone https://github.com/logsbydeepak/todo-backend
 1. create `dev.env` file with the properties as follows
 
 ```
-API_PORT
+PORT
 DB_URL
 DB_LOG_URL
 ACCESS_TOKEN_SECRET
@@ -33,7 +33,7 @@ ENCRYPT_SECRET
 `sample value`
 
 ```
-API_PORT=4000
+PORT=4000
 DB_URL=mongodb://mongo_container:27017/todo
 DB_LOG_URL=mongodb://mongo_container:27017/todo-logs
 ACCESS_TOKEN_SECRET=B9xSfjmzuChskF8RkzXpJQXkWKCwvCTGB2atamCfNKxK2gcbF

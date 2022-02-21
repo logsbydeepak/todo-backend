@@ -10,7 +10,7 @@ if (NODE_ENV !== "prod" + "../../") {
   config({ path: `${rootPath}/${NODE_ENV}.env` });
 }
 
-export const API_PORT: string | undefined = env.API_PORT;
+export const PORT: string | undefined = env.PORT;
 export const DB_URL: string | undefined = env.DB_URL;
 export const DB_LOG_URL: string | undefined = env.DB_LOG_URL;
 export const ACCESS_TOKEN_SECRET: string | undefined = env.ACCESS_TOKEN_SECRET;
