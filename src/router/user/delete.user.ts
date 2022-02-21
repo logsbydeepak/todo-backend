@@ -23,7 +23,7 @@ export const deleteUser = async (
     removeRefreshTokenCookie(res);
 
     res.statusCode = 204;
-    res.send()
+    res.send();
     return;
   } catch (error: any) {
     return next(error);
