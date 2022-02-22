@@ -1,5 +1,5 @@
 {
-  "name": "Todo Backendtend Node",
+  "name": "Todo Backend Node",
   "dockerComposeFile": "../docker/dev/docker-compose.yml",
   "service": "todo_backend",
   "workspaceFolder": "/home/node/todo-backend",
