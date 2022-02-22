@@ -3,7 +3,7 @@ import { CookieOptions, Response } from "express";
 
 const defaultConfig: CookieOptions = {
   httpOnly: true,
-  maxAge: 3600000 * 90,
+  maxAge: 86400000 * 90,
   secure: NODE_ENV === "prod",
   sameSite: NODE_ENV === "prod" ? "none" : false,
 };
