@@ -40,7 +40,7 @@ export const createUser = async (
 
     setAccessTokenCookie(res, newToken.accessToken);
     setRefreshTokenCookie(res, newToken.refreshToken);
-    // setAuthCookie(res);
+    setAuthCookie(res);
 
     return SuccessResponse(res, 201, {
       name: newUser.name,

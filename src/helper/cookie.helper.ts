@@ -12,6 +12,7 @@ export const setAuthCookie = (res: Response): Response =>
   res.cookie("auth", "true", {
     ...defaultConfig,
     path: "/",
+    httpOnly: false,
   });
 
 export const setAccessTokenCookie = (
@@ -27,6 +28,13 @@ export const setRefreshTokenCookie = (
   res.cookie("refreshToken", refreshToken, {
     ...defaultConfig,
     path: "/v1/session/refresh",
+  });
+
+export const removeAuthCookie = (res: Response): Response =>
+  res.clearCookie("auth", {
+    ...defaultConfig,
+    path: "/",
+    httpOnly: false,
   });
 
 export const removeAccessTokenCookie = (res: Response): Response =>

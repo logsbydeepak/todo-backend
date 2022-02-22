@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 import {
   removeAccessTokenCookie,
+  removeAuthCookie,
   removeRefreshTokenCookie,
 } from "@helper/cookie";
 
@@ -20,6 +21,7 @@ export const deleteSession = async (
 
     removeAccessTokenCookie(res);
     removeRefreshTokenCookie(res);
+    removeAuthCookie(res);
 
     res.statusCode = 204;
     res.send();

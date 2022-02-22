@@ -35,7 +35,7 @@ export const createSession = async (
 
     setAccessTokenCookie(res, newToken.accessToken);
     setRefreshTokenCookie(res, newToken.refreshToken);
-    // setAuthCookie(res);
+    setAuthCookie(res);
 
     return SuccessResponse(res, 201, {
       name: dbUser.name,
