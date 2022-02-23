@@ -13,7 +13,6 @@ import { dbCreateToken, dbEmailExist } from "@helper/db";
 import { CreateUserBodyType, UserModelType, TokenModelType } from "@types";
 import {
   setAccessTokenCookie,
-  setAuthCookie,
   setRefreshTokenCookie,
 } from "@helper/cookie";
 
@@ -40,7 +39,6 @@ export const createUser = async (
 
     setAccessTokenCookie(res, newToken.accessToken);
     setRefreshTokenCookie(res, newToken.refreshToken);
-    setAuthCookie(res);
 
     return SuccessResponse(res, 201, {
       name: newUser.name,
