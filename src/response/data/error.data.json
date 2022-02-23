@@ -39,7 +39,7 @@
       },
       {
         "messageCode": 17,
-        "message": "password must be a minimum of 8 characters long and have an of 1 lower case, upper case, and symbol",
+        "message": "password must be a minimum of 8 characters long and have an of 1 lower case, upper case, symbol, number",
         "statusCode": 400
       },
       {
