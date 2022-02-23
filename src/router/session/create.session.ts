@@ -10,11 +10,7 @@ import { SuccessResponse } from "@response";
 import { validateHashAndSalt } from "@helper/security";
 import { dbCreateToken, dbReadUserByEmail } from "@helper/db";
 import { CreateUserBodyType, TokenModelType, UserModelType } from "@types";
-import {
-  setAccessTokenCookie,
-  setAuthCookie,
-  setRefreshTokenCookie,
-} from "@helper/cookie";
+import { setAccessTokenCookie, setRefreshTokenCookie } from "@helper/cookie";
 
 export const createSession = async (
   req: Request,
@@ -35,7 +31,6 @@ export const createSession = async (
 
     setAccessTokenCookie(res, newToken.accessToken);
     setRefreshTokenCookie(res, newToken.refreshToken);
-    setAuthCookie(res);
 
     return SuccessResponse(res, 201, {
       name: dbUser.name,

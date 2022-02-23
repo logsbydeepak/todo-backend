@@ -10,14 +10,6 @@ const defaultConfig: CookieOptions = {
   sameSite: NODE_ENV === "prod" ? "none" : false,
 };
 
-export const setAuthCookie = (res: Response): Response =>
-  res.cookie("auth", "true", {
-    ...defaultConfig,
-    path: "/",
-    httpOnly: false,
-    domain: AUTH_COOKIE_DOMAIN,
-  });
-
 export const setAccessTokenCookie = (
   res: Response,
   accessToken: string
@@ -31,14 +23,6 @@ export const setRefreshTokenCookie = (
   res.cookie("refreshToken", refreshToken, {
     ...defaultConfig,
     path: "/v1/session/refresh",
-  });
-
-export const removeAuthCookie = (res: Response): Response =>
-  res.clearCookie("auth", {
-    ...defaultConfig,
-    path: "/",
-    httpOnly: false,
-    domain: AUTH_COOKIE_DOMAIN,
   });
 
 export const removeAccessTokenCookie = (res: Response): Response =>
