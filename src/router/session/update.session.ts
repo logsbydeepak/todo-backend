@@ -14,11 +14,7 @@ import {
   setRefreshTokenCookie,
 } from "@helper/cookie";
 
-import {
-  AccessTokenValidatorType,
-  RefreshTokenValidatorType,
-  TokenModelType,
-} from "@types";
+import { TokenModelType } from "@types";
 
 import {
   dbCreateToken,
@@ -63,12 +59,16 @@ export const updateSession = async (
       11
     );
 
-    const accessTokenData: AccessTokenValidatorType = accessTokenValidator(
-      accessTokenDecryption
-    );
-    const refreshTokenData: RefreshTokenValidatorType = refreshTokenValidator(
-      refreshTokenDecryption
-    );
+    const accessTokenData = accessTokenValidator(accessTokenDecryption);
+    const refreshTokenData = refreshTokenValidator(refreshTokenDecryption);
+
+    if (accessTokenData === null) {
+      return ErrorResponse(res, "TP", 15);
+    }
+
+    if (refreshTokenData === null) {
+      return ErrorResponse(res, "TP", 11);
+    }
 
     if (accessTokenData !== "TokenExpiredError") {
       return ErrorResponse(res, "TP", 12);
@@ -83,12 +83,12 @@ export const updateSession = async (
     await dbUserExist(refreshTokenData.id);
 
     const timeBeforeExpire = moment
-      .unix(refreshTokenData.exp)
+      .unix(refreshTokenData.exp as number)
       .subtract(1, "day")
       .unix();
 
     if (
-      refreshTokenData.exp <= timeBeforeExpire &&
+      (refreshTokenData.exp as number) <= timeBeforeExpire &&
       refreshTokenData.refreshTokenRefreshCount < 4
     ) {
       await TokenModel.deleteOne({ accessToken });

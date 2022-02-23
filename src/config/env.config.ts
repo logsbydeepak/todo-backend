@@ -10,11 +10,13 @@ if (NODE_ENV !== "prod" + "../../") {
   config({ path: `${rootPath}/${NODE_ENV}.env` });
 }
 
-export const PORT: string | undefined = env.PORT;
-export const DB_URL: string | undefined = env.DB_URL;
-export const DB_LOG_URL: string | undefined = env.DB_LOG_URL;
-export const ACCESS_TOKEN_SECRET: string | undefined = env.ACCESS_TOKEN_SECRET;
-export const REFRESH_TOKEN_SECRET: string | undefined =
-  env.REFRESH_TOKEN_SECRET;
-export const ENCRYPT_SECRET: string | undefined = env.ENCRYPT_SECRET;
-export const ALLOW_ORIGIN: string | undefined = env.ALLOW_ORIGIN;
+// export const PORT = env.PORT as string;
+export const {
+  PORT,
+  DB_URL,
+  DB_LOG_URL,
+  ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET,
+  ENCRYPT_SECRET,
+  ALLOW_ORIGIN,
+} = env;

@@ -1,13 +1,6 @@
-import { JwtPayload } from "jsonwebtoken";
+import { JwtPayload, TokenExpiredError } from "jsonwebtoken";
 import { ErrorRequestHandler } from "express";
-import { Schema, Document, ObjectId } from "mongoose";
-
-export type QueryType =
-  | string
-  | QueryString.ParsedQs
-  | string[]
-  | QueryString.ParsedQs[]
-  | undefined;
+import { Document } from "mongoose";
 
 interface AccessPayloadId extends JwtPayload {
   id: string;
@@ -17,18 +10,6 @@ interface RefreshPayloadId extends JwtPayload {
   id: string;
   refreshTokenRefreshCount: number;
 }
-
-export type RefreshTokenValidatorType =
-  | RefreshPayloadId
-  | TokenExpiredError
-  | null
-  | "TokenExpiredError";
-
-export type AccessTokenValidatorType =
-  | AccessPayloadId
-  | TokenExpiredError
-  | null
-  | "TokenExpiredError";
 
 export interface UserModelType extends Document {
   _id: string;

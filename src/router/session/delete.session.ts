@@ -5,7 +5,6 @@ import {
   removeRefreshTokenCookie,
 } from "@helper/cookie";
 
-import { QueryType } from "@types";
 import { TokenModel } from "@model";
 
 export const deleteSession = async (
