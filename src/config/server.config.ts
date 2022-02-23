@@ -13,7 +13,7 @@ export const server: Express = express();
 
 server.use(
   cors({
-    origin: ALLOW_ORIGIN?.split(" "),
+    origin: ALLOW_ORIGIN,
     credentials: true,
     methods: ["POST", "GET", "PUT", "DELETE"],
   })

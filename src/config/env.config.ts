@@ -18,3 +18,4 @@ export const REFRESH_TOKEN_SECRET: string | undefined =
   env.REFRESH_TOKEN_SECRET;
 export const ENCRYPT_SECRET: string | undefined = env.ENCRYPT_SECRET;
 export const ALLOW_ORIGIN: string | undefined = env.ALLOW_ORIGIN;
+export const AUTH_COOKIE_DOMAIN: string | undefined = env.AUTH_COOKIE_DOMAIN;

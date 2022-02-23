@@ -1,6 +1,8 @@
 import { NODE_ENV } from "@config/env";
 import { CookieOptions, Response } from "express";
 
+import { AUTH_COOKIE_DOMAIN } from "@config/env";
+
 const defaultConfig: CookieOptions = {
   httpOnly: true,
   maxAge: 86400000 * 90,
@@ -13,6 +15,7 @@ export const setAuthCookie = (res: Response): Response =>
     ...defaultConfig,
     path: "/",
     httpOnly: false,
+    domain: AUTH_COOKIE_DOMAIN,
   });
 
 export const setAccessTokenCookie = (
@@ -35,6 +38,7 @@ export const removeAuthCookie = (res: Response): Response =>
     ...defaultConfig,
     path: "/",
     httpOnly: false,
+    domain: AUTH_COOKIE_DOMAIN,
   });
 
 export const removeAccessTokenCookie = (res: Response): Response =>
