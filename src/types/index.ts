@@ -1,15 +1,5 @@
-import { JwtPayload, TokenExpiredError } from "jsonwebtoken";
 import { ErrorRequestHandler } from "express";
 import { Document } from "mongoose";
-
-interface AccessPayloadId extends JwtPayload {
-  id: string;
-}
-
-interface RefreshPayloadId extends JwtPayload {
-  id: string;
-  refreshTokenRefreshCount: number;
-}
 
 export interface UserModelType extends Document {
   _id: string;
