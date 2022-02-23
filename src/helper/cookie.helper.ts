@@ -1,8 +1,6 @@
 import { NODE_ENV } from "@config/env";
 import { CookieOptions, Response } from "express";
 
-import { AUTH_COOKIE_DOMAIN } from "@config/env";
-
 const defaultConfig: CookieOptions = {
   httpOnly: true,
   maxAge: 86400000 * 90,
