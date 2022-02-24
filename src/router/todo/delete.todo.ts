@@ -4,11 +4,7 @@ import { TodoModel } from "@model";
 import { dbReadTodo } from "@helper/db";
 import { validateEmpty } from "@helper/validator";
 
-const deleteTodo = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
+const deleteTodo = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = res.locals;
     const todoIdQuery: string = req.query.id as string;
@@ -20,9 +16,8 @@ const deleteTodo = async (
 
     res.statusCode = 204;
     res.send();
-    return;
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
 

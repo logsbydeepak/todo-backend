@@ -18,26 +18,27 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
     const toUpdate: string = validateEmpty(bodyData.toUpdate, "BP", 18);
 
     const dbUser: UserModelType = await dbReadUserById(userId);
+    let toUpdateValue: string;
 
     switch (toUpdate) {
       case "name":
-        dbUser.name = validateEmpty(bodyData.name, "BP", 13);
+        toUpdateValue = validateEmpty(bodyData.name, "BP", 13);
         break;
 
       case "email":
-        const email: string = validateEmail(bodyData.email);
-        await dbEmailExist(validateEmail(email));
-        dbUser.email = email;
+        toUpdateValue = validateEmail(bodyData.email);
+        await dbEmailExist(validateEmail(toUpdateValue));
         break;
 
       case "password":
-        dbUser.password = validatePassword(bodyData.password);
+        toUpdateValue = validatePassword(bodyData.password);
         break;
 
       default:
         return ErrorResponse(res, "BP", 19);
     }
 
+    dbUser[toUpdate] = toUpdateValue;
     await dbUser.save();
 
     return SuccessResponse(res, 200, {

@@ -7,11 +7,7 @@ import {
 
 import { TodoModel, TokenModel, UserModel } from "@model";
 
-const deleteUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
+const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id: string = res.locals.userId;
 
@@ -24,9 +20,8 @@ const deleteUser = async (
 
     res.statusCode = 204;
     res.send();
-    return;
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
 

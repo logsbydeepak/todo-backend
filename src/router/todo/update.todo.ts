@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { SuccessResponse } from "@response";
 import { validateBody, validateEmpty, validateTask } from "@helper/validator";
 import { TodoModelType, UpdateTodoBodyType } from "@types";
-import { dbReadTodo, dbTokenExist } from "@helper/db";
+import { dbReadTodo } from "@helper/db";
 
 const updateTodo = async (
   req: Request,
@@ -24,6 +24,7 @@ const updateTodo = async (
 
     await dbTodo.save();
 
+    /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
     return SuccessResponse(res, 200, {
       id: dbTodo._id,
       task: dbTodo.task,

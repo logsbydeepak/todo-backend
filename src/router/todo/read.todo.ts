@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { TodoModel } from "@model";
-import { TodoModelType, TokenModelType } from "@types";
+import { TodoModelType } from "@types";
 import { validateEmpty } from "@helper/validator";
 import { ErrorResponse, SuccessResponse } from "@response";
 
@@ -16,14 +16,14 @@ const readTodo = async (
     const skip: string = validateEmpty(req.query.skip as string, "QP", 13);
     const limit: string = validateEmpty(req.query.limit as string, "QP", 16);
 
-    const skipInt: number = parseInt(skip);
-    const limitInt: number = parseInt(limit);
+    const skipInt: number = parseInt(skip, 10);
+    const limitInt: number = parseInt(limit, 10);
 
-    if (isNaN(skipInt)) {
+    if (Number.isNaN(skipInt)) {
       return ErrorResponse(res, "QP", 14);
     }
 
-    if (isNaN(limitInt)) {
+    if (Number.isNaN(limitInt)) {
       return ErrorResponse(res, "QP", 17);
     }
 
@@ -36,17 +36,13 @@ const readTodo = async (
         .skip(skipInt)
         .limit(limitInt);
 
-      dbTodo.forEach(
-        (element: {
-          owner: string | undefined;
-          __v: string | undefined;
-          updatedAt: string | undefined;
-        }) => {
-          element.owner = undefined;
-          element.__v = undefined;
-          element.updatedAt = undefined;
-        }
-      );
+      const newDBTodo = [];
+
+      /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+      dbTodo.forEach((element) => {
+        const { _id, task, status: _status, updatedAt } = element;
+        newDBTodo.push({ _id, task, status: _status, updatedAt });
+      });
 
       return SuccessResponse(res, 200, dbTodo);
     }
