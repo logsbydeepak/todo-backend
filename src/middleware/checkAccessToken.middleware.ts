@@ -6,11 +6,11 @@ import { accessTokenValidator } from "@helper/token";
 import { generateDecryption } from "@helper/security";
 import { dbTokenExist, dbUserExist } from "@helper/db";
 
-export const checkAccessToken = async (
+const checkAccessToken = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+) => {
   try {
     const accessToken: string = validateEmpty(
       req.cookies.accessToken,
@@ -48,3 +48,5 @@ export const checkAccessToken = async (
     return next(error);
   }
 };
+
+export default checkAccessToken;

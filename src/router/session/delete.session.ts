@@ -11,7 +11,7 @@ const deleteSession = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+) => {
   try {
     const { accessToken } = req.cookies;
 
@@ -22,9 +22,8 @@ const deleteSession = async (
 
     res.statusCode = 204;
     res.send();
-    return;
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
 

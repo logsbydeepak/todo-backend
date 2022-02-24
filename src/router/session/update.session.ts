@@ -32,7 +32,7 @@ const updateSession = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+) => {
   try {
     const accessToken: string = validateEmpty(
       req.cookies.accessToken,
@@ -63,21 +63,25 @@ const updateSession = async (
     const refreshTokenData = refreshTokenValidator(refreshTokenDecryption);
 
     if (accessTokenData === null) {
-      return ErrorResponse(res, "TP", 15);
+      ErrorResponse(res, "TP", 15);
+      return;
     }
 
     if (refreshTokenData === null) {
-      return ErrorResponse(res, "TP", 11);
+      ErrorResponse(res, "TP", 11);
+      return;
     }
 
     if (accessTokenData !== "TokenExpiredError") {
-      return ErrorResponse(res, "TP", 12);
+      ErrorResponse(res, "TP", 12);
+      return;
     }
 
     if (refreshTokenData === "TokenExpiredError") {
       removeAccessTokenCookie(res);
       removeRefreshTokenCookie(res);
-      return ErrorResponse(res, "TP", 13);
+      ErrorResponse(res, "TP", 13);
+      return;
     }
 
     await dbUserExist(refreshTokenData.id);
@@ -110,7 +114,8 @@ const updateSession = async (
       await TokenModel.deleteOne({ refreshToken });
       removeAccessTokenCookie(res);
       removeRefreshTokenCookie(res);
-      return ErrorResponse(res, "TP", 17);
+      ErrorResponse(res, "TP", 17);
+      return;
     }
 
     if (accessTokenData === "TokenExpiredError") {
@@ -132,9 +137,9 @@ const updateSession = async (
 
     removeAccessTokenCookie(res);
     removeRefreshTokenCookie(res);
-    return ErrorResponse(res, "TP", 18);
+    ErrorResponse(res, "TP", 18);
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
 

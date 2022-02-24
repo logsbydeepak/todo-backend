@@ -11,7 +11,7 @@ const deleteAllSession = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+) => {
   try {
     const { userId } = res.locals;
 
@@ -22,9 +22,8 @@ const deleteAllSession = async (
 
     res.statusCode = 204;
     res.send();
-    return;
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
 

@@ -38,7 +38,6 @@ const readTodo = async (
 
       const newDBTodo = [];
 
-      /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
       dbTodo.forEach((element) => {
         const { _id, task, status: _status, updatedAt } = element;
         newDBTodo.push({ _id, task, status: _status, updatedAt });

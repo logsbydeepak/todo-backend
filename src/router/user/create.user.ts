@@ -27,7 +27,6 @@ const createUser = async (
     await dbEmailExist(email);
 
     const newUser: UserModelType = new UserModel({ name, email, password });
-    /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
     const newUserId: string = newUser._id;
     const newToken: TokenModelType = dbCreateToken(newUserId, 1);
 

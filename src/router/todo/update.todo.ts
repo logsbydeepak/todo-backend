@@ -24,7 +24,6 @@ const updateTodo = async (
 
     await dbTodo.save();
 
-    /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
     return SuccessResponse(res, 200, {
       id: dbTodo._id,
       task: dbTodo.task,

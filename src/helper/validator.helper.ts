@@ -36,12 +36,12 @@ export const validateEmail = (email: string): string => {
     throw ErrorObject("BP", 14);
   }
 
-  email = email.trim().toLowerCase();
-  if (!isEmail(email)) {
+  const formatedEmail = email.trim().toLowerCase();
+  if (!isEmail(formatedEmail)) {
     throw ErrorObject("BP", 15);
   }
 
-  return email;
+  return formatedEmail;
 };
 
 export const validatePassword = (password: string): string => {
@@ -49,12 +49,12 @@ export const validatePassword = (password: string): string => {
     throw ErrorObject("BP", 16);
   }
 
-  password = password.trim();
-  if (!isStrongPassword(password)) {
+  const formatedPassword = password.trim();
+  if (!isStrongPassword(formatedPassword)) {
     throw ErrorObject("BP", 17);
   }
 
-  return password;
+  return formatedPassword;
 };
 
 export const validateTask = (rawData: boolean): boolean => {

@@ -5,11 +5,7 @@ import { SuccessResponse } from "@response";
 import { CreateTodoBodyType, TodoModelType } from "@types";
 import { validateBody, validateEmpty, validateTask } from "@helper/validator";
 
-const createTodo = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
+const createTodo = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id: string = res.locals.userId;
 
@@ -24,13 +20,13 @@ const createTodo = async (
     });
 
     await newTodo.save();
-    return SuccessResponse(res, 201, {
+    SuccessResponse(res, 201, {
       id: newTodo._id,
       task: newTodo.task,
       status: newTodo.status,
     });
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
 
