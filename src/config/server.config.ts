@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import express, { Express, json } from "express";
 
 import router from "@router";
-import { checkEnv } from "@helper/env";
+import checkEnv from "@helper/env";
 import { serverErrorHandler, corsOption } from "@helper/server";
 
 checkEnv();

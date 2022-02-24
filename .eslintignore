@@ -1,4 +1,8 @@
 node_modules/
 dist/
+docs/
+docker/
+.husky/
+.devcontainer/
 
-tsconfig**
+*.json

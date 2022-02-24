@@ -10,14 +10,16 @@ export const serverErrorHandler = (
   req: Request,
   res: Response,
   next: NextFunction
-): void => {
+) => {
   if (error.ErrorObject) {
     const { messageTypeCode, messageCode } = error.ErrorObject;
-    return ErrorResponse(res, messageTypeCode, messageCode);
+    ErrorResponse(res, messageTypeCode, messageCode);
+    return;
   }
 
   if (error.name === "SyntaxError") {
-    return ErrorResponse(res, "BP", 12);
+    ErrorResponse(res, "BP", 12);
+    return;
   }
   ErrorResponse(res, "IS", 10);
   next();

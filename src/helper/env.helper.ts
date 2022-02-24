@@ -1,12 +1,16 @@
 import * as allEnv from "@config/env";
 
 // stop program if env is missing
-export const checkEnv = (): void => {
-  Object.entries(allEnv).forEach(([_, value]) => {
+const checkEnv = () => {
+  Object.entries(allEnv).forEach((element) => {
+    const value = element[1];
     if (!value) {
+      /* eslint no-console: ["error", { allow: ["error", "table"] }] */
       console.error(`Environment variable missing`);
       console.table(allEnv);
-      return process.exit(1);
+      process.exit(1);
     }
   });
 };
+
+export default checkEnv;

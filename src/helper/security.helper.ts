@@ -21,9 +21,10 @@ export const generateDecryption = (
   }
 };
 
-export const generateHashAndSalt = async (
-  rawPassword: string
-): Promise<string> => await hash(rawPassword, 10);
+export const generateHashAndSalt = async (rawPassword: string) => {
+  const genHash = await hash(rawPassword, 10);
+  return genHash;
+};
 
 export const validateHashAndSalt = async (
   rawPassword: string,
