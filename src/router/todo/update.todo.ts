@@ -5,7 +5,7 @@ import { validateBody, validateEmpty, validateTask } from "@helper/validator";
 import { TodoModelType, UpdateTodoBodyType } from "@types";
 import { dbReadTodo, dbTokenExist } from "@helper/db";
 
-export const updateTodo = async (
+const updateTodo = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -33,3 +33,5 @@ export const updateTodo = async (
     return next(error);
   }
 };
+
+export default updateTodo;

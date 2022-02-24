@@ -5,7 +5,7 @@ import { TodoModelType, TokenModelType } from "@types";
 import { validateEmpty } from "@helper/validator";
 import { ErrorResponse, SuccessResponse } from "@response";
 
-export const readTodo = async (
+const readTodo = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -56,3 +56,5 @@ export const readTodo = async (
     return next(error);
   }
 };
+
+export default readTodo;

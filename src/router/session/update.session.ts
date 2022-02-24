@@ -28,7 +28,7 @@ import { ErrorResponse } from "@response";
 import { validateEmpty } from "@helper/validator";
 import { generateDecryption, generateEncryption } from "@helper/security";
 
-export const updateSession = async (
+const updateSession = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -137,3 +137,5 @@ export const updateSession = async (
     return next(error);
   }
 };
+
+export default updateSession;

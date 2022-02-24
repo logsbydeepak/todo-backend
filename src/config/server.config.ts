@@ -3,7 +3,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import express, { Express, json } from "express";
 
-import { router } from "@router";
+import router from "@router";
 import { checkEnv } from "@helper/env";
 import { ALLOW_ORIGIN } from "@config/env";
 import { serverErrorHandler } from "@helper/server";

@@ -4,7 +4,7 @@ import { TodoModel } from "@model";
 import { dbReadTodo } from "@helper/db";
 import { validateEmpty } from "@helper/validator";
 
-export const deleteTodo = async (
+const deleteTodo = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -25,3 +25,5 @@ export const deleteTodo = async (
     return next(error);
   }
 };
+
+export default deleteTodo;

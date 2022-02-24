@@ -5,7 +5,7 @@ import { SuccessResponse } from "@response";
 import { CreateTodoBodyType, TodoModelType } from "@types";
 import { validateBody, validateEmpty, validateTask } from "@helper/validator";
 
-export const createTodo = async (
+const createTodo = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -33,3 +33,5 @@ export const createTodo = async (
     return next(error);
   }
 };
+
+export default createTodo;

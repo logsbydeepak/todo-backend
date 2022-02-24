@@ -7,7 +7,7 @@ import {
 
 import { TodoModel, TokenModel, UserModel } from "@model";
 
-export const deleteUser = async (
+const deleteUser = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -29,3 +29,5 @@ export const deleteUser = async (
     return next(error);
   }
 };
+
+export default deleteUser;

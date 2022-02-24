@@ -12,7 +12,7 @@ import { dbCreateToken, dbReadUserByEmail } from "@helper/db";
 import { CreateUserBodyType, TokenModelType, UserModelType } from "@types";
 import { setAccessTokenCookie, setRefreshTokenCookie } from "@helper/cookie";
 
-export const createSession = async (
+const createSession = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -40,3 +40,5 @@ export const createSession = async (
     return next(error);
   }
 };
+
+export default createSession;

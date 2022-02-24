@@ -4,7 +4,7 @@ import { dbReadUserById } from "@helper/db";
 import { SuccessResponse } from "@response";
 import { UserModelType } from "@types";
 
-export const readUser = async (
+const readUser = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -21,3 +21,5 @@ export const readUser = async (
     return next(error);
   }
 };
+
+export default readUser;

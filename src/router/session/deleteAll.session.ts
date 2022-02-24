@@ -7,7 +7,7 @@ import {
 
 import { TokenModel } from "@model";
 
-export const deleteAllSession = async (
+const deleteAllSession = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -27,3 +27,5 @@ export const deleteAllSession = async (
     return next(error);
   }
 };
+
+export default deleteAllSession;
