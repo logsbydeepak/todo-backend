@@ -11,7 +11,7 @@ export const readTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId: string = res.locals.userId;
+    const { userId } = res.locals;
     const status: string = validateEmpty(req.query.status as string, "QP", 12);
     const skip: string = validateEmpty(req.query.skip as string, "QP", 13);
     const limit: string = validateEmpty(req.query.limit as string, "QP", 16);

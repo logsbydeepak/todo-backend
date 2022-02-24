@@ -13,7 +13,7 @@ export const deleteAllSession = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId: string = res.locals.userId;
+    const { userId } = res.locals;
 
     await TokenModel.deleteMany({ owner: userId });
 

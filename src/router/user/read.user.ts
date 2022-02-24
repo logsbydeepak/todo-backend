@@ -10,7 +10,7 @@ export const readUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId: string = res.locals.userId;
+    const { userId } = res.locals;
     const dbUser: UserModelType = await dbReadUserById(userId);
 
     return SuccessResponse(res, 200, {

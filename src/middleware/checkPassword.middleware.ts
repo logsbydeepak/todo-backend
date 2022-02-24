@@ -11,7 +11,7 @@ export const checkPassword = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId: string = res.locals.userId;
+    const { userId } = res.locals;
     const currentPassword: string = validatePassword(req.body.currentPassword);
 
     const dbUser: UserModelType = await dbReadUserById(userId);

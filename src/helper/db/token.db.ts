@@ -33,7 +33,6 @@ export const dbTokenExist = async (
   if (dbTokenCount === 0) {
     throw ErrorObject(messageTypeCode, messageCode);
   }
-  return;
 };
 
 export const dbReadToken = async (

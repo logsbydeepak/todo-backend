@@ -11,7 +11,7 @@ export const updateTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId: string = res.locals.userId;
+    const { userId } = res.locals;
     const bodyData: UpdateTodoBodyType = validateBody(req.body, 3);
     const todoId: string = validateEmpty(bodyData.id, "BP", 26);
     const task: string = validateEmpty(bodyData.task, "BP", 21);

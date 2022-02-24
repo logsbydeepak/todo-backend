@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-const ObjectId = Schema.Types.ObjectId;
+const { ObjectId } = Schema.Types;
 
 export const TodoSchema: Schema = new Schema(
   {

@@ -7,7 +7,6 @@ export const dbEmailExist = async (email: string): Promise<void> => {
   if (emailCount !== 0) {
     throw ErrorObject("AU", 11);
   }
-  return;
 };
 
 export const dbUserExist = async (userId: string): Promise<void> => {
@@ -18,7 +17,6 @@ export const dbUserExist = async (userId: string): Promise<void> => {
   if (idCount === 0) {
     throw ErrorObject("AU", 10);
   }
-  return;
 };
 
 export const dbReadUserById = async (

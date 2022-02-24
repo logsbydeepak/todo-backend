@@ -10,7 +10,7 @@ export const deleteTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId: string = res.locals.userId;
+    const { userId } = res.locals;
     const todoIdQuery: string = req.query.id as string;
 
     const todoId: string = validateEmpty(todoIdQuery, "QP", 11) as string;

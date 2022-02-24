@@ -13,7 +13,7 @@ export const deleteSession = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const accessToken: string = req.cookies.accessToken;
+    const { accessToken } = req.cookies;
 
     await TokenModel.deleteOne({ accessToken });
 

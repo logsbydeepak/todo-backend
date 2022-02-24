@@ -1,10 +1,10 @@
 import { Router } from "express";
 
+import { checkAccessToken, checkPassword } from "@middleware";
 import { createSession } from "./session/create.session";
 import { deleteSession } from "./session/delete.session";
 import { updateSession } from "./session/update.session";
 
-import { checkAccessToken, checkPassword } from "@middleware";
 import { deleteAllSession } from "./session/deleteAll.session";
 
 export const sessionRouter: Router = Router();

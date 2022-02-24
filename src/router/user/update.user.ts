@@ -17,7 +17,7 @@ export const updateUser = async (
   next: NextFunction
 ) => {
   try {
-    const userId: string = res.locals.userId;
+    const { userId } = res.locals;
     const bodyData: UpdateUserBodyType = validateBody(req.body, 3);
     const toUpdate: string = validateEmpty(bodyData.toUpdate, "BP", 18);
 
