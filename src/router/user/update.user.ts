@@ -11,11 +11,7 @@ import { dbReadUserById, dbEmailExist } from "@helper/db";
 import { ErrorResponse, SuccessResponse } from "@response";
 import { UserModelType, UpdateUserBodyType } from "@types";
 
-export const updateUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { userId } = res.locals;
     const bodyData: UpdateUserBodyType = validateBody(req.body, 3);
@@ -30,7 +26,7 @@ export const updateUser = async (
 
       case "email":
         const email: string = validateEmail(bodyData.email);
-        await dbEmailExist(email);
+        await dbEmailExist(validateEmail(email));
         dbUser.email = email;
         break;
 
@@ -52,3 +48,5 @@ export const updateUser = async (
     return next(error);
   }
 };
+
+export default updateUser;
