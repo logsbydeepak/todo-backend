@@ -64,6 +64,7 @@
     "express": "^4.17.2",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
+    "logform": "^2.4.0",
     "moment": "^2.29.1",
     "mongoose": "^6.1.4",
     "tsconfig-paths": "^3.12.0",

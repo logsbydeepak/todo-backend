@@ -4,9 +4,9 @@ import { createLogger, transports, format, Logger } from "winston";
 
 import { DB_LOG_URL, NODE_ENV } from "@config/env";
 
-const { combine, timestamp, printf, colorize } = format;
+const { combine, timestamp: formatTimeStamp, printf, colorize } = format;
 
-export const logger: Logger = createLogger({
+const logger: Logger = createLogger({
   level: "info",
   transports: [
     new transports.MongoDB({
@@ -42,9 +42,11 @@ if (NODE_ENV !== "prod") {
     new transports.Console({
       format: combine(
         colorize(),
-        timestamp({ format: timeZone }),
+        formatTimeStamp({ format: timeZone }),
         consoleFormat
       ),
     })
   );
 }
+
+export default logger;

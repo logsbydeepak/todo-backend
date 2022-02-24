@@ -2,6 +2,7 @@ import { TodoModel } from "@model";
 import { TodoModelType } from "@types";
 import { ErrorObject } from "@response";
 
+/* eslint import/prefer-default-export: off */
 export const dbReadTodo = async (todoId: string, userId: string) => {
   const dbTodo: TodoModelType | null = await TodoModel.findById(todoId);
 

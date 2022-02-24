@@ -6,7 +6,7 @@ import { config } from "dotenv";
 const rootPath: string = resolve(`${__dirname}../../../`);
 export const { NODE_ENV } = env;
 
-if (NODE_ENV !== "prod" + "../../") {
+if (NODE_ENV !== "prod") {
   config({ path: `${rootPath}/${NODE_ENV}.env` });
 }
 

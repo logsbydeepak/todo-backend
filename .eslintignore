@@ -6,3 +6,5 @@ docker/
 .devcontainer/
 
 *.json
+*.env
+*.md

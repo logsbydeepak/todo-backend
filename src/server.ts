@@ -1,9 +1,9 @@
 import { connection } from "mongoose";
 
 import { PORT } from "@config/env";
+import server from "@config/server";
 import { dbConnect } from "@config/db";
-import { server } from "@config/server";
-import { logger } from "@config/logger";
+import logger from "@config/logger";
 
 dbConnect();
 connection.on("open", () => {

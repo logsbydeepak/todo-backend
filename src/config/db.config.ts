@@ -1,7 +1,7 @@
 import { connection, connect } from "mongoose";
 
 import { DB_URL } from "@config/env";
-import { logger } from "@config/logger";
+import logger from "@config/logger";
 
 export const dbConnect = (): void => {
   connect(DB_URL as string);
@@ -11,6 +11,7 @@ export const dbConnect = (): void => {
   });
 
   connection.on("error", () => {
+    /* eslint no-console: ["error", { allow: ["log"] }] */
     console.log("Error establishing DB connection");
     process.exit(1);
   });
