@@ -15,7 +15,8 @@
     "build": "run-s clean build:start",
     "build:start": "tsc",
     "clean": "rimraf dist",
-    "start": "cross-env TS_NODE_BASEURL=./dist NODE_ENV=prod node -r tsconfig-paths/register ./dist/server.js"
+    "start": "cross-env TS_NODE_BASEURL=./dist NODE_ENV=prod node -r tsconfig-paths/register ./dist/server.js",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
