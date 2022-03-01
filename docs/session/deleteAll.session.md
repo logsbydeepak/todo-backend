@@ -1,4 +1,4 @@
-# DELETE SESSION
+# DELETE SESSION - Logout all
 
 - **URL**
 

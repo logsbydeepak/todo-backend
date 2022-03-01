@@ -1,4 +1,4 @@
-# UPDATE SESSION
+# UPDATE SESSION - Refresh Token
 
 - **URL**
 

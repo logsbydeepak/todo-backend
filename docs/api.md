@@ -31,7 +31,7 @@ All error response data [**error.data.json**](/src/response/data/error.data.json
 
 ## User Router
 
-[**CREATE USER**](/docs/user/create.user.md)<br/>
+[**CREATE USER**](/docs/user/create.user.md) ( SignUp )<br/>
 [**READ USER**](/docs/user/read.user.md)<br/>
 [**UPDATE USER**](/docs/user/update.user.md)<br/>
 [**DELETE USER**](/docs/user/delete.user.md)<br/>
@@ -45,7 +45,7 @@ All error response data [**error.data.json**](/src/response/data/error.data.json
 
 ## Session Router
 
-[**CREATE SESSION**](/docs/session/create.session.md) <br/>
-[**UPDATE SESSION**](/docs/session/update.session.md) <br/>
-[**DELETE SESSION**](/docs/session/delete.session.md) <br/>
-[**DELETE ALL SESSION**](/docs/session/deleteAll.session.md) <br/>
+[**CREATE SESSION**](/docs/session/create.session.md) - SignIn<br/>
+[**UPDATE SESSION**](/docs/session/update.session.md) - Refresh Token<br/>
+[**DELETE SESSION**](/docs/session/delete.session.md) - Logout<br/>
+[**DELETE ALL SESSION**](/docs/session/deleteAll.session.md) - Logout all<br/>
