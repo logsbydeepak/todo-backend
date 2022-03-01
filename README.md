@@ -3,6 +3,8 @@
 TODO REST API </br>
 It is a personal project
 
+It is part of **[TODO FRONTEND](https://github.com/logsbydeepak/todo-frontend)**
+
 ### **[LIVE DEMO](https://todo-backend-project-prod.herokuapp.com/v1/)**
 
 ### **[API Documentation](docs/api.md)**
