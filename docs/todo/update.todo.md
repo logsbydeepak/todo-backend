@@ -3,7 +3,7 @@
 - **URL**
 
   `PUT /v1/todo` <br/>
-  `AUTHENTICATION`
+  `AUTHORIZATION`
 
 - **URL Params** <br/>
   None

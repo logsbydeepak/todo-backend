@@ -1,11 +1,14 @@
-# DELETE USER
+# DELETE SESSION
 
 - **URL**
 
-  `DELETE /v1/user`<br/>
+  `DELETE /v1/session/all` <br/>
   `AUTHORIZATION`
 
-- **URL Params**
+- **URL Params** <br/>
+  None
+
+- **Data Params** <br/>
 
   ```json
   {
@@ -13,10 +16,8 @@
   }
   ```
 
-- **Data Params** <br/>
-  None
-
 - **Success Response:**
 
   - **Code:** 204 <br/>
-    **Content:** None
+    **Content:** <br/>
+    None

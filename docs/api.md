@@ -24,6 +24,11 @@
 
 All error response data [**error.data.json**](/src/response/data/error.data.json)
 
+## AUTHORIZATION Cookie Paths
+
+1. access token - `v1/`
+1. refresh token - `v1/refresh/`
+
 ## User Router
 
 [**CREATE USER**](/docs/user/create.user.md)<br/>
@@ -43,3 +48,4 @@ All error response data [**error.data.json**](/src/response/data/error.data.json
 [**CREATE SESSION**](/docs/session/create.session.md) <br/>
 [**UPDATE SESSION**](/docs/session/update.session.md) <br/>
 [**DELETE SESSION**](/docs/session/delete.session.md) <br/>
+[**DELETE ALL SESSION**](/docs/session/deleteAll.session.md) <br/>

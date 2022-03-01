@@ -3,7 +3,7 @@
 - **URL**
 
   `GET /v1/todo` <br/>
-  `AUTHENTICATION`
+  `AUTHORIZATION`
 
 - **URL Params**
 

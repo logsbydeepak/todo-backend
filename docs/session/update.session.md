@@ -3,7 +3,7 @@
 - **URL**
 
   `PUT /v1/session/refresh` <br/>
-  `AUTHENTICATION`
+  `AUTHORIZATION`
 
 - **URL Params** <br/>
   None

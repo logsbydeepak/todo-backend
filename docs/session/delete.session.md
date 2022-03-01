@@ -3,15 +3,10 @@
 - **URL**
 
   `DELETE /v1/session` <br/>
-  `AUTHENTICATION`
+  `AUTHORIZATION`
 
 - **URL Params** <br/>
-
-  **Required:** <br/>
-  `all="true"`
-
-  **Value:** <br/>
-  **all:** `true` for logout all or `false` for logout
+  None
 
 - **Data Params** <br/>
   None

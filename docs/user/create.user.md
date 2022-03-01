@@ -3,6 +3,7 @@
 - **URL**
 
   `POST /v1/user`
+  `AUTHENTICATION`
 
 - **URL Params**
 

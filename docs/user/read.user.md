@@ -3,7 +3,7 @@
 - **URL**
 
   `GET /v1/user` <br/>
-  `AUTHENTICATION`
+  `AUTHORIZATION`
 
 - **URL Params** <br/>
   None
