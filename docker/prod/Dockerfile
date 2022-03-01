@@ -7,4 +7,4 @@ RUN npm run build
 RUN rm -rf node_modules/
 RUN rm -rf src/
 RUN npm install --production
-CMD ["npm", "run", "prod"]
+CMD ["npm", "run", "start"]

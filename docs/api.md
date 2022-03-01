@@ -31,7 +31,7 @@ All error response data [**error.data.json**](/src/response/data/error.data.json
 
 ## User Router
 
-[**CREATE USER**](/docs/user/create.user.md) ( SignUp )<br/>
+[**CREATE USER**](/docs/user/create.user.md) - SignUp<br/>
 [**READ USER**](/docs/user/read.user.md)<br/>
 [**UPDATE USER**](/docs/user/update.user.md)<br/>
 [**DELETE USER**](/docs/user/delete.user.md)<br/>

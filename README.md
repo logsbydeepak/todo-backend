@@ -1,10 +1,9 @@
 # Todo Backend
 
-TODO REST API
-
+TODO REST API </br>
 It is a personal project
 
-**[API Documentation](docs/api.md)**
+### **[API Documentation](docs/api.md)**
 
 ### Clone project
 
@@ -12,12 +11,24 @@ It is a personal project
 git clone https://github.com/logsbydeepak/todo-backend
 ```
 
+# Table of contents
+
+- **[Project requirement](#project-requirement)**
+
+- **[Run in development](#run-in-development)**
+
+  - [With Docker Componse](#with-docker-componse)
+  - [With devcontainer](#with-devcontainer)
+
+- **[Run in production](#run-in-production)**
+  - [With Docker](#with-docker)
+
 ### Project requirement
 
 - [Node](https://nodejs.org/)
 - [MongoDB Community Edition](https://docs.mongodb.com/manual/administration/install-community/) / [MongoDB Atlas Account](https://www.mongodb.com/atlas/database)
 
-## RUN in `development`
+### Run in development
 
 1. create `dev.env` file with the properties as follows
 
@@ -28,6 +39,7 @@ DB_LOG_URL
 ACCESS_TOKEN_SECRET
 REFRESH_TOKEN_SECRET
 ENCRYPT_SECRET
+ALLOW_ORIGIN
 ```
 
 `sample value`
@@ -39,6 +51,7 @@ DB_LOG_URL=mongodb://mongo_container:27017/todo-logs
 ACCESS_TOKEN_SECRET=B9xSfjmzuChskF8RkzXpJQXkWKCwvCTGB2atamCfNKxK2gcbF
 REFRESH_TOKEN_SECRET=B9xSfjmzuChskF8RkzXpJQXkWKCwvCTGB2atamCfNKxK2gcbF
 ENCRYPT_SECRET=B9xSfjmzuChskF8RkzXpJQXkWKCwvCTGB2atamCfNKxK2gcbF
+ALLOW_ORIGIN=http://localhost:3000
 ```
 
 2. install package
@@ -53,7 +66,9 @@ npm install
 npm run dev
 ```
 
-### With `Docker`
+API will start at http://localhost:4000
+
+### With Docker Componse
 
 step 1 is `optional`
 
@@ -73,20 +88,13 @@ By default Port number 4000 of host and container is opened and port 8888 for mo
 
 MongoDB connection url inside container `mongodb://todo_dev_backend_mongo_container:27017`. Use this in [dev.env](#run-in-development). And `mongodb://localhost:27017` in host.
 
-4. set [dev.env](#run-in-development)
-5. install package
+3. **[Run](#run)**
 
-```bash
-npm install
-```
+## With devcontainer
 
-6. start
+1. [Installation](https://code.visualstudio.com/docs/remote/containers#_installation)
 
-```bash
-npm run dev
-```
-
-API will start at http://localhost:4000
+2. **[Run](#run)**
 
 ## RUN in `production`
 
@@ -122,7 +130,7 @@ npm install --production
 6. start
 
 ```bin
-npm run prod
+npm run start
 ```
 
 ### With `Docker`
