@@ -11,15 +11,12 @@ It is a personal project
 git clone https://github.com/logsbydeepak/todo-backend
 ```
 
-# Table of contents
+## Table of contents
 
 - **[Project requirement](#project-requirement)**
-
 - **[Run in development](#run-in-development)**
-
-  - [With Docker Componse](#with-docker-componse)
+  - [With Docker Compose](#with-docker-compose)
   - [With devcontainer](#with-devcontainer)
-
 - **[Run in production](#run-in-production)**
   - [With Docker](#with-docker)
 
@@ -68,7 +65,7 @@ npm run dev
 
 API will start at http://localhost:4000
 
-### With Docker Componse
+### With `Docker Compose`
 
 step 1 is `optional`
 
@@ -90,7 +87,7 @@ MongoDB connection url inside container `mongodb://todo_dev_backend_mongo_contai
 
 3. **[Run](#run)**
 
-## With devcontainer
+## With `devcontainer`
 
 1. [Installation](https://code.visualstudio.com/docs/remote/containers#_installation)
 
