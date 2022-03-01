@@ -3,6 +3,8 @@
 TODO REST API </br>
 It is a personal project
 
+### **[LIVE DEMO](https://todo-backend-project-prod.herokuapp.com/v1/)**
+
 ### **[API Documentation](docs/api.md)**
 
 ### Clone project
@@ -25,7 +27,7 @@ git clone https://github.com/logsbydeepak/todo-backend
 - [Node](https://nodejs.org/)
 - [MongoDB Community Edition](https://docs.mongodb.com/manual/administration/install-community/) / [MongoDB Atlas Account](https://www.mongodb.com/atlas/database)
 
-### Run in development
+### Run in `development`
 
 1. create `dev.env` file with the properties as follows
 
