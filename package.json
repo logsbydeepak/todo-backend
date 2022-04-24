@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev run-s clean dev:start",
-    "dev:start": "tsnd -r tsconfig-paths/register --rs --cache-directory \"./dist\" -- src/server.ts",
+    "dev": "nodemon",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch",
     "format": "prettier --write .",
     "format:watch": "onchange \"**/*\" --exclude-path .prettierignore -- prettier --write {{changed}}",
     "lint": "eslint \"./**\"",
@@ -13,9 +14,9 @@
     "lint:watch": "onchange \"**/*\" --exclude-path .eslintignore -- eslint {{changed}}",
     "lint:watch:fix": "onchange \"**/*\" --exclude-path .eslintignore -- eslint {{changed}} --fix ",
     "build": "run-s clean build:start",
-    "build:start": "tsc",
+    "build:start": "tsc && tsc-alias",
     "clean": "rimraf dist",
-    "start": "cross-env TS_NODE_BASEURL=./dist NODE_ENV=prod node -r tsconfig-paths/register ./dist/server.js",
+    "start": "node ./dist/server.js",
     "prepare": "husky install"
   },
   "repository": {
@@ -30,6 +31,8 @@
   },
   "homepage": "https://github.com/logsbydeepak/todo-backend#readme",
   "devDependencies": {
+    "@swc/core": "^1.2.171",
+    "@swc/helpers": "^0.3.8",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.12",
@@ -48,11 +51,15 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
+    "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.1.0",
     "prettier": "^2.5.1",
+    "regenerator-runtime": "^0.13.9",
     "rimraf": "^3.0.2",
+    "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
+    "tsc-alias": "^1.6.7",
     "typescript": "^4.5.4"
   },
   "dependencies": {
